@@ -17,9 +17,17 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "noImplicitReturns": true,
+    "noImplicitThis": true
   },
   "include": [
     "src"
-  ]
+  ],
+  "rules": {
+    "no-console": false,
+    "member-access": false,
+    "jsx-no-lambda": false,
+    "jsx-boolean-value": false
+  }
 }

@@ -1,0 +1,19 @@
+.type .active {
+  color: red;
+  font-weight: bold;
+}
+
+.promo-list {
+  display: inline-block;
+  width: 50%;
+}
+
+.promo-item {
+  display: inline-block;
+  width: 100px;
+}
+
+.result-item {
+  display: inline-block;
+  width: 100px;
+}
