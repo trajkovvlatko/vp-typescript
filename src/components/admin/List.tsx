@@ -3,11 +3,16 @@ import {useFetch} from '../../hooks/useFetch';
 import UserContext from '../../contexts/UserContext';
 import {Link} from 'react-router-dom';
 
-function PerformersList() {
+interface Props {
+  type: 'performer' | 'venue';
+}
+
+function List(props: Props) {
+  const type = props.type;
   const host = process.env.REACT_APP_API_HOST;
   const {user} = React.useContext(UserContext);
 
-  const url = `${host}/admin/performers`;
+  const url = `${host}/admin/${type}s`;
   const {error, loading, results} = useFetch(url, user.token);
 
   if (loading) {
@@ -19,8 +24,8 @@ function PerformersList() {
   }
 
   return (
-    <div className='performers-list'>
-      <Link to='/admin/performers/new'>New performer</Link>
+    <div className={`${type}s-list`}>
+      <Link to={`/admin/${type}s/new`}>New {type}</Link>
       <table>
         <thead>
           <tr>
@@ -32,11 +37,11 @@ function PerformersList() {
         <tbody>
           {results.map((row: {id: number; name: string}) => {
             return (
-              <tr>
+              <tr key={`${type}-${row.id}`}>
                 <td>{row.id}</td>
                 <td>{row.name}</td>
                 <td>
-                  <Link to={`/admin/performers/${row.id}/edit`}>Edit</Link>
+                  <Link to={`/admin/${type}s/${row.id}/edit`}>Edit</Link>
                 </td>
               </tr>
             );
@@ -47,4 +52,4 @@ function PerformersList() {
   );
 }
 
-export default PerformersList;
+export default List;

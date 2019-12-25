@@ -7,7 +7,7 @@ interface Props {
 function Rating(props: Props) {
   return (
     <div>
-      {[...Array(props.stars)].map((e, i) => <span className="star">★</span>)}
+      {[...Array(props.stars)].map((e, i) => <span key={`star-${i}`} className="star">★</span>)}
     </div>
   );
 }

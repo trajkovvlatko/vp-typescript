@@ -24,7 +24,6 @@ export const useFetch = (url: string, token: string = '') => {
                 },
               }
             : {};
-        console.log(headers);
         const response = await fetch(url, headers);
         const json = await response.json();
         updateData({

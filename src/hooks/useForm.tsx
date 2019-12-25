@@ -6,9 +6,13 @@ export const useForm = (initialValues: any) => {
   return [
     values,
     (e: any) => {
+      let value = e.target.value;
+      if (value === 'true' || value === 'false') {
+        value = !!value;
+      }
       setValues({
         ...values,
-        [e.target.name]: e.target.value,
+        [e.target.name]: value,
       });
     },
   ];

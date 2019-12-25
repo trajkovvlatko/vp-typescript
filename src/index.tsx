@@ -10,6 +10,7 @@ import VenuePage from "./pages/VenuePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AdminPage from "./pages/admin/AdminPage";
+import AdminPerformerPage from "./pages/admin/AdminPerformerPage";
 
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import UserContext from "./contexts/UserContext";
@@ -25,12 +26,14 @@ const App: React.FC = () => {
   return (
     <Router>
       <UserContext.Provider value={{ user, setUser }}>
-        <Route path="/search/:type/:location/:ids?" component={SearchPage} />
-        <Route path="/performers/:id" component={PerformerPage} />
-        <Route path="/venues/:id" component={VenuePage} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/register" component={RegisterPage} />
-        <Route path="/admin" component={AdminPage} />
+        <Route exact path="/search/:type/:location/:ids?" component={SearchPage} />
+        <Route exact path="/performers/:id" component={PerformerPage} />
+        <Route exact path="/venues/:id" component={VenuePage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/register" component={RegisterPage} />
+        <Route exact path="/admin" component={AdminPage} />
+        <Route exact path="/admin/performers/new" component={AdminPerformerPage} />
+        <Route exact path="/admin/performers/:id/edit" component={AdminPerformerPage} />
         <Route exact path="/" component={FrontPage} />
       </UserContext.Provider>
     </Router>
