@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../../components/Header';
-import EditPerformer from '../../components/admin/EditPerformer';
-import NewPerformer from '../../components/admin/NewPerformer';
+import EditPerformer from '../../components/admin/performers/Edit';
+import NewPerformer from '../../components/admin/performers/New';
 
 interface Props {
   match: {

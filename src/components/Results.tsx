@@ -1,6 +1,6 @@
 import React from 'react';
 import ResultItem from './ResultItem';
-import { useFetch } from '../hooks/useFetch';
+import {useFetch} from '../hooks/useFetch';
 import ResultInterface from '../interfaces/ResultInterface';
 import FiltersInterface from '../interfaces/FiltersInterface';
 
@@ -23,10 +23,8 @@ function Results(props: Props) {
     paramsList.push(`properties=${filters.ids.join(',')}`);
   }
   const params: string = paramsList.join('&');
-  const url: string = `${host}/search/${filters.type}s/${
-    filters.location
-  }?${params}`;
-  const { error, loading, results } = useFetch(url);
+  const url: string = `${host}/search/${filters.type}s/${filters.location}?${params}`;
+  const {error, loading, results} = useFetch(url);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -39,7 +37,7 @@ function Results(props: Props) {
   return (
     <div>
       <h3>Results</h3>
-      <div className="results">
+      <div className='results'>
         {results.map((row: ResultInterface) => (
           <ResultItem
             data={row}
