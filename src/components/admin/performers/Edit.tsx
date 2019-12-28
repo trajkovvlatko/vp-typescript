@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import GenresForm from '../GenresForm';
+import GenresForm from './genres/Form';
 import UserContext from '../../../contexts/UserContext';
 import BasicPerformer from '../../../interfaces/BasicPerformer';
 import Genre from '../../../interfaces/GenreInterface';

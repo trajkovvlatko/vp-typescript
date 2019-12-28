@@ -1,5 +1,5 @@
 import React from 'react';
-import Genre from '../../interfaces/GenreInterface';
+import Genre from '../../../../interfaces/GenreInterface';
 
 interface GenreCheckboxInterface extends Genre {
   checked: boolean;

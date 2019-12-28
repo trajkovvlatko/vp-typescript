@@ -1,10 +1,10 @@
 import React from 'react';
-import {useFetch} from '../../hooks/useFetch';
-import Genre from '../../interfaces/GenreInterface';
-import GenreCheckbox from './GenreCheckbox';
+import {useFetch} from '../../../../hooks/useFetch';
+import Genre from '../../../../interfaces/GenreInterface';
+import GenreCheckbox from './Checkbox';
 import axios from 'axios';
-import {getHeader} from '../../helpers/main';
-import UserContext from '../../contexts/UserContext';
+import {getHeader} from '../../../../helpers/main';
+import UserContext from '../../../../contexts/UserContext';
 
 interface Props {
   performerId: number;
@@ -33,6 +33,7 @@ function GenresForm(props: Props) {
       {genre_ids: selected},
       getHeader(user.token as string)
     );
+    console.log(resp)
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
