@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import GenresForm from '../GenresForm';
 import UserContext from '../../../contexts/UserContext';
 import BasicPerformer from '../../../interfaces/BasicPerformer';
+import Genre from '../../../interfaces/GenreInterface';
 import Form from './Form';
 import axios from 'axios';
 import {getHeader} from '../../../helpers/main';
@@ -12,6 +13,7 @@ interface Props {
 
 interface EditBasicPerformer extends BasicPerformer {
   id: number;
+  genres_list: Genre[];
 }
 
 function EditPerformer(props: Props) {
@@ -25,6 +27,7 @@ function EditPerformer(props: Props) {
     location: '',
     phone: '',
     website: '',
+    genres_list: [],
   };
 
   const [values, setValues] = useState({
@@ -44,6 +47,7 @@ function EditPerformer(props: Props) {
           location: response.location,
           phone: response.phone,
           website: response.website,
+          genres_list: response.genres_list,
         };
         setValues({
           loading: false,
@@ -56,7 +60,7 @@ function EditPerformer(props: Props) {
   async function save(newValues: BasicPerformer) {
     // TODO: add try catch
     const resp = await axios.patch(
-      `${host}/admin/performers/${values.performer.id}`,
+      `${host}/admin/performers/${values.performer.id}/genres`,
       newValues,
       getHeader(user.token as string)
     );
@@ -67,11 +71,15 @@ function EditPerformer(props: Props) {
     return <div>Loading...</div>;
   }
 
+  const selectedGenreIds: number[] = values.performer.genres_list.map(
+    r => r.id
+  );
+
   return (
     <div>
       <h1>Edit Performer</h1>
       <Form values={values.performer} save={save} />
-      <GenresForm performerId={props.id} />
+      <GenresForm performerId={props.id} selected={selectedGenreIds} />
     </div>
   );
 }
