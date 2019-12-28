@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import GenresForm from './genres/Form';
+import YoutubeLinksForm from './youtube_links/Form';
 import UserContext from '../../../contexts/UserContext';
 import BasicPerformer from '../../../interfaces/BasicPerformer';
 import Genre from '../../../interfaces/GenreInterface';
+import YoutubeLink from '../../../interfaces/YoutubeLinkInterface';
 import Form from './Form';
 import axios from 'axios';
 import {getHeader} from '../../../helpers/main';
@@ -14,6 +16,7 @@ interface Props {
 interface EditBasicPerformer extends BasicPerformer {
   id: number;
   genres_list: Genre[];
+  youtube_links_list: YoutubeLink[];
 }
 
 function EditPerformer(props: Props) {
@@ -28,6 +31,7 @@ function EditPerformer(props: Props) {
     phone: '',
     website: '',
     genres_list: [],
+    youtube_links_list: [],
   };
 
   const [values, setValues] = useState({
@@ -48,6 +52,7 @@ function EditPerformer(props: Props) {
           phone: response.phone,
           website: response.website,
           genres_list: response.genres_list,
+          youtube_links_list: response.youtube_links_list,
         };
         setValues({
           loading: false,
@@ -80,6 +85,7 @@ function EditPerformer(props: Props) {
       <h1>Edit Performer</h1>
       <Form values={values.performer} save={save} />
       <GenresForm performerId={props.id} selected={selectedGenreIds} />
+      <YoutubeLinksForm performerId={props.id} links={values.performer.youtube_links_list} />
     </div>
   );
 }
