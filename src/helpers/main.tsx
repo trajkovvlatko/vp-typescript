@@ -8,3 +8,11 @@ export function getDate() {
     (dd > 9 ? '' : '0') + dd,
   ].join('-');
 }
+
+export function getHeader(token: string) {
+  return {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+}

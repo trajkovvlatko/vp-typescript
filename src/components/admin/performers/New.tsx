@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import {useForm} from '../../../hooks/useForm';
 import UserContext from '../../../contexts/UserContext';
 import Form from './Form';
 import {withRouter} from 'react-router-dom';
@@ -23,9 +22,7 @@ function NewPerformer(props: Props) {
     website: '',
   };
 
-  const [values, handleChange] = useForm(defaultValues);
-
-  async function save() {
+  async function save(values: BasicPerformer) {
     // TODO: Add try catch
     const resp = await axios.post(`${host}/admin/performers`, values, {
       headers: {
@@ -38,7 +35,7 @@ function NewPerformer(props: Props) {
   return (
     <div>
       <h1>New Performer</h1>
-      <Form values={values} save={save} handleChange={handleChange} />
+      <Form values={defaultValues} save={save} />
     </div>
   );
 }
