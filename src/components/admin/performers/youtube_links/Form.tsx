@@ -15,13 +15,19 @@ function YoutubeLinksForm(props: Props) {
   const [links, setLinks] = useState(props.links);
   const [newLinks, setNewLinks] = useState<string[]>([]);
   const newLink = useRef<HTMLInputElement>(null);
+  const initialLinkIds = props.links.map(i => i.id);
+
+  function getRemovedIds() {
+    const linkIds = links.map(v => v.id);
+    return initialLinkIds.filter(v => !linkIds.includes(v));
+  }
 
   async function save() {
     // TODO: add try catch and error notification
     const resp = await axios.patch(
       `${host}/admin/performers/${props.performerId}/youtube_links`,
       {
-        remove_youtube_link_ids: links.map(l => l.id),
+        remove_youtube_link_ids: getRemovedIds(),
         new_youtube_links: newLinks,
       },
       getHeader(user.token as string)
