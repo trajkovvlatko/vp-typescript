@@ -1,4 +1,4 @@
-export default interface Performer {
+export default interface BasicPerformerInterface {
   name: string;
   details: string;
   location: string;

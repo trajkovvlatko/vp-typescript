@@ -2,11 +2,11 @@ import React, {useState, useRef} from 'react';
 import axios from 'axios';
 import {getHeader} from '../../../../helpers/main';
 import UserContext from '../../../../contexts/UserContext';
-import Image from '../../../../interfaces/ImageInterface';
+import ImageInterface from '../../../../interfaces/ImageInterface';
 
 interface Props {
   performerId: number;
-  images: Image[];
+  images: ImageInterface[];
 }
 
 function ImagesForm(props: Props) {
@@ -49,7 +49,7 @@ function ImagesForm(props: Props) {
     for (let i = 0; i < newImages.length; i++) {
       formData.append('images[]', newImages[i]);
     }
-    formData.append('remove_image_ids', getRemovedIds().toString())
+    formData.append('remove_image_ids', getRemovedIds().toString());
     const url = `${host}/admin/performers/${props.performerId}/images`;
     axios
       .post(url, formData, config)
@@ -77,7 +77,7 @@ function ImagesForm(props: Props) {
     <div>
       <h2>Images</h2>
 
-      {images.map((row: Image) => {
+      {images.map((row: ImageInterface) => {
         return (
           <div key={`image-${row.id}`}>
             <img src={row.image} alt={`alt-${row.image}`} />
@@ -97,7 +97,7 @@ function ImagesForm(props: Props) {
       {newImages.map((image: File) => {
         return (
           <div key={`${image.name}-${Math.random()}`}>
-            {image.name}
+            <img src={URL.createObjectURL(image)} width='100' alt='' />
             <button
               onClick={() => {
                 removeNewImage(image.name);

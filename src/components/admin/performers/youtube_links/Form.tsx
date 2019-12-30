@@ -2,11 +2,11 @@ import React, {useState, useRef} from 'react';
 import axios from 'axios';
 import {getHeader} from '../../../../helpers/main';
 import UserContext from '../../../../contexts/UserContext';
-import YoutubeLink from '../../../../interfaces/YoutubeLinkInterface';
+import YoutubeLinkInterface from '../../../../interfaces/YoutubeLinkInterface';
 
 interface Props {
   performerId: number;
-  links: YoutubeLink[];
+  links: YoutubeLinkInterface[];
 }
 
 function YoutubeLinksForm(props: Props) {
@@ -57,7 +57,7 @@ function YoutubeLinksForm(props: Props) {
   return (
     <div>
       <h2>Youtube Links</h2>
-      {links.map((row: YoutubeLink) => {
+      {links.map((row: YoutubeLinkInterface) => {
         return (
           <div key={`youtube-link-${row.id}`}>
             {row.link}

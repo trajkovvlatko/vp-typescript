@@ -6,10 +6,10 @@ import YoutubeLinksForm from './youtube_links/Form';
 import ImagesForm from './images/Form';
 import UserContext from '../../../contexts/UserContext';
 
-import BasicPerformer from '../../../interfaces/BasicPerformer';
-import Genre from '../../../interfaces/GenreInterface';
-import YoutubeLink from '../../../interfaces/YoutubeLinkInterface';
-import Image from '../../../interfaces/ImageInterface';
+import BasicPerformerInterface from '../../../interfaces/BasicPerformerInterface';
+import GenreInterface from '../../../interfaces/GenreInterface';
+import YoutubeLinkInterface from '../../../interfaces/YoutubeLinkInterface';
+import ImageInterface from '../../../interfaces/ImageInterface';
 
 import axios from 'axios';
 import {getHeader} from '../../../helpers/main';
@@ -18,18 +18,18 @@ interface Props {
   id: number;
 }
 
-interface EditBasicPerformer extends BasicPerformer {
+interface EditBasicPerformerInterface extends BasicPerformerInterface {
   id: number;
-  genres_list: Genre[];
-  youtube_links_list: YoutubeLink[];
-  images_list: Image[];
+  genres_list: GenreInterface[];
+  youtube_links_list: YoutubeLinkInterface[];
+  images_list: ImageInterface[];
 }
 
 function EditPerformer(props: Props) {
   const {user} = React.useContext(UserContext);
   const host = process.env.REACT_APP_API_HOST;
   const url: string = `${host}/admin/performers/${props.id}`;
-  let defaultValues: EditBasicPerformer = {
+  let defaultValues: EditBasicPerformerInterface = {
     id: props.id,
     name: '',
     details: '',
@@ -51,7 +51,7 @@ function EditPerformer(props: Props) {
     fetch(url, getHeader(user.token as string))
       .then(response => response.json())
       .then(response => {
-        const newValues: EditBasicPerformer = {
+        const newValues: EditBasicPerformerInterface = {
           id: props.id,
           name: response.name,
           details: response.details,
@@ -70,7 +70,7 @@ function EditPerformer(props: Props) {
       });
   }, []);
 
-  async function save(newValues: BasicPerformer) {
+  async function save(newValues: BasicPerformerInterface) {
     // TODO: add try catch
     const resp = await axios.patch(
       `${host}/admin/performers/${values.performer.id}/genres`,
@@ -92,9 +92,15 @@ function EditPerformer(props: Props) {
     <div>
       <h1>Edit Performer</h1>
       <Form values={values.performer} save={save} />
-      <ImagesForm performerId={props.id} images={values.performer.images_list} />
+      <ImagesForm
+        performerId={props.id}
+        images={values.performer.images_list}
+      />
       <GenresForm performerId={props.id} selected={selectedGenreIds} />
-      <YoutubeLinksForm performerId={props.id} links={values.performer.youtube_links_list} />
+      <YoutubeLinksForm
+        performerId={props.id}
+        links={values.performer.youtube_links_list}
+      />
     </div>
   );
 }

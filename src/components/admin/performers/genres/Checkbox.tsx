@@ -1,7 +1,7 @@
 import React from 'react';
-import Genre from '../../../../interfaces/GenreInterface';
+import GenreInterface from '../../../../interfaces/GenreInterface';
 
-interface GenreCheckboxInterface extends Genre {
+interface GenreCheckboxInterface extends GenreInterface {
   checked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }

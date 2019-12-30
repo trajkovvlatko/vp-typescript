@@ -1,7 +1,11 @@
 import React from 'react';
-import { useFetch } from '../hooks/useFetch';
-import { Link } from 'react-router-dom';
+import {useFetch} from '../hooks/useFetch';
+import {Link} from 'react-router-dom';
 import Header from '../components/Header';
+import GenreInterface from '../interfaces/GenreInterface';
+import YoutubeLinkInterface from '../interfaces/YoutubeLinkInterface';
+import ImageInterface from '../interfaces/ImageInterface';
+import {PerformerBookingInterface} from '../interfaces/BookingInterface';
 
 interface Props {
   match: {
@@ -11,35 +15,17 @@ interface Props {
   };
 }
 
-interface Booking {
-  date: Date;
-  venue_id: number;
-  venue_name: string;
-}
-
-interface Genre {
-  name: string;
-}
-
-interface YoutubeLink {
-  link: string;
-}
-
-interface Image {
-  image: string;
-}
-
 interface Performer {
   name: string;
   image: string;
   location: string;
   phone: string;
-  bookings_list: Booking[];
-  genres_list: Genre[];
   website: string;
-  youtube_links_list: YoutubeLink[];
-  images_list: Image[];
   rating: number;
+  genres_list: GenreInterface[];
+  images_list: ImageInterface[];
+  youtube_links_list: YoutubeLinkInterface[];
+  bookings_list: PerformerBookingInterface[];
 }
 
 function PerformerPage(props: Props) {
@@ -49,7 +35,7 @@ function PerformerPage(props: Props) {
     host = process.env.REACT_APP_API_HOST;
   }
   const url: string = `${host}/performers/${id}`;
-  const { error, loading, results: result } = useFetch(url);
+  const {error, loading, results: result} = useFetch(url);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -60,50 +46,56 @@ function PerformerPage(props: Props) {
   }
 
   const performer: Performer = result;
-  const upcoming = performer.bookings_list.filter((booking: Booking) => {
-    return new Date(booking.date) > new Date();
-  });
-  const previous = performer.bookings_list.filter((booking: Booking) => {
-    return new Date(booking.date) < new Date();
-  });
+  const upcoming = performer.bookings_list.filter(
+    (booking: PerformerBookingInterface) => {
+      return new Date(booking.date) > new Date();
+    }
+  );
+  const previous = performer.bookings_list.filter(
+    (booking: PerformerBookingInterface) => {
+      return new Date(booking.date) < new Date();
+    }
+  );
 
   return (
     <div>
-      <Header page="home" />
+      <Header page='home' />
       <h2>{performer.name}</h2>
-      <img src={performer.image} alt="selected" />
+      <img src={performer.image} alt='selected' />
       <div>Location: {performer.location}</div>
       <div>
         Phone: <a href={`tel:${performer.phone}`}>{performer.phone}</a>
       </div>
       <div>
         Genres:{' '}
-        {performer.genres_list.map((genre: Genre) => genre.name).join(', ')}
+        {performer.genres_list
+          .map((genre: GenreInterface) => genre.name)
+          .join(', ')}
       </div>
       <div>Website: {performer.website}</div>
-      {performer.youtube_links_list.map((yt: { link: string }) => {
+      {performer.youtube_links_list.map((yt: YoutubeLinkInterface) => {
         return (
           <iframe
             title={yt.link}
             key={yt.link}
-            width="560"
-            height="315"
+            width='560'
+            height='315'
             src={yt.link}
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope;"
+            frameBorder='0'
+            allow='accelerometer; autoplay; encrypted-media; gyroscope;'
             allowFullScreen
           />
         );
       })}
       <div>
-        {performer.images_list.map((img: { image: string }) => (
-          <img width="150" src={img.image} key={img.image} alt={img.image} />
+        {performer.images_list.map((img: {image: string}) => (
+          <img width='150' src={img.image} key={img.image} alt={img.image} />
         ))}
       </div>
       {previous.length > 0 && (
         <div>
           Previous:
-          {previous.map((b: Booking) => (
+          {previous.map((b: PerformerBookingInterface) => (
             <div key={`prev-${b.date}`}>
               Performed at:{' '}
               <Link to={`/venues/${b.venue_id}`}>{b.venue_name}</Link> on{' '}
@@ -115,7 +107,7 @@ function PerformerPage(props: Props) {
       {upcoming.length > 0 && (
         <div>
           Upcoming:
-          {upcoming.map((b: Booking) => (
+          {upcoming.map((b: PerformerBookingInterface) => (
             <div key={`upcoming-${b.date}`}>
               Will perform at:{' '}
               <Link to={`/venues/${b.venue_id}`}>{b.venue_name}</Link> on{' '}

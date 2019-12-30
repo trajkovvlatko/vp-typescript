@@ -1,6 +1,6 @@
 import React from 'react';
 import {useFetch} from '../../../../hooks/useFetch';
-import Genre from '../../../../interfaces/GenreInterface';
+import GenreInterface from '../../../../interfaces/GenreInterface';
 import GenreCheckbox from './Checkbox';
 import axios from 'axios';
 import {getHeader} from '../../../../helpers/main';
@@ -33,7 +33,7 @@ function GenresForm(props: Props) {
       {genre_ids: selected},
       getHeader(user.token as string)
     );
-    console.log(resp)
+    console.log(resp);
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -50,7 +50,7 @@ function GenresForm(props: Props) {
   return (
     <div>
       <h2>Genres</h2>
-      {results.map((row: Genre) => {
+      {results.map((row: GenreInterface) => {
         return (
           <GenreCheckbox
             id={row.id}

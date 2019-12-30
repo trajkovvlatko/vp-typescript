@@ -3,7 +3,7 @@ import axios from 'axios';
 import UserContext from '../../../contexts/UserContext';
 import Form from './Form';
 import {withRouter} from 'react-router-dom';
-import BasicPerformer from '../../../interfaces/BasicPerformer';
+import BasicPerformerInterface from '../../../interfaces/BasicPerformerInterface';
 
 interface Props {
   history: {
@@ -14,7 +14,7 @@ interface Props {
 function NewPerformer(props: Props) {
   const {user} = React.useContext(UserContext);
   const host = process.env.REACT_APP_API_HOST;
-  const defaultValues: BasicPerformer = {
+  const defaultValues: BasicPerformerInterface = {
     name: '',
     details: '',
     location: '',
@@ -22,7 +22,7 @@ function NewPerformer(props: Props) {
     website: '',
   };
 
-  async function save(values: BasicPerformer) {
+  async function save(values: BasicPerformerInterface) {
     // TODO: Add try catch
     const resp = await axios.post(`${host}/admin/performers`, values, {
       headers: {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
-import BasicPerformer from '../../../interfaces/BasicPerformer';
+import BasicPerformerInterface from '../../../interfaces/BasicPerformerInterface';
 
 interface Props {
   values: {
@@ -10,7 +10,7 @@ interface Props {
     phone: string;
     website: string;
   };
-  save: (values: BasicPerformer) => Promise<void>
+  save: (values: BasicPerformerInterface) => Promise<void>;
 }
 
 function Form(props: Props) {
@@ -53,7 +53,11 @@ function Form(props: Props) {
           <tr>
             <td>Location:</td>
             <td>
-              <select name='location' ref={register({required: true})} defaultValue={values.location}>
+              <select
+                name='location'
+                ref={register({required: true})}
+                defaultValue={values.location}
+              >
                 <option>Sweden</option>
                 <option>Denmark</option>
                 <option>Norway</option>
