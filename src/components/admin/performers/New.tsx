@@ -1,17 +1,13 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
+import {RouteComponentProps} from "react-router-dom";
 import axios from 'axios';
+
 import UserContext from '../../../contexts/UserContext';
 import Form from './Form';
-import {withRouter} from 'react-router-dom';
 import BasicPerformerInterface from '../../../interfaces/BasicPerformerInterface';
 
-interface Props {
-  history: {
-    push: (path: string) => void;
-  };
-}
-
-function NewPerformer(props: Props) {
+function NewPerformer(props: RouteComponentProps) {
   const {user} = React.useContext(UserContext);
   const host = process.env.REACT_APP_API_HOST;
   const defaultValues: BasicPerformerInterface = {

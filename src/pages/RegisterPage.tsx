@@ -1,4 +1,6 @@
 import React from 'react';
+import {RouteComponentProps} from 'react-router-dom';
+
 import Header from '../components/Header';
 import axios from 'axios';
 import { useState } from 'react';
@@ -9,18 +11,12 @@ let email = '',
   confirmPassword = '',
   name = '';
 
-interface Props {
-  history: {
-    push: (path: string) => void;
-  };
-}
-
 interface StateInterface {
   error: boolean;
   message: string;
 }
 
-function RegisterPage(props: Props) {
+function RegisterPage(props: RouteComponentProps) {
   const [data, updateData] = useState<StateInterface>({
     error: false,
     message: '',

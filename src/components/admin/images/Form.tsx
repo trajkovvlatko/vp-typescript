@@ -1,11 +1,12 @@
 import React, {useState, useRef} from 'react';
 import axios from 'axios';
-import {getAuthHeader} from '../../../../helpers/main';
-import UserContext from '../../../../contexts/UserContext';
-import ImageInterface from '../../../../interfaces/ImageInterface';
+import {getAuthHeader} from '../../../helpers/main';
+import UserContext from '../../../contexts/UserContext';
+import ImageInterface from '../../../interfaces/ImageInterface';
 
 interface Props {
-  performerId: number;
+  id: number;
+  type: 'performer' | 'venue';
   images: ImageInterface[];
 }
 
@@ -49,7 +50,7 @@ function ImagesForm(props: Props) {
       formData.append('images[]', newImages[i]);
     }
     formData.append('remove_image_ids', getRemovedIds().toString());
-    const url = `${host}/admin/performers/${props.performerId}/images`;
+    const url = `${host}/admin/${props.type}s/${props.id}/images`;
     axios
       .post(url, formData, config)
       .then(response => {

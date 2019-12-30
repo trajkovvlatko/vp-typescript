@@ -1,22 +1,17 @@
 import React from 'react';
+import {RouteComponentProps} from 'react-router-dom';
 import Header from '../../components/Header';
 import EditPerformer from '../../components/admin/performers/Edit';
 import NewPerformer from '../../components/admin/performers/New';
+type TParams = {id: string};
 
-interface Props {
-  match: {
-    params: {
-      id?: number;
-    };
-  };
-}
-
-function AdminPerformerPage(props: Props) {
+function AdminPerformerPage({match}: RouteComponentProps<TParams>) {
+  const id = parseInt(match.params.id);
   return (
     <div>
       <Header page='performers/new' />
-      {props.match.params.id ? (
-        <EditPerformer id={props.match.params.id} />
+      {match.params.id ? (
+        <EditPerformer id={id} />
       ) : (
         <NewPerformer />
       )}

@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
+import {RouteComponentProps} from 'react-router-dom';
+
 import Type from './Type';
 import Location from './Location';
 import { withRouter } from 'react-router-dom';
-
-interface Props {
-  history: {
-    push: (path: string) => void;
-  };
-}
 
 interface StateInterface {
   type: string;
@@ -19,7 +15,7 @@ interface UpdateStateInterface {
   location?: string;
 }
 
-function BasicSearch(props: Props) {
+function BasicSearch(props: RouteComponentProps) {
   const [state, setState] = useState<StateInterface>({
     type: 'performer',
     location: 'sweden',

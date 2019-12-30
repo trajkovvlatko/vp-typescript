@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 
 import Form from './Form';
 import GenresForm from './genres/Form';
-import YoutubeLinksForm from './youtube_links/Form';
-import ImagesForm from './images/Form';
+import YoutubeLinksForm from '../youtube_links/Form';
+import ImagesForm from '../images/Form';
 import UserContext from '../../../contexts/UserContext';
 
 import BasicPerformerInterface from '../../../interfaces/BasicPerformerInterface';
@@ -93,12 +93,14 @@ function EditPerformer(props: Props) {
       <h1>Edit Performer</h1>
       <Form values={values.performer} save={save} />
       <ImagesForm
-        performerId={props.id}
+        id={props.id}
+        type='performer'
         images={values.performer.images_list}
       />
       <GenresForm performerId={props.id} selected={selectedGenreIds} />
       <YoutubeLinksForm
-        performerId={props.id}
+        id={props.id}
+        type='performer'
         links={values.performer.youtube_links_list}
       />
     </div>

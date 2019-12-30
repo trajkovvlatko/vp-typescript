@@ -1,4 +1,6 @@
 import React from 'react';
+import {RouteComponentProps} from 'react-router-dom';
+
 import {useFetch} from '../hooks/useFetch';
 import {Link} from 'react-router-dom';
 import Header from '../components/Header';
@@ -7,13 +9,7 @@ import ImageInterface from '../interfaces/ImageInterface';
 import PropertyInterface from '../interfaces/PropertyInterface';
 import {VenueBookingInterface} from '../interfaces/BookingInterface';
 
-interface Props {
-  match: {
-    params: {
-      id: number;
-    };
-  };
-}
+type TParams = {id: string};
 
 interface Venue {
   name: string;
@@ -28,9 +24,9 @@ interface Venue {
   bookings_list: VenueBookingInterface[];
 }
 
-function VenuePage(props: Props) {
-  const id: number = props.match.params.id;
-  let host: string = '';
+function VenuePage({match}: RouteComponentProps<TParams>) {
+  const id = parseInt(match.params.id);
+  let host = '';
   if (process.env.REACT_APP_API_HOST) {
     host = process.env.REACT_APP_API_HOST;
   }

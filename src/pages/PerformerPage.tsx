@@ -1,4 +1,6 @@
 import React from 'react';
+import {RouteComponentProps} from 'react-router-dom';
+
 import {useFetch} from '../hooks/useFetch';
 import {Link} from 'react-router-dom';
 import Header from '../components/Header';
@@ -7,13 +9,7 @@ import YoutubeLinkInterface from '../interfaces/YoutubeLinkInterface';
 import ImageInterface from '../interfaces/ImageInterface';
 import {PerformerBookingInterface} from '../interfaces/BookingInterface';
 
-interface Props {
-  match: {
-    params: {
-      id: number;
-    };
-  };
-}
+type TParams = {id: string};
 
 interface Performer {
   name: string;
@@ -28,9 +24,9 @@ interface Performer {
   bookings_list: PerformerBookingInterface[];
 }
 
-function PerformerPage(props: Props) {
-  const id: number = props.match.params.id;
-  let host: string = '';
+function PerformerPage({match}: RouteComponentProps<TParams>) {
+  const id = parseInt(match.params.id);
+  let host = '';
   if (process.env.REACT_APP_API_HOST) {
     host = process.env.REACT_APP_API_HOST;
   }

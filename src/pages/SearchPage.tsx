@@ -1,7 +1,9 @@
 import React from 'react';
+import {RouteComponentProps} from 'react-router-dom';
+
 import Filters from '../components/Filters';
 import Results from '../components/Results';
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import Header from '../components/Header';
 
 interface Filters {
@@ -11,19 +13,12 @@ interface Filters {
   ids: any; // TODO: Fix these anys
 }
 
-interface Props {
-  match: {
-    params: Filters;
-  };
-  history: {
-    push: (path: string) => void;
-  };
-}
+type TParams = Filters;
 
 let filters: Filters;
 
-function SearchPage(props: Props) {
-  const { type, location, date, ids } = props.match.params;
+function SearchPage(props: RouteComponentProps<TParams>) {
+  const {type, location, date, ids} = props.match.params;
   filters = {
     type: type,
     location: location,
@@ -33,7 +28,7 @@ function SearchPage(props: Props) {
 
   function search(data: {}) {
     // TODO
-    filters = { ...filters, ...data };
+    filters = {...filters, ...data};
     props.history.push(
       `/search/${filters.type}/${filters.location}/${filters.ids.join(',')}`
     );
@@ -41,7 +36,7 @@ function SearchPage(props: Props) {
 
   return (
     <div>
-      <Header page="home" />
+      <Header page='home' />
       <h1>Search Page</h1>
       <div>
         <Filters filters={filters} onChange={search} />
