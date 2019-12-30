@@ -3,7 +3,7 @@ import {useFetch} from '../../../../hooks/useFetch';
 import GenreInterface from '../../../../interfaces/GenreInterface';
 import GenreCheckbox from './Checkbox';
 import axios from 'axios';
-import {getHeader} from '../../../../helpers/main';
+import {getAuthHeader} from '../../../../helpers/main';
 import UserContext from '../../../../contexts/UserContext';
 
 interface Props {
@@ -31,7 +31,7 @@ function GenresForm(props: Props) {
     const resp = await axios.patch(
       `${host}/admin/performers/${props.performerId}`,
       {genre_ids: selected},
-      getHeader(user.token as string)
+      {headers: getAuthHeader(user.token as string)}
     );
     console.log(resp);
   }

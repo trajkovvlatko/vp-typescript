@@ -12,7 +12,7 @@ import YoutubeLinkInterface from '../../../interfaces/YoutubeLinkInterface';
 import ImageInterface from '../../../interfaces/ImageInterface';
 
 import axios from 'axios';
-import {getHeader} from '../../../helpers/main';
+import {getAuthHeader} from '../../../helpers/main';
 
 interface Props {
   id: number;
@@ -48,7 +48,7 @@ function EditPerformer(props: Props) {
   });
 
   useEffect(() => {
-    fetch(url, getHeader(user.token as string))
+    fetch(url, {headers: getAuthHeader(user.token as string)})
       .then(response => response.json())
       .then(response => {
         const newValues: EditBasicPerformerInterface = {
@@ -75,7 +75,7 @@ function EditPerformer(props: Props) {
     const resp = await axios.patch(
       `${host}/admin/performers/${values.performer.id}/genres`,
       newValues,
-      getHeader(user.token as string)
+      {headers: getAuthHeader(user.token as string)}
     );
     console.log('Updated!', resp);
   }

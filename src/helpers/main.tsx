@@ -9,10 +9,6 @@ export function getDate() {
   ].join('-');
 }
 
-export function getHeader(token: string) {
-  return {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
+export function getAuthHeader(token: string) {
+  return {Authorization: `Bearer ${token}`};
 }

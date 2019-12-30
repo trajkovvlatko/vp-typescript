@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import axios from 'axios';
-import {getHeader} from '../../../../helpers/main';
+import {getAuthHeader} from '../../../../helpers/main';
 import UserContext from '../../../../contexts/UserContext';
 import YoutubeLinkInterface from '../../../../interfaces/YoutubeLinkInterface';
 
@@ -30,7 +30,7 @@ function YoutubeLinksForm(props: Props) {
         remove_youtube_link_ids: getRemovedIds(),
         new_youtube_links: newLinks,
       },
-      getHeader(user.token as string)
+      {headers: getAuthHeader(user.token as string)}
     );
     console.log('Updated!', resp);
   }

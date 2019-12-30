@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import axios from 'axios';
-import {getHeader} from '../../../../helpers/main';
+import {getAuthHeader} from '../../../../helpers/main';
 import UserContext from '../../../../contexts/UserContext';
 import ImageInterface from '../../../../interfaces/ImageInterface';
 
@@ -37,10 +37,9 @@ function ImagesForm(props: Props) {
   function save(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    let authHeader = getHeader(user.token as string);
     const config = {
       headers: {
-        ...authHeader.headers,
+        ...getAuthHeader(user.token as string),
         ...{'content-type': 'multipart/form-data'},
       },
     };
