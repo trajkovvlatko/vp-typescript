@@ -1,6 +1,6 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
-import BasicPerformerInterface from '../../../interfaces/BasicPerformerInterface';
+import BasicPerformerInterface from 'interfaces/BasicPerformerInterface';
 
 interface Props {
   values: {

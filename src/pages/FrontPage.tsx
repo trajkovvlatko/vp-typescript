@@ -1,7 +1,7 @@
 import React from 'react';
-import BasicSearch from '../components/BasicSearch';
-import PromoList from '../components/PromoList';
-import Header from '../components/Header';
+import BasicSearch from 'components/BasicSearch';
+import PromoList from 'components/PromoList';
+import Header from 'components/Header';
 
 function FrontPage() {
   return (

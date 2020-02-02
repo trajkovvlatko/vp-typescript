@@ -1,8 +1,8 @@
 import React from 'react';
 import Property from './Property';
-import { useFetch } from '../hooks/useFetch';
-import PropertyInterface from '../interfaces/PropertyInterface';
-import IdsListInterface from '../interfaces/IdsListInterface';
+import { useFetch } from 'hooks/useFetch';
+import PropertyInterface from 'interfaces/PropertyInterface';
+import IdsListInterface from 'interfaces/IdsListInterface';
 
 interface Props {
   values: string[];

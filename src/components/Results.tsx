@@ -1,8 +1,8 @@
 import React from 'react';
 import ResultItem from './ResultItem';
-import {useFetch} from '../hooks/useFetch';
-import ResultInterface from '../interfaces/ResultInterface';
-import FiltersInterface from '../interfaces/FiltersInterface';
+import {useFetch} from 'hooks/useFetch';
+import ResultInterface from 'interfaces/ResultInterface';
+import FiltersInterface from 'interfaces/FiltersInterface';
 
 interface Props {
   filters: FiltersInterface;

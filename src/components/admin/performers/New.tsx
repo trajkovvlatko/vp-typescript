@@ -3,9 +3,9 @@ import {withRouter} from 'react-router-dom';
 import {RouteComponentProps} from "react-router-dom";
 import axios from 'axios';
 
-import UserContext from '../../../contexts/UserContext';
+import UserContext from 'contexts/UserContext';
 import Form from './Form';
-import BasicPerformerInterface from '../../../interfaces/BasicPerformerInterface';
+import BasicPerformerInterface from 'interfaces/BasicPerformerInterface';
 
 function NewPerformer(props: RouteComponentProps) {
   const {user} = React.useContext(UserContext);

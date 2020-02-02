@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../../components/Header';
-import List from '../../components/admin/List';
+import Header from 'components/Header';
+import List from 'components/admin/List';
 
 function AdminPage() {
   return (

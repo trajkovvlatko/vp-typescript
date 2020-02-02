@@ -1,10 +1,10 @@
 import React from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 
-import Filters from '../components/Filters';
-import Results from '../components/Results';
+import Filters from 'components/Filters';
+import Results from 'components/Results';
 import {withRouter} from 'react-router-dom';
-import Header from '../components/Header';
+import Header from 'components/Header';
 
 interface Filters {
   type: string;

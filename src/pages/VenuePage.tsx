@@ -1,13 +1,13 @@
 import React from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 
-import {useFetch} from '../hooks/useFetch';
+import {useFetch} from 'hooks/useFetch';
 import {Link} from 'react-router-dom';
-import Header from '../components/Header';
-import YoutubeLinkInterface from '../interfaces/YoutubeLinkInterface';
-import ImageInterface from '../interfaces/ImageInterface';
-import PropertyInterface from '../interfaces/PropertyInterface';
-import {VenueBookingInterface} from '../interfaces/BookingInterface';
+import Header from 'components/Header';
+import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
+import ImageInterface from 'interfaces/ImageInterface';
+import PropertyInterface from 'interfaces/PropertyInterface';
+import {VenueBookingInterface} from 'interfaces/BookingInterface';
 
 type TParams = {id: string};
 

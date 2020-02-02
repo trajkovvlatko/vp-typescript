@@ -1,5 +1,5 @@
 import React from 'react';
-import PropertyInterface from '../interfaces/PropertyInterface';
+import PropertyInterface from 'interfaces/PropertyInterface';
 
 interface Props {
   checked: boolean;

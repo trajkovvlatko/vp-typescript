@@ -1,10 +1,10 @@
 import React from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 
-import Header from '../components/Header';
+import Header from 'components/Header';
 import axios from 'axios';
 import {useState, useContext} from 'react';
-import UserContext from '../contexts/UserContext';
+import UserContext from 'contexts/UserContext';
 
 const host = process.env.REACT_APP_API_HOST;
 let email = '',

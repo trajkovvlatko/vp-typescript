@@ -1,7 +1,7 @@
 import React from 'react';
 import Rating from './Rating';
 import { Link } from 'react-router-dom';
-import PromoItemInterface from '../interfaces/PromoItemInterface';
+import PromoItemInterface from 'interfaces/PromoItemInterface';
 
 interface Props {
   data: PromoItemInterface;

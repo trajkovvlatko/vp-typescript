@@ -1,8 +1,8 @@
 import React from 'react';
 import Genre from './Genre';
-import { useFetch } from '../hooks/useFetch';
-import GenreInterface from '../interfaces/GenreInterface';
-import IdsListInterface from '../interfaces/IdsListInterface';
+import { useFetch } from 'hooks/useFetch';
+import GenreInterface from 'interfaces/GenreInterface';
+import IdsListInterface from 'interfaces/IdsListInterface';
 
 interface Props {
   values: string[];

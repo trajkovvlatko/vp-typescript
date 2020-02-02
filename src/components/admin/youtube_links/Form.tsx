@@ -1,9 +1,9 @@
 import React, {useState, useRef} from 'react';
 import axios from 'axios';
-import {getAuthHeader} from '../../../helpers/main';
-import useNotification from '../../../hooks/useNotification';
-import UserContext from '../../../contexts/UserContext';
-import YoutubeLinkInterface from '../../../interfaces/YoutubeLinkInterface';
+import {getAuthHeader} from 'helpers/main';
+import useNotification from 'hooks/useNotification';
+import UserContext from 'contexts/UserContext';
+import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
 import Persisted from './Persisted';
 import New from './New';
 

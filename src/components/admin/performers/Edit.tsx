@@ -4,15 +4,15 @@ import Form from './Form';
 import GenresForm from './genres/Form';
 import YoutubeLinksForm from '../youtube_links/Form';
 import ImagesForm from '../images/Form';
-import UserContext from '../../../contexts/UserContext';
+import UserContext from 'contexts/UserContext';
 
-import BasicPerformerInterface from '../../../interfaces/BasicPerformerInterface';
-import GenreInterface from '../../../interfaces/GenreInterface';
-import YoutubeLinkInterface from '../../../interfaces/YoutubeLinkInterface';
-import ImageInterface from '../../../interfaces/ImageInterface';
+import BasicPerformerInterface from 'interfaces/BasicPerformerInterface';
+import GenreInterface from 'interfaces/GenreInterface';
+import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
+import ImageInterface from 'interfaces/ImageInterface';
 
 import axios from 'axios';
-import {getAuthHeader} from '../../../helpers/main';
+import {getAuthHeader} from 'helpers/main';
 
 interface Props {
   id: number;
@@ -29,6 +29,8 @@ function EditPerformer(props: Props) {
   const {user} = React.useContext(UserContext);
   const host = process.env.REACT_APP_API_HOST;
   const url: string = `${host}/admin/performers/${props.id}`;
+  const id = props.id;
+  const token = user.token;
   let defaultValues: EditBasicPerformerInterface = {
     id: props.id,
     name: '',
@@ -48,11 +50,11 @@ function EditPerformer(props: Props) {
   });
 
   useEffect(() => {
-    fetch(url, {headers: getAuthHeader(user.token as string)})
+    fetch(url, {headers: getAuthHeader(token as string)})
       .then(response => response.json())
       .then(response => {
         const newValues: EditBasicPerformerInterface = {
-          id: props.id,
+          id: id,
           name: response.name,
           details: response.details,
           location: response.location,
@@ -68,12 +70,12 @@ function EditPerformer(props: Props) {
           performer: newValues,
         });
       });
-  }, []);
+  }, [id, url, token]);
 
   async function save(newValues: BasicPerformerInterface) {
     // TODO: add try catch
     const resp = await axios.patch(
-      `${host}/admin/performers/${values.performer.id}/genres`,
+      `${host}/admin/performers/${values.performer.id}`,
       newValues,
       {headers: getAuthHeader(user.token as string)}
     );

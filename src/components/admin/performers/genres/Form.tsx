@@ -1,10 +1,10 @@
 import React from 'react';
-import {useFetch} from '../../../../hooks/useFetch';
-import GenreInterface from '../../../../interfaces/GenreInterface';
+import {useFetch} from 'hooks/useFetch';
+import GenreInterface from 'interfaces/GenreInterface';
 import GenreCheckbox from './Checkbox';
 import axios from 'axios';
-import {getAuthHeader} from '../../../../helpers/main';
-import UserContext from '../../../../contexts/UserContext';
+import {getAuthHeader} from 'helpers/main';
+import UserContext from 'contexts/UserContext';
 
 interface Props {
   performerId: number;
@@ -29,7 +29,7 @@ function GenresForm(props: Props) {
   async function save() {
     // add try catch and error notification
     const resp = await axios.patch(
-      `${host}/admin/performers/${props.performerId}`,
+      `${host}/admin/performers/${props.performerId}/genres`,
       {genre_ids: selected},
       {headers: getAuthHeader(user.token as string)}
     );

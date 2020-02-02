@@ -3,22 +3,22 @@ import ReactDOM from "react-dom";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import FrontPage from "./pages/FrontPage";
-import SearchPage from "./pages/SearchPage";
-import PerformerPage from "./pages/PerformerPage";
-import VenuePage from "./pages/VenuePage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import AdminPage from "./pages/admin/AdminPage";
-import AdminPerformerPage from "./pages/admin/AdminPerformerPage";
+import FrontPage from "pages/FrontPage";
+import SearchPage from "pages/SearchPage";
+import PerformerPage from "pages/PerformerPage";
+import VenuePage from "pages/VenuePage";
+import LoginPage from "pages/LoginPage";
+import RegisterPage from "pages/RegisterPage";
+import AdminPage from "pages/admin/AdminPage";
+import AdminPerformerPage from "pages/admin/AdminPerformerPage";
 
-import { useLocalStorage } from "./hooks/useLocalStorage";
-import UserContext from "./contexts/UserContext";
+import { useLocalStorage } from "hooks/useLocalStorage";
+import UserContext from "contexts/UserContext";
 
-import "./styles/index.css";
-import "./styles/App.css";
+import "styles/index.css";
+import "styles/App.css";
 
-import * as serviceWorker from "./serviceWorker";
+import * as serviceWorker from "serviceWorker";
 
 const App: React.FC = () => {
   const [user, setUser] = useLocalStorage("vp-user", {});

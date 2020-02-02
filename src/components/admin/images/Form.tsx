@@ -1,8 +1,8 @@
 import React, {useState, useRef} from 'react';
 import axios from 'axios';
-import {getAuthHeader} from '../../../helpers/main';
-import UserContext from '../../../contexts/UserContext';
-import ImageInterface from '../../../interfaces/ImageInterface';
+import {getAuthHeader} from 'helpers/main';
+import UserContext from 'contexts/UserContext';
+import ImageInterface from 'interfaces/ImageInterface';
 
 interface Props {
   id: number;

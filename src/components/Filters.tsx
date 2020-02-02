@@ -3,7 +3,7 @@ import TypeDropDown from './TypeDropDown';
 import Location from './Location';
 import Genres from './Genres';
 import Properties from './Properties';
-import FiltersInterface from '../interfaces/FiltersInterface';
+import FiltersInterface from 'interfaces/FiltersInterface';
 
 interface Props {
   filters: FiltersInterface;

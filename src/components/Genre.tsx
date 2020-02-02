@@ -1,5 +1,5 @@
 import React from 'react';
-import GenreInterface from '../interfaces/GenreInterface';
+import GenreInterface from 'interfaces/GenreInterface';
 
 interface Props {
   checked: boolean;

@@ -1,7 +1,7 @@
 import React from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 
-import Header from '../components/Header';
+import Header from 'components/Header';
 import axios from 'axios';
 import { useState } from 'react';
 

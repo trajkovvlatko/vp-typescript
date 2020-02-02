@@ -1,7 +1,7 @@
 import React from 'react';
 import PromoItem from './PromoItem';
-import { useFetch } from '../hooks/useFetch';
-import PromoItemInterface from '../interfaces/PromoItemInterface';
+import { useFetch } from 'hooks/useFetch';
+import PromoItemInterface from 'interfaces/PromoItemInterface';
 
 interface Props {
   title: string;

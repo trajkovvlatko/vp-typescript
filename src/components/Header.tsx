@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import UserContext from '../contexts/UserContext';
-import NavLink from '../components/NavLink';
+import UserContext from 'contexts/UserContext';
+import NavLink from 'components/NavLink';
 
 interface Props {
   page: string;
