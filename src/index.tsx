@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 import FrontPage from "pages/FrontPage";
 import SearchPage from "pages/SearchPage";
@@ -24,19 +24,21 @@ const App: React.FC = () => {
   const [user, setUser] = useLocalStorage("vp-user", {});
 
   return (
-    <Router>
+    <BrowserRouter>
       <UserContext.Provider value={{ user, setUser }}>
-        <Route exact path="/search/:type/:location/:ids?" component={SearchPage} />
-        <Route exact path="/performers/:id" component={PerformerPage} />
-        <Route exact path="/venues/:id" component={VenuePage} />
-        <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/register" component={RegisterPage} />
-        <Route exact path="/admin" component={AdminPage} />
-        <Route exact path="/admin/performers/new" component={AdminPerformerPage} />
-        <Route exact path="/admin/performers/:id/edit" component={AdminPerformerPage} />
-        <Route exact path="/" component={FrontPage} />
+        <Switch>
+          <Route exact path="/" component={FrontPage} />
+          <Route path="/search/:type/:location/:ids?" component={SearchPage} />
+          <Route path="/performers/:id" component={PerformerPage} />
+          <Route path="/venues/:id" component={VenuePage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/admin" component={AdminPage} />
+          <Route path="/admin/performers/:id/edit" component={AdminPerformerPage} />
+          <Route path="/admin/performers/new" component={AdminPerformerPage} />
+        </Switch>
       </UserContext.Provider>
-    </Router>
+    </BrowserRouter>
   );
 };
 
