@@ -1,6 +1,6 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
-import BasicPerformerInterface from 'interfaces/BasicPerformerInterface';
+import BasicVenueInterface from 'interfaces/BasicVenueInterface';
 
 interface Props {
   values: {
@@ -10,7 +10,7 @@ interface Props {
     phone: string;
     website: string;
   };
-  save: (values: BasicPerformerInterface) => Promise<void>;
+  save: (values: BasicVenueInterface) => Promise<void>;
 }
 
 function Form(props: Props) {

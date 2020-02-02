@@ -6,13 +6,13 @@ import useNotification from 'hooks/useNotification';
 
 import UserContext from 'contexts/UserContext';
 import Form from './Form';
-import BasicPerformerInterface from 'interfaces/BasicPerformerInterface';
+import BasicVenueInterface from 'interfaces/BasicVenueInterface';
 
-function NewPerformer(props: RouteComponentProps) {
+function NewVenue(props: RouteComponentProps) {
   const {user} = React.useContext(UserContext);
   const host = process.env.REACT_APP_API_HOST;
   const [notification, setNotification] = useNotification();
-  const defaultValues: BasicPerformerInterface = {
+  const defaultValues: BasicVenueInterface = {
     name: '',
     details: '',
     location: '',
@@ -20,22 +20,22 @@ function NewPerformer(props: RouteComponentProps) {
     website: '',
   };
 
-  async function save(values: BasicPerformerInterface) {
+  async function save(values: BasicVenueInterface) {
     try {
-      const resp = await axios.post(`${host}/admin/performers`, values, {
+      const resp = await axios.post(`${host}/admin/venues`, values, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       });
-      props.history.push(`/admin/performers/${resp.data.id}/edit`);
+      props.history.push(`/admin/venues/${resp.data.id}/edit`);
     } catch(e) {
-      setNotification({type: 'error', message: 'Error while saving a performer.'});
+      setNotification({type: 'error', message: 'Error while saving a venue.'});
     }
   }
 
   return (
     <div>
-      <h1>New Performer</h1>
+      <h1>New Venue</h1>
 
       {notification && (
         <p>
@@ -48,4 +48,4 @@ function NewPerformer(props: RouteComponentProps) {
   );
 }
 
-export default withRouter(NewPerformer);
+export default withRouter(NewVenue);
