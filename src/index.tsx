@@ -11,6 +11,7 @@ import LoginPage from "pages/LoginPage";
 import RegisterPage from "pages/RegisterPage";
 import AdminPage from "pages/admin/AdminPage";
 import AdminPerformerPage from "pages/admin/AdminPerformerPage";
+import AdminVenuePage from "pages/admin/AdminVenuePage";
 
 import { useLocalStorage } from "hooks/useLocalStorage";
 import UserContext from "contexts/UserContext";
@@ -36,6 +37,8 @@ const App: React.FC = () => {
           <Route exact path="/admin" component={AdminPage} />
           <Route path="/admin/performers/:id/edit" component={AdminPerformerPage} />
           <Route path="/admin/performers/new" component={AdminPerformerPage} />
+          <Route path="/admin/venues/:id/edit" component={AdminVenuePage} />
+          <Route path="/admin/venues/new" component={AdminVenuePage} />
         </Switch>
       </UserContext.Provider>
     </BrowserRouter>

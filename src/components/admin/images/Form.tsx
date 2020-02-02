@@ -3,6 +3,7 @@ import axios from 'axios';
 import {getAuthHeader} from 'helpers/main';
 import UserContext from 'contexts/UserContext';
 import ImageInterface from 'interfaces/ImageInterface';
+import useNotification from 'hooks/useNotification';
 
 interface Props {
   id: number;
@@ -17,6 +18,7 @@ function ImagesForm(props: Props) {
   const [newImages, setNewImages] = useState<File[]>([]);
   const newImage = useRef<HTMLInputElement>(null);
   const initialImageIds = props.images.map(i => i.id);
+  const [notification, setNotification] = useNotification();
 
   function remove(id: number) {
     setImages(
@@ -54,7 +56,9 @@ function ImagesForm(props: Props) {
     axios
       .post(url, formData, config)
       .then(response => {
-        console.log(response);
+        setImages([...images, ...response.data]);
+        setNewImages([]);
+        setNotification({type: 'info', message: 'Successfully saved images.'});
       })
       .catch(error => {});
   }
@@ -77,10 +81,20 @@ function ImagesForm(props: Props) {
     <div>
       <h2>Images</h2>
 
+      {notification && (
+        <p>
+          <b>{notification.type.toUpperCase()}</b>: {notification.message}
+        </p>
+      )}
+
       {images.map((row: ImageInterface) => {
         return (
           <div key={`image-${row.id}`}>
-            <img src={row.image} alt={`alt-${row.image}`} />
+            <img
+              src={`${host}/uploads/${row.image}`}
+              alt={`alt-${row.image}`}
+              width='100'
+            />
             <button
               onClick={() => {
                 remove(row.id);
