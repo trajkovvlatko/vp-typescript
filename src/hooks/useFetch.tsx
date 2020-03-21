@@ -40,7 +40,6 @@ export const useFetch = (url: string, token: string = '') => {
           });
         }
       } catch (e) {
-        console.log('catch');
         updateData({
           error: true,
           loading: false,

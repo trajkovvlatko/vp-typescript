@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 
 import {useFetch} from 'hooks/useFetch';
 import {Link} from 'react-router-dom';
 import Header from 'components/Header';
-import VenueSelector from 'components/VenueSelector';
+import BookSelector from 'components/BookSelector';
 
 import GenreInterface from 'interfaces/GenreInterface';
 import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
@@ -37,14 +37,10 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
   const url: string = `${host}/performers/${id}`;
   const {error, loading, results: result} = useFetch(url);
   const {user} = React.useContext(UserContext);
+  const [showBookSelector, updateShowBookSelector] = useState<Boolean>(false);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error while fetching data.</div>;
-  }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error while fetching data.</div>;
 
   const performer: Performer = result;
   const upcoming = performer.bookings_list.filter(
@@ -58,13 +54,23 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
     }
   );
 
+  function onShowBookSelectorClick() {
+    updateShowBookSelector(true);
+  }
+
   return (
     <div>
       <Header page='home' />
       <h2>{performer.name}</h2>
 
       {user.token ? (
-        <VenueSelector performerId={performer.id} />
+        <div>
+          {showBookSelector ? (
+            <BookSelector connectType='performer' connectId={performer.id} />
+          ) : (
+            <button onClick={onShowBookSelectorClick}>Book this venue</button>
+          )}
+        </div>
       ) : (
         <Link to='/login'>Book</Link>
       )}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 
 import {useFetch} from 'hooks/useFetch';
@@ -8,10 +8,13 @@ import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
 import ImageInterface from 'interfaces/ImageInterface';
 import PropertyInterface from 'interfaces/PropertyInterface';
 import {VenueBookingInterface} from 'interfaces/BookingInterface';
+import BookSelector from 'components/BookSelector';
+import UserContext from 'contexts/UserContext';
 
 type TParams = {id: string};
 
 interface Venue {
+  id: number;
   name: string;
   image: string;
   location: string;
@@ -26,32 +29,50 @@ interface Venue {
 
 function VenuePage({match}: RouteComponentProps<TParams>) {
   const id = parseInt(match.params.id);
+  const {user} = React.useContext(UserContext);
   let host = '';
   if (process.env.REACT_APP_API_HOST) {
     host = process.env.REACT_APP_API_HOST;
   }
   const url: string = `${host}/venues/${id}`;
   const {error, loading, results: result} = useFetch(url);
+  const [showBookSelector, updateShowBookSelector] = useState<Boolean>(false);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error while fetching data.</div>;
-  }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error while fetching data.</div>;
 
   const venue: Venue = result;
-  const upcoming = venue.bookings_list.filter((booking: VenueBookingInterface) => {
-    return new Date(booking.date) > new Date();
-  });
-  const previous = venue.bookings_list.filter((booking: VenueBookingInterface) => {
-    return new Date(booking.date) < new Date();
-  });
+  const upcoming = venue.bookings_list.filter(
+    (booking: VenueBookingInterface) => {
+      return new Date(booking.date) > new Date();
+    }
+  );
+  const previous = venue.bookings_list.filter(
+    (booking: VenueBookingInterface) => {
+      return new Date(booking.date) < new Date();
+    }
+  );
+
+  function onShowBookSelectorClick() {
+    updateShowBookSelector(true);
+  }
 
   return (
     <div>
       <Header page='home' />
+
+      {user.token ? (
+        <div>
+          {showBookSelector ? (
+            <BookSelector connectType='venue' connectId={venue.id} />
+          ) : (
+            <button onClick={onShowBookSelectorClick}>Book this venue</button>
+          )}
+        </div>
+      ) : (
+        <Link to='/login'>Book</Link>
+      )}
+
       <h2>{venue.name}</h2>
       <img src={venue.image} alt='selected' />
       <div>Location: {venue.location}</div>
@@ -83,7 +104,7 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
         <div>
           Previous:
           {previous.map((b: VenueBookingInterface) => (
-            <div key={`prev-${b.date}`}>
+            <div key={`prev-${b.performer_id}-${b.date}`}>
               Hosted
               <Link to={`/performers/${b.performer_id}`}>
                 {b.performer_name}
