@@ -28,20 +28,20 @@ const App: React.FC = () => {
     <BrowserRouter>
       <UserContext.Provider value={{user, setUser}}>
         <Switch>
-          <Route exact path="/" component={FrontPage} />
-          <Route path="/search/:type/:location/:ids?" component={SearchPage} />
-          <Route path="/performers/:id" component={PerformerPage} />
-          <Route path="/venues/:id" component={VenuePage} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/register" component={RegisterPage} />
-          <Route exact path="/admin" component={AdminPage} />
+          <Route exact path='/' component={FrontPage} />
+          <Route path='/search/:type/:location/:ids?' component={SearchPage} />
+          <Route path='/performers/:id' component={PerformerPage} />
+          <Route path='/venues/:id' component={VenuePage} />
+          <Route exact path='/login' component={LoginPage} />
+          <Route exact path='/register' component={RegisterPage} />
+          <Route exact path='/admin' component={AdminPage} />
           <Route
-            path="/admin/performers/:id/edit"
+            path='/admin/performers/:id/edit'
             component={AdminPerformerPage}
           />
-          <Route path="/admin/performers/new" component={AdminPerformerPage} />
-          <Route path="/admin/venues/:id/edit" component={AdminVenuePage} />
-          <Route path="/admin/venues/new" component={AdminVenuePage} />
+          <Route path='/admin/performers/new' component={AdminPerformerPage} />
+          <Route path='/admin/venues/:id/edit' component={AdminVenuePage} />
+          <Route path='/admin/venues/new' component={AdminVenuePage} />
         </Switch>
       </UserContext.Provider>
     </BrowserRouter>
