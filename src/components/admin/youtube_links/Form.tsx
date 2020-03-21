@@ -95,7 +95,11 @@ function YoutubeLinksForm(props: Props) {
         />
       ))}
 
-      {newLinks.length > 0 && <p>New links <small>(not saved yet)</small></p>}
+      {newLinks.length > 0 && (
+        <p>
+          New links <small>(not saved yet)</small>
+        </p>
+      )}
       {newLinks.map((link: string) => (
         <New link={link} remove={removeNewLink} key={Math.random()} />
       ))}

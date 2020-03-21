@@ -4,14 +4,18 @@ import {RouteComponentProps} from 'react-router-dom';
 import {useFetch} from 'hooks/useFetch';
 import {Link} from 'react-router-dom';
 import Header from 'components/Header';
+import VenueSelector from 'components/VenueSelector';
+
 import GenreInterface from 'interfaces/GenreInterface';
 import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
 import ImageInterface from 'interfaces/ImageInterface';
 import {PerformerBookingInterface} from 'interfaces/BookingInterface';
+import UserContext from 'contexts/UserContext';
 
 type TParams = {id: string};
 
 interface Performer {
+  id: number;
   name: string;
   image: string;
   location: string;
@@ -32,6 +36,7 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
   }
   const url: string = `${host}/performers/${id}`;
   const {error, loading, results: result} = useFetch(url);
+  const {user} = React.useContext(UserContext);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -57,6 +62,13 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
     <div>
       <Header page='home' />
       <h2>{performer.name}</h2>
+
+      {user.token ? (
+        <VenueSelector performerId={performer.id} />
+      ) : (
+        <Link to='/login'>Book</Link>
+      )}
+
       <img src={performer.image} alt='selected' />
       <div>Location: {performer.location}</div>
       <div>

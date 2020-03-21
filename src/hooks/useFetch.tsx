@@ -26,12 +26,21 @@ export const useFetch = (url: string, token: string = '') => {
             : {};
         const response = await fetch(url, headers);
         const json = await response.json();
-        updateData({
-          error: false,
-          loading: false,
-          results: json,
-        });
+        if (json.error) {
+          updateData({
+            error: true,
+            loading: false,
+            results: [],
+          });
+        } else {
+          updateData({
+            error: false,
+            loading: false,
+            results: json,
+          });
+        }
       } catch (e) {
+        console.log('catch');
         updateData({
           error: true,
           loading: false,

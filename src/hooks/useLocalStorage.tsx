@@ -22,5 +22,6 @@ export const useLocalStorage = (key: string, initialValue: any) => {
       console.log(error);
     }
   };
+
   return [storedValue, setValue];
 };
