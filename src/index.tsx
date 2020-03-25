@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import FrontPage from 'pages/FrontPage';
 import SearchPage from 'pages/SearchPage';
@@ -9,11 +9,14 @@ import PerformerPage from 'pages/PerformerPage';
 import VenuePage from 'pages/VenuePage';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
+import NotificationPage from 'pages/NotificationPage';
 import AdminPage from 'pages/admin/AdminPage';
 import AdminPerformerPage from 'pages/admin/AdminPerformerPage';
 import AdminVenuePage from 'pages/admin/AdminVenuePage';
 
-import {useLocalStorage} from 'hooks/useLocalStorage';
+import Notifications from 'components/Notifications';
+
+import { useLocalStorage } from 'hooks/useLocalStorage';
 import UserContext from 'contexts/UserContext';
 
 import 'styles/index.css';
@@ -26,7 +29,8 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{user, setUser}}>
+      <UserContext.Provider value={{ user, setUser }}>
+        <Notifications />
         <Switch>
           <Route exact path='/' component={FrontPage} />
           <Route path='/search/:type/:location/:ids?' component={SearchPage} />
@@ -34,6 +38,7 @@ const App: React.FC = () => {
           <Route path='/venues/:id' component={VenuePage} />
           <Route exact path='/login' component={LoginPage} />
           <Route exact path='/register' component={RegisterPage} />
+          <Route exact path='/notifications/:id' component={NotificationPage} />
           <Route exact path='/admin' component={AdminPage} />
           <Route
             path='/admin/performers/:id/edit'

@@ -17,3 +17,11 @@
   display: inline-block;
   width: 100px;
 }
+
+.notifications ul {
+  display: none;
+}
+
+.notifications ul.active {
+  display: block;
+}

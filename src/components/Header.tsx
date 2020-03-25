@@ -1,15 +1,15 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import UserContext from 'contexts/UserContext';
 import NavLink from 'components/NavLink';
-import {useLocalStorage} from 'hooks/useLocalStorage';
+import { useLocalStorage } from 'hooks/useLocalStorage';
 
 interface Props {
   page: string;
 }
 
 function Header(props: Props) {
-  const {user} = React.useContext(UserContext);
+  const { user } = React.useContext(UserContext);
   const [_, setLocalStorageValue] = useLocalStorage('vp-user', {});
 
   function logout() {
@@ -27,11 +27,11 @@ function Header(props: Props) {
           </div>
         </div>
       )) || [
-        <div key="logged-out">
-          <NavLink currentPage={props.page} label='Login' page='login' />
-          <NavLink currentPage={props.page} label='Register' page='register' />
-        </div>,
-      ]}
+          <div key="logged-out">
+            <NavLink currentPage={props.page} label='Login' page='login' />
+            <NavLink currentPage={props.page} label='Register' page='register' />
+          </div>,
+        ]}
     </div>
   );
 }

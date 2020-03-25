@@ -43,15 +43,6 @@ function BookSelector(props: Props) {
       },
     };
 
-    /*     let performerId, venueId;
-    if (props.connectType === 'performer') {
-      performerId = props.connectId;
-      venueId = selectedId;
-    } else {
-      performerId = selectedId;
-      venueId = props.connectId;
-    }
- */
     axios
       .post(
         `${host}/admin/bookings/${dateTime}/${props.connectType}/${props.connectId}/${selectedType}/${selectedId}`,
