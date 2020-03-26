@@ -82,9 +82,12 @@ function EditPerformer(props: Props) {
         {headers: getAuthHeader(user.token as string)}
       );
       if (resp.status === 200) {
-        setNotification({type: 'info', message: 'The performer is successfully saved.'});
+        setNotification({
+          type: 'info',
+          message: 'The performer is successfully saved.',
+        });
       }
-    } catch(_) {
+    } catch (_) {
       setNotification({type: 'info', message: 'Error while saving performer.'});
     }
   }

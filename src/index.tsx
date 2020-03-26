@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import FrontPage from 'pages/FrontPage';
 import SearchPage from 'pages/SearchPage';
@@ -16,7 +16,7 @@ import AdminVenuePage from 'pages/admin/AdminVenuePage';
 
 import Notifications from 'components/Notifications';
 
-import { useLocalStorage } from 'hooks/useLocalStorage';
+import {useLocalStorage} from 'hooks/useLocalStorage';
 import UserContext from 'contexts/UserContext';
 
 import 'styles/index.css';
@@ -29,7 +29,7 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider value={{user, setUser}}>
         <Notifications />
         <Switch>
           <Route exact path='/' component={FrontPage} />

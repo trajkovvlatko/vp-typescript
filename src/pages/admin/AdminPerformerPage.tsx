@@ -10,11 +10,7 @@ function AdminPerformerPage({match}: RouteComponentProps<TParams>) {
   return (
     <div>
       <Header page='performers/new' />
-      {match.params.id ? (
-        <EditPerformer id={id} />
-      ) : (
-        <NewPerformer />
-      )}
+      {match.params.id ? <EditPerformer id={id} /> : <NewPerformer />}
     </div>
   );
 }

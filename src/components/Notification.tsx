@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 interface Props {
   id: number;
@@ -9,9 +9,7 @@ interface Props {
 function Notificaton(props: Props) {
   return (
     <div>
-      <Link to={`/notifications/${props.id}`}>
-        {props.message}
-      </Link>
+      <Link to={`/notifications/${props.id}`}>{props.message}</Link>
     </div>
   );
 }

@@ -15,7 +15,7 @@ function Genre(props: Props) {
   return (
     <div>
       <input
-        type="checkbox"
+        type='checkbox'
         value={props.genre.id}
         defaultChecked={props.checked}
         onChange={onChange}

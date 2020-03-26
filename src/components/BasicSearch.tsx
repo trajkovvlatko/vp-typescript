@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 
 import Type from './Type';
 import Location from './Location';
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 interface StateInterface {
   type: string;
@@ -22,7 +22,7 @@ function BasicSearch(props: RouteComponentProps) {
   });
 
   function update(data: UpdateStateInterface) {
-    setState({ ...state, ...data });
+    setState({...state, ...data});
   }
 
   function onSearch() {
@@ -34,11 +34,11 @@ function BasicSearch(props: RouteComponentProps) {
       <h2>Basic search</h2>
       I'm looking for a:
       <Type
-        value="performer"
+        value='performer'
         active={state.type === 'performer'}
         onClick={update}
       />
-      <Type value="venue" active={state.type === 'venue'} onClick={update} />
+      <Type value='venue' active={state.type === 'venue'} onClick={update} />
       in:
       <Location value={state.location} onChange={update} />
       <button onClick={onSearch}>Search</button>

@@ -35,9 +35,15 @@ function PropertiesForm(props: Props) {
         {property_ids: selected},
         {headers: getAuthHeader(user.token as string)}
       );
-      setNotification({type: 'info', message: 'Successfully saved properties.'});
-    } catch(e) {
-      setNotification({type: 'error', message: 'Error while saving properties.'});
+      setNotification({
+        type: 'info',
+        message: 'Successfully saved properties.',
+      });
+    } catch (e) {
+      setNotification({
+        type: 'error',
+        message: 'Error while saving properties.',
+      });
     }
   }
 

@@ -9,6 +9,6 @@ interface UserContextInterface {
 
 const defaultUser = {};
 const setUser = () => defaultUser;
-const defaults: UserContextInterface = { user: {}, setUser: setUser };
+const defaults: UserContextInterface = {user: {}, setUser: setUser};
 const UserContext = React.createContext<UserContextInterface>(defaults);
 export default UserContext;

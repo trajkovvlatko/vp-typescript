@@ -37,7 +37,10 @@ function GenresForm(props: Props) {
       );
       setNotification({type: 'info', message: 'Successfully saved genres.'});
     } catch (e) {
-      setNotification({type: 'error', message: 'Error while saving properties.'});
+      setNotification({
+        type: 'error',
+        message: 'Error while saving properties.',
+      });
     }
   }
 

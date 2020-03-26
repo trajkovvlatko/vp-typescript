@@ -10,11 +10,7 @@ function AdminVenuePage({match}: RouteComponentProps<TParams>) {
   return (
     <div>
       <Header page='venues/new' />
-      {match.params.id ? (
-        <EditVenue id={id} />
-      ) : (
-        <NewVenue />
-      )}
+      {match.params.id ? <EditVenue id={id} /> : <NewVenue />}
     </div>
   );
 }

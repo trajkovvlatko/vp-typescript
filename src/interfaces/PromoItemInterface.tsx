@@ -4,4 +4,4 @@ export default interface PromoItemInterface {
   image: string;
   rating: string;
   type: string;
-};
+}

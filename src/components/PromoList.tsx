@@ -1,6 +1,6 @@
 import React from 'react';
 import PromoItem from './PromoItem';
-import { useFetch } from 'hooks/useFetch';
+import {useFetch} from 'hooks/useFetch';
 import PromoItemInterface from 'interfaces/PromoItemInterface';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 function PromoList(props: Props) {
   const host = process.env.REACT_APP_API_HOST;
   const url = `${host}/${props.type}s?sorting=${props.sorting}&limit=3`;
-  const { error, loading, results } = useFetch(url);
+  const {error, loading, results} = useFetch(url);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -23,7 +23,7 @@ function PromoList(props: Props) {
   }
 
   return (
-    <div className="promo-list">
+    <div className='promo-list'>
       <h5>{props.title}</h5>
       {results.map((row: PromoItemInterface) => (
         <PromoItem data={row} key={`promo-item-${row.id}`} />

@@ -1,6 +1,6 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
-import {RouteComponentProps} from "react-router-dom";
+import {RouteComponentProps} from 'react-router-dom';
 import axios from 'axios';
 import useNotification from 'hooks/useNotification';
 
@@ -28,7 +28,7 @@ function NewVenue(props: RouteComponentProps) {
         },
       });
       props.history.push(`/admin/venues/${resp.data.id}/edit`);
-    } catch(e) {
+    } catch (e) {
       setNotification({type: 'error', message: 'Error while saving a venue.'});
     }
   }

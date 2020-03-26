@@ -1,6 +1,6 @@
 import React from 'react';
 import Rating from './Rating';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import PromoItemInterface from 'interfaces/PromoItemInterface';
 
 interface Props {
@@ -8,10 +8,10 @@ interface Props {
 }
 
 function PromoItem(props: Props) {
-  const { id, name, image, rating, type } = props.data;
+  const {id, name, image, rating, type} = props.data;
   return (
-    <div className="promo-item">
-      <img src={image} width="100" alt={name} />
+    <div className='promo-item'>
+      <img src={image} width='100' alt={name} />
       <p>{name}</p>
       <Rating stars={parseInt(rating)} />
       <Link to={`/${type}s/${id}`}>Book</Link>

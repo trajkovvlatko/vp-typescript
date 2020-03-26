@@ -1,6 +1,6 @@
 import React from 'react';
 import Genre from './Genre';
-import { useFetch } from 'hooks/useFetch';
+import {useFetch} from 'hooks/useFetch';
 import GenreInterface from 'interfaces/GenreInterface';
 import IdsListInterface from 'interfaces/IdsListInterface';
 
@@ -11,7 +11,7 @@ interface Props {
 
 function Genres(props: Props) {
   const url: string = `${process.env.REACT_APP_API_HOST}/genres`;
-  const { error, loading, results } = useFetch(url);
+  const {error, loading, results} = useFetch(url);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -32,7 +32,7 @@ function Genres(props: Props) {
       newGenres = selected.filter(g => g !== value);
     }
     selected = newGenres;
-    props.onChange({ ids: newGenres });
+    props.onChange({ids: newGenres});
   }
 
   return (

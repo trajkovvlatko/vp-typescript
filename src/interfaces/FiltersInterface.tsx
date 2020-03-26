@@ -3,4 +3,4 @@ export default interface FiltersInterface {
   location: string;
   date: any;
   ids: string[];
-};
+}

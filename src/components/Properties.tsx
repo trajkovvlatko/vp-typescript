@@ -1,6 +1,6 @@
 import React from 'react';
 import Property from './Property';
-import { useFetch } from 'hooks/useFetch';
+import {useFetch} from 'hooks/useFetch';
 import PropertyInterface from 'interfaces/PropertyInterface';
 import IdsListInterface from 'interfaces/IdsListInterface';
 
@@ -11,7 +11,7 @@ interface Props {
 
 function Properties(props: Props) {
   const url = `${process.env.REACT_APP_API_HOST}/properties`;
-  const { error, loading, results } = useFetch(url);
+  const {error, loading, results} = useFetch(url);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -32,7 +32,7 @@ function Properties(props: Props) {
       newProperties = selected.filter(g => g !== value);
     }
     selected = newProperties;
-    props.onChange({ ids: newProperties });
+    props.onChange({ids: newProperties});
   }
 
   return (

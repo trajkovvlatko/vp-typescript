@@ -3,4 +3,4 @@ export default interface ResultInterface {
   name: string;
   image: string;
   rating: string;
-};
+}

@@ -15,7 +15,7 @@ function Property(props: Props) {
   return (
     <div>
       <input
-        type="checkbox"
+        type='checkbox'
         value={props.property.id}
         defaultChecked={props.checked}
         onChange={onChange}

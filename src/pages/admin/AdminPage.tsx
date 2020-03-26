@@ -11,7 +11,7 @@ function AdminPage() {
       <List type='performer' />
       ---------------
       <h3>Venues</h3>
-      <List type='venue'/>
+      <List type='venue' />
     </div>
   );
 }
