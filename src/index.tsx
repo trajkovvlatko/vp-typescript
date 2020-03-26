@@ -14,6 +14,7 @@ import AdminPage from 'pages/admin/AdminPage';
 import AdminPerformerPage from 'pages/admin/AdminPerformerPage';
 import AdminVenuePage from 'pages/admin/AdminVenuePage';
 
+import WithUser from 'components/WithUser';
 import Notifications from 'components/Notifications';
 
 import {useLocalStorage} from 'hooks/useLocalStorage';
@@ -30,7 +31,9 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <UserContext.Provider value={{user, setUser}}>
-        <Notifications />
+        <WithUser>
+          <Notifications />
+        </WithUser>
         <Switch>
           <Route exact path='/' component={FrontPage} />
           <Route path='/search/:type/:location/:ids?' component={SearchPage} />

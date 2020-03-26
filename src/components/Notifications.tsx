@@ -6,7 +6,6 @@ const host = process.env.REACT_APP_API_HOST;
 
 function Notificatons() {
   const {user} = React.useContext(UserContext);
-  const a = [1, 2, 3];
 
   const [active, setActive] = useState<Boolean>(false);
   const url = `${host}/admin/notifications`;

@@ -9,10 +9,11 @@ interface Props {
 }
 
 function Header(props: Props) {
-  const {user} = React.useContext(UserContext);
+  const {user, setUser} = React.useContext(UserContext);
   const [_, setLocalStorageValue] = useLocalStorage('vp-user', {});
 
   function logout() {
+    setUser({});
     setLocalStorageValue({});
   }
 
