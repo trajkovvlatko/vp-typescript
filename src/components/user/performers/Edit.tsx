@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 
 import Form from './Form';
-import PropertiesForm from './properties/Form';
+import GenresForm from './genres/Form';
 import YoutubeLinksForm from '../youtube_links/Form';
 import ImagesForm from '../images/Form';
 import UserContext from 'contexts/UserContext';
 import useNotification from 'hooks/useNotification';
 
-import BasicVenueInterface from 'interfaces/BasicVenueInterface';
-import PropertyInterface from 'interfaces/PropertyInterface';
+import BasicPerformerInterface from 'interfaces/BasicPerformerInterface';
+import GenreInterface from 'interfaces/GenreInterface';
 import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
 import ImageInterface from 'interfaces/ImageInterface';
 
@@ -19,28 +19,28 @@ interface Props {
   id: number;
 }
 
-interface EditBasicVenueInterface extends BasicVenueInterface {
+interface EditBasicPerformerInterface extends BasicPerformerInterface {
   id: number;
-  properties_list: PropertyInterface[];
+  genres_list: GenreInterface[];
   youtube_links_list: YoutubeLinkInterface[];
   images_list: ImageInterface[];
 }
 
-function EditVenue(props: Props) {
+function EditPerformer(props: Props) {
   const {user} = React.useContext(UserContext);
   const host = process.env.REACT_APP_API_HOST;
-  const url: string = `${host}/admin/venues/${props.id}`;
+  const url: string = `${host}/user/performers/${props.id}`;
   const id = props.id;
   const token = user.token;
   const [notification, setNotification] = useNotification();
-  let defaultValues: EditBasicVenueInterface = {
+  let defaultValues: EditBasicPerformerInterface = {
     id: props.id,
     name: '',
     details: '',
     location: '',
     phone: '',
     website: '',
-    properties_list: [],
+    genres_list: [],
     youtube_links_list: [],
     images_list: [],
   };
@@ -48,47 +48,47 @@ function EditVenue(props: Props) {
   const [values, setValues] = useState({
     loading: true,
     error: false,
-    venue: defaultValues,
+    performer: defaultValues,
   });
 
   useEffect(() => {
     fetch(url, {headers: getAuthHeader(token as string)})
       .then(response => response.json())
       .then(response => {
-        const newValues: EditBasicVenueInterface = {
+        const newValues: EditBasicPerformerInterface = {
           id: id,
           name: response.name,
           details: response.details,
           location: response.location,
           phone: response.phone,
           website: response.website,
-          properties_list: response.properties_list,
+          genres_list: response.genres_list,
           youtube_links_list: response.youtube_links_list,
           images_list: response.images_list,
         };
         setValues({
           loading: false,
           error: false,
-          venue: newValues,
+          performer: newValues,
         });
       });
   }, [id, url, token]);
 
-  async function save(newValues: BasicVenueInterface) {
+  async function save(newValues: BasicPerformerInterface) {
     try {
       const resp = await axios.patch(
-        `${host}/admin/venues/${values.venue.id}`,
+        `${host}/user/performers/${values.performer.id}`,
         newValues,
         {headers: getAuthHeader(user.token as string)}
       );
       if (resp.status === 200) {
         setNotification({
           type: 'info',
-          message: 'The venue is successfully saved.',
+          message: 'The performer is successfully saved.',
         });
       }
     } catch (_) {
-      setNotification({type: 'info', message: 'Error while saving venue.'});
+      setNotification({type: 'info', message: 'Error while saving performer.'});
     }
   }
 
@@ -96,13 +96,13 @@ function EditVenue(props: Props) {
     return <div>Loading...</div>;
   }
 
-  const selectedPropertyIds: number[] = values.venue.properties_list.map(
+  const selectedGenreIds: number[] = values.performer.genres_list.map(
     r => r.id
   );
 
   return (
     <div>
-      <h1>Edit Venue</h1>
+      <h1>Edit Performer</h1>
 
       {notification && (
         <p>
@@ -110,20 +110,20 @@ function EditVenue(props: Props) {
         </p>
       )}
 
-      <Form values={values.venue} save={save} />
+      <Form values={values.performer} save={save} />
       <ImagesForm
         id={props.id}
-        type='venue'
-        images={values.venue.images_list}
+        type='performer'
+        images={values.performer.images_list}
       />
-      <PropertiesForm venueId={props.id} selected={selectedPropertyIds} />
+      <GenresForm performerId={props.id} selected={selectedGenreIds} />
       <YoutubeLinksForm
         id={props.id}
-        type='venue'
-        links={values.venue.youtube_links_list}
+        type='performer'
+        links={values.performer.youtube_links_list}
       />
     </div>
   );
 }
 
-export default EditVenue;
+export default EditPerformer;

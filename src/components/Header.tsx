@@ -22,7 +22,7 @@ function Header(props: Props) {
       <Link to='/'>Home</Link>
       {(user.token && (
         <div key='logged-in'>
-          <NavLink currentPage={props.page} label='Admin' page='admin' />
+          <NavLink currentPage={props.page} label='User' page='user' />
           <div className='logout' onClick={logout}>
             Logout
           </div>

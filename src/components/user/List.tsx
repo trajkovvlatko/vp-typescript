@@ -12,7 +12,7 @@ function List(props: Props) {
   const host = process.env.REACT_APP_API_HOST;
   const {user} = React.useContext(UserContext);
 
-  const url = `${host}/admin/${type}s`;
+  const url = `${host}/user/${type}s`;
   const {error, loading, results} = useFetch(url, user.token);
 
   if (loading) {
@@ -25,7 +25,7 @@ function List(props: Props) {
 
   return (
     <div className={`${type}s-list`}>
-      <Link to={`/admin/${type}s/new`}>New {type}</Link>
+      <Link to={`/user/${type}s/new`}>New {type}</Link>
       <table>
         <thead>
           <tr>
@@ -41,7 +41,7 @@ function List(props: Props) {
                 <td>{row.id}</td>
                 <td>{row.name}</td>
                 <td>
-                  <Link to={`/admin/${type}s/${row.id}/edit`}>Edit</Link>
+                  <Link to={`/user/${type}s/${row.id}/edit`}>Edit</Link>
                 </td>
               </tr>
             );

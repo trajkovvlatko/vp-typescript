@@ -30,7 +30,7 @@ function YoutubeLinksForm(props: Props) {
   async function save() {
     try {
       const resp = await axios.patch(
-        `${host}/admin/${props.type}s/${props.id}/youtube_links`,
+        `${host}/user/${props.type}s/${props.id}/youtube_links`,
         {
           remove_youtube_link_ids: getRemovedIds(),
           new_youtube_links: newLinks,

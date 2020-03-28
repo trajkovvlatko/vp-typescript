@@ -10,12 +10,13 @@ import VenuePage from 'pages/VenuePage';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
 import NotificationPage from 'pages/NotificationPage';
-import AdminPage from 'pages/admin/AdminPage';
-import AdminPerformerPage from 'pages/admin/AdminPerformerPage';
-import AdminVenuePage from 'pages/admin/AdminVenuePage';
+
+import UserPage from 'pages/user/UserPage';
+import UserPerformerPage from 'pages/user/UserPerformerPage';
+import UserVenuePage from 'pages/user/UserVenuePage';
 
 import WithUser from 'components/WithUser';
-import Notifications from 'components/Notifications';
+import NotificationsList from 'components/user/notifications/List';
 
 import {useLocalStorage} from 'hooks/useLocalStorage';
 import UserContext from 'contexts/UserContext';
@@ -32,7 +33,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <UserContext.Provider value={{user, setUser}}>
         <WithUser>
-          <Notifications />
+          <NotificationsList />
         </WithUser>
         <Switch>
           <Route exact path='/' component={FrontPage} />
@@ -42,14 +43,21 @@ const App: React.FC = () => {
           <Route exact path='/login' component={LoginPage} />
           <Route exact path='/register' component={RegisterPage} />
           <Route exact path='/notifications/:id' component={NotificationPage} />
-          <Route exact path='/admin' component={AdminPage} />
-          <Route
-            path='/admin/performers/:id/edit'
-            component={AdminPerformerPage}
-          />
-          <Route path='/admin/performers/new' component={AdminPerformerPage} />
-          <Route path='/admin/venues/:id/edit' component={AdminVenuePage} />
-          <Route path='/admin/venues/new' component={AdminVenuePage} />
+          <WithUser>
+            <React.Fragment>
+              <Route exact path='/user' component={UserPage} />
+              <Route
+                path='/user/performers/:id/edit'
+                component={UserPerformerPage}
+              />
+              <Route
+                path='/user/performers/new'
+                component={UserPerformerPage}
+              />
+              <Route path='/user/venues/:id/edit' component={UserVenuePage} />
+              <Route path='/user/venues/new' component={UserVenuePage} />
+            </React.Fragment>
+          </WithUser>
         </Switch>
       </UserContext.Provider>
     </BrowserRouter>

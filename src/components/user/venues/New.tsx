@@ -22,12 +22,12 @@ function NewVenue(props: RouteComponentProps) {
 
   async function save(values: BasicVenueInterface) {
     try {
-      const resp = await axios.post(`${host}/admin/venues`, values, {
+      const resp = await axios.post(`${host}/user/venues`, values, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       });
-      props.history.push(`/admin/venues/${resp.data.id}/edit`);
+      props.history.push(`/user/venues/${resp.data.id}/edit`);
     } catch (e) {
       setNotification({type: 'error', message: 'Error while saving a venue.'});
     }

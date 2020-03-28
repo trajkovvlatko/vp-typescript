@@ -1,21 +1,21 @@
 import React from 'react';
 import {useFetch} from 'hooks/useFetch';
-import PropertyInterface from 'interfaces/PropertyInterface';
-import PropertyCheckbox from './Checkbox';
+import GenreInterface from 'interfaces/GenreInterface';
+import GenreCheckbox from './Checkbox';
 import axios from 'axios';
 import {getAuthHeader} from 'helpers/main';
 import UserContext from 'contexts/UserContext';
 import useNotification from 'hooks/useNotification';
 
 interface Props {
-  venueId: number;
+  performerId: number;
   selected: number[];
 }
 
-function PropertiesForm(props: Props) {
+function GenresForm(props: Props) {
   const {user} = React.useContext(UserContext);
   const host = process.env.REACT_APP_API_HOST;
-  const url = `${host}/properties`;
+  const url = `${host}/genres`;
   const {error, loading, results} = useFetch(url);
   const {selected} = props;
   const [notification, setNotification] = useNotification();
@@ -31,14 +31,11 @@ function PropertiesForm(props: Props) {
   async function save() {
     try {
       await axios.patch(
-        `${host}/admin/venues/${props.venueId}/properties`,
-        {property_ids: selected},
+        `${host}/user/performers/${props.performerId}/genres`,
+        {genre_ids: selected},
         {headers: getAuthHeader(user.token as string)}
       );
-      setNotification({
-        type: 'info',
-        message: 'Successfully saved properties.',
-      });
+      setNotification({type: 'info', message: 'Successfully saved genres.'});
     } catch (e) {
       setNotification({
         type: 'error',
@@ -60,7 +57,7 @@ function PropertiesForm(props: Props) {
 
   return (
     <div>
-      <h2>Properties</h2>
+      <h2>Genres</h2>
 
       {notification && (
         <p>
@@ -68,20 +65,20 @@ function PropertiesForm(props: Props) {
         </p>
       )}
 
-      {results.map((row: PropertyInterface) => {
+      {results.map((row: GenreInterface) => {
         return (
-          <PropertyCheckbox
+          <GenreCheckbox
             id={row.id}
             name={row.name}
-            key={`property-${row.id}`}
+            key={`genre-${row.id}`}
             onChange={handleChange}
             checked={props.selected.includes(row.id)}
           />
         );
       })}
-      <button onClick={save}>Save properties</button>
+      <button onClick={save}>Save genres</button>
     </div>
   );
 }
 
-export default PropertiesForm;
+export default GenresForm;

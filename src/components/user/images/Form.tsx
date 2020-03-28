@@ -52,7 +52,7 @@ function ImagesForm(props: Props) {
       formData.append('images[]', newImages[i]);
     }
     formData.append('remove_image_ids', getRemovedIds().toString());
-    const url = `${host}/admin/${props.type}s/${props.id}/images`;
+    const url = `${host}/user/${props.type}s/${props.id}/images`;
     axios
       .post(url, formData, config)
       .then(response => {

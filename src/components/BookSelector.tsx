@@ -15,7 +15,7 @@ interface Props {
 function BookSelector(props: Props) {
   const selectedType =
     props.connectType === 'performer' ? 'venue' : 'performer';
-  const url: string = `${host}/admin/${selectedType}s/active`;
+  const url: string = `${host}/user/${selectedType}s/active`;
   const {user} = React.useContext(UserContext);
   const {error, loading, results} = useFetch(url, user.token);
   const [notification, setNotification] = useNotification();
@@ -45,7 +45,7 @@ function BookSelector(props: Props) {
 
     axios
       .post(
-        `${host}/admin/bookings/${dateTime}/${props.connectType}/${props.connectId}/${selectedType}/${selectedId}`,
+        `${host}/user/bookings/${dateTime}/${props.connectType}/${props.connectId}/${selectedType}/${selectedId}`,
         {},
         config
       )

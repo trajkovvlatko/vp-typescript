@@ -6,7 +6,7 @@ interface Props {
   message: string;
 }
 
-function Notificaton(props: Props) {
+function NotificatonItem(props: Props) {
   return (
     <div>
       <Link to={`/notifications/${props.id}`}>{props.message}</Link>
@@ -14,4 +14,4 @@ function Notificaton(props: Props) {
   );
 }
 
-export default Notificaton;
+export default NotificatonItem;

@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from 'components/Header';
-import List from 'components/admin/List';
+import List from 'components/user/List';
 
-function AdminPage() {
+function UserPage() {
   return (
     <div>
-      <Header page='admin' />
-      <h1>Admin Page</h1>
+      <Header page='user' />
+      <h1>User Page</h1>
       <h3>Performers</h3>
       <List type='performer' />
       ---------------
@@ -16,4 +16,4 @@ function AdminPage() {
   );
 }
 
-export default AdminPage;
+export default UserPage;

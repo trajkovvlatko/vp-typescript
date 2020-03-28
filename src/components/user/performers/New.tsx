@@ -22,12 +22,12 @@ function NewPerformer(props: RouteComponentProps) {
 
   async function save(values: BasicPerformerInterface) {
     try {
-      const resp = await axios.post(`${host}/admin/performers`, values, {
+      const resp = await axios.post(`${host}/user/performers`, values, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       });
-      props.history.push(`/admin/performers/${resp.data.id}/edit`);
+      props.history.push(`/user/performers/${resp.data.id}/edit`);
     } catch (e) {
       setNotification({
         type: 'error',

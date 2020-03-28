@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {useFetch} from 'hooks/useFetch';
-import Notification from './Notification';
+import NotificationItem from './Item';
 import UserContext from 'contexts/UserContext';
 const host = process.env.REACT_APP_API_HOST;
 
-function Notificatons() {
+function NotificatonsList() {
   const {user} = React.useContext(UserContext);
 
   const [active, setActive] = useState<Boolean>(false);
-  const url = `${host}/admin/notifications`;
+  const url = `${host}/user/notifications`;
   const {error, loading, results} = useFetch(url, user.token);
 
   if (loading) return <div>Loading...</div>;
@@ -24,7 +24,7 @@ function Notificatons() {
       <ul className={active ? 'active' : ''}>
         {results.map((row: {id: number; message: string}) => {
           return (
-            <Notification
+            <NotificationItem
               id={row.id}
               message={row.message}
               key={`notification-${row.id}`}
@@ -36,4 +36,4 @@ function Notificatons() {
   );
 }
 
-export default Notificatons;
+export default NotificatonsList;

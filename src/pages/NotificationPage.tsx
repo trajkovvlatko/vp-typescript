@@ -18,7 +18,7 @@ function NotificationPage({match}: RouteComponentProps<TParams>) {
   const {user} = React.useContext(UserContext);
   const [notification, setNotification] = useNotification();
 
-  const url = `${host}/admin/notifications/${id}`;
+  const url = `${host}/user/notifications/${id}`;
   const {error, loading, results: result} = useFetch(url, user.token);
 
   if (loading) return <div>Loading...</div>;
@@ -34,7 +34,7 @@ function NotificationPage({match}: RouteComponentProps<TParams>) {
 
     console.log(status);
     axios
-      .patch(`${host}/admin/bookings/${result.id}`, {status}, config)
+      .patch(`${host}/user/bookings/${result.id}`, {status}, config)
       .then(function(response) {
         setNotification({type: 'info', message: 'Successfully sent.'});
       })
