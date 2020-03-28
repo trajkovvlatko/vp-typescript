@@ -12,7 +12,9 @@ import RegisterPage from 'pages/RegisterPage';
 import BookingPage from 'pages/user/BookingPage';
 
 import UserPage from 'pages/user/UserPage';
+import UserPerformersPage from 'pages/user/UserPerformersPage';
 import UserPerformerPage from 'pages/user/UserPerformerPage';
+import UserVenuesPage from 'pages/user/UserVenuesPage';
 import UserVenuePage from 'pages/user/UserVenuePage';
 
 import WithUser from 'components/WithUser';
@@ -37,9 +39,11 @@ const App: React.FC = () => {
       <UserContext.Provider value={{user, setUser}}>
         <NotificationContext.Provider value={{notification, setNotification}}>
           <Notification />
+
           <WithUser>
             <BookingsList />
           </WithUser>
+
           <Switch>
             <Route exact path='/' component={FrontPage} />
             <Route
@@ -54,6 +58,12 @@ const App: React.FC = () => {
             <WithUser>
               <React.Fragment>
                 <Route exact path='/user' component={UserPage} />
+                <Route
+                  exact
+                  path='/user/performers'
+                  component={UserPerformersPage}
+                />
+                <Route exact path='/user/venues' component={UserVenuesPage} />
                 <Route
                   path='/user/performers/:id/edit'
                   component={UserPerformerPage}

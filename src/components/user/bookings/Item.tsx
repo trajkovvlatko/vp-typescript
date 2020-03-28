@@ -16,6 +16,7 @@ function BookingItem(props: BookingItemInterface) {
             {props.venue_name} invited {props.performer_name}
           </div>
         )}
+        on {props.booking_date.substring(0, 10)}
       </Link>
     </div>
   );

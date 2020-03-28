@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 import axios from 'axios';
 
@@ -15,8 +15,9 @@ type TParams = {id: string};
 
 function BookingPage({match}: RouteComponentProps<TParams>) {
   const id = parseInt(match.params.id);
-  const {user} = React.useContext(UserContext);
-  const {setNotification} = React.useContext(NotificationContext);
+  const {user} = useContext(UserContext);
+  const {setNotification} = useContext(NotificationContext);
+  const [status, setStatus] = useState<String>('');
 
   const url = `${host}/user/bookings/${id}`;
   const {error, loading, results: result} = useFetch(url, user.token);
@@ -24,7 +25,16 @@ function BookingPage({match}: RouteComponentProps<TParams>) {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error while fetching data.</div>;
 
+  if (status === '') {
+    setStatus(result.status);
+  }
+
   const sendRequest = (status: string) => {
+    const verb = status === 'accepted' ? 'accept' : 'reject';
+    if (!window.confirm(`Do you want to ${verb} this request?`)) {
+      return;
+    }
+
     const config = {
       headers: {
         ...getAuthHeader(user.token as string),
@@ -35,6 +45,7 @@ function BookingPage({match}: RouteComponentProps<TParams>) {
     axios
       .patch(`${host}/user/bookings/${result.id}`, {status}, config)
       .then(function(response) {
+        setStatus(status);
         setNotification({type: 'info', message: 'Successfully sent.'});
       })
       .catch(function(error) {
@@ -68,10 +79,16 @@ function BookingPage({match}: RouteComponentProps<TParams>) {
           </div>
         )}
       </div>
-      <div>
-        <button onClick={accept}>Accept</button>
-        <button onClick={reject}>Reject</button>
-      </div>
+      {(status === 'requested' && (
+        <div>
+          <button onClick={accept}>Accept</button>
+          <button onClick={reject}>Reject</button>
+        </div>
+      )) || (
+        <div>
+          This request is already <b>{status}</b>.
+        </div>
+      )}
     </div>
   );
 }

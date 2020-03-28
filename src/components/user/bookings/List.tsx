@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {useFetch} from 'hooks/useFetch';
 import BookingItem from './Item';
 import UserContext from 'contexts/UserContext';
@@ -6,10 +6,10 @@ import BookingItemInterface from 'interfaces/BookingItemInterface';
 const host = process.env.REACT_APP_API_HOST;
 
 function BookingsList() {
-  const {user} = React.useContext(UserContext);
+  const {user} = useContext(UserContext);
 
   const [active, setActive] = useState<Boolean>(false);
-  const url = `${host}/user/bookings`;
+  const url = `${host}/user/bookings/requested`;
   const {error, loading, results} = useFetch(url, user.token);
 
   if (loading) return <div>Loading...</div>;
@@ -21,7 +21,7 @@ function BookingsList() {
 
   return (
     <div className='bookings'>
-      <button onClick={showBookingsList}>Bookings</button>
+      <button onClick={showBookingsList}>Booking requests</button>
       <ul className={active ? 'active' : ''}>
         {results.map((row: BookingItemInterface) => {
           return (

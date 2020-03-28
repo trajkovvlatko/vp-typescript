@@ -1,17 +1,21 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import Header from 'components/Header';
-import List from 'components/user/List';
+import AcceptedBookings from 'components/user/bookings/Accepted';
 
 function UserPage() {
   return (
     <div>
       <Header page='user' />
       <h1>User Page</h1>
-      <h3>Performers</h3>
-      <List type='performer' />
-      ---------------
-      <h3>Venues</h3>
-      <List type='venue' />
+      <div>
+        <Link to='/user/performers'>My performers</Link>
+      </div>
+      <div>
+        <Link to='/user/venues'>My venues</Link>
+      </div>
+
+      <AcceptedBookings />
     </div>
   );
 }
