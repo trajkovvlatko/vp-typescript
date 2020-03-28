@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useFetch} from 'hooks/useFetch';
 import BookingItem from './Item';
 import UserContext from 'contexts/UserContext';
+import BookingItemInterface from 'interfaces/BookingItemInterface';
 const host = process.env.REACT_APP_API_HOST;
 
 function BookingsList() {
@@ -22,11 +23,17 @@ function BookingsList() {
     <div className='bookings'>
       <button onClick={showBookingsList}>Bookings</button>
       <ul className={active ? 'active' : ''}>
-        {results.map((row: {id: number; message: string}) => {
+        {results.map((row: BookingItemInterface) => {
           return (
             <BookingItem
               id={row.id}
-              message={row.message}
+              requester_id={row.requester_id}
+              requester_type={row.requester_type}
+              requested_id={row.requested_id}
+              requested_type={row.requested_type}
+              booking_date={row.booking_date}
+              performer_name={row.performer_name}
+              venue_name={row.venue_name}
               key={`booking-${row.id}`}
             />
           );

@@ -42,8 +42,8 @@ function BookingPage({match}: RouteComponentProps<TParams>) {
       });
   };
 
-  const accept = () => sendRequest('accept');
-  const reject = () => sendRequest('reject');
+  const accept = () => sendRequest('accepted');
+  const reject = () => sendRequest('rejected');
 
   return (
     <div>
