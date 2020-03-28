@@ -1,17 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {withRouter} from 'react-router-dom';
 import {RouteComponentProps} from 'react-router-dom';
 import axios from 'axios';
-import useNotification from 'hooks/useNotification';
+import NotificationContext from 'contexts/NotificationContext';
 
 import UserContext from 'contexts/UserContext';
 import Form from './Form';
 import BasicVenueInterface from 'interfaces/BasicVenueInterface';
 
 function NewVenue(props: RouteComponentProps) {
-  const {user} = React.useContext(UserContext);
+  const {user} = useContext(UserContext);
   const host = process.env.REACT_APP_API_HOST;
-  const [notification, setNotification] = useNotification();
+  const {setNotification} = useContext(NotificationContext);
   const defaultValues: BasicVenueInterface = {
     name: '',
     details: '',
@@ -36,12 +36,6 @@ function NewVenue(props: RouteComponentProps) {
   return (
     <div>
       <h1>New Venue</h1>
-
-      {notification && (
-        <p>
-          <b>{notification.type.toUpperCase()}</b>: {notification.message}
-        </p>
-      )}
 
       <Form values={defaultValues} save={save} />
     </div>

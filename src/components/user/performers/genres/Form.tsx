@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useFetch} from 'hooks/useFetch';
 import GenreInterface from 'interfaces/GenreInterface';
 import GenreCheckbox from './Checkbox';
 import axios from 'axios';
 import {getAuthHeader} from 'helpers/main';
 import UserContext from 'contexts/UserContext';
-import useNotification from 'hooks/useNotification';
+import NotificationContext from 'contexts/NotificationContext';
 
 interface Props {
   performerId: number;
@@ -13,12 +13,12 @@ interface Props {
 }
 
 function GenresForm(props: Props) {
-  const {user} = React.useContext(UserContext);
+  const {user} = useContext(UserContext);
+  const {setNotification} = useContext(NotificationContext);
   const host = process.env.REACT_APP_API_HOST;
   const url = `${host}/genres`;
   const {error, loading, results} = useFetch(url);
   const {selected} = props;
-  const [notification, setNotification] = useNotification();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -58,12 +58,6 @@ function GenresForm(props: Props) {
   return (
     <div>
       <h2>Genres</h2>
-
-      {notification && (
-        <p>
-          <b>{notification.type.toUpperCase()}</b>: {notification.message}
-        </p>
-      )}
 
       {results.map((row: GenreInterface) => {
         return (

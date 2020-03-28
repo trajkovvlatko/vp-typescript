@@ -1,9 +1,9 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useContext} from 'react';
 import axios from 'axios';
 import {getAuthHeader} from 'helpers/main';
 import UserContext from 'contexts/UserContext';
+import NotificationContext from 'contexts/NotificationContext';
 import ImageInterface from 'interfaces/ImageInterface';
-import useNotification from 'hooks/useNotification';
 
 interface Props {
   id: number;
@@ -12,13 +12,13 @@ interface Props {
 }
 
 function ImagesForm(props: Props) {
-  const {user} = React.useContext(UserContext);
+  const {user} = useContext(UserContext);
+  const {setNotification} = useContext(NotificationContext);
   const host = process.env.REACT_APP_API_HOST;
   const [images, setImages] = useState(props.images);
   const [newImages, setNewImages] = useState<File[]>([]);
   const newImage = useRef<HTMLInputElement>(null);
   const initialImageIds = props.images.map(i => i.id);
-  const [notification, setNotification] = useNotification();
 
   function remove(id: number) {
     setImages(
@@ -80,12 +80,6 @@ function ImagesForm(props: Props) {
   return (
     <div>
       <h2>Images</h2>
-
-      {notification && (
-        <p>
-          <b>{notification.type.toUpperCase()}</b>: {notification.message}
-        </p>
-      )}
 
       {images.map((row: ImageInterface) => {
         return (

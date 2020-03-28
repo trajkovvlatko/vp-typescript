@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 
 import Form from './Form';
 import PropertiesForm from './properties/Form';
 import YoutubeLinksForm from '../youtube_links/Form';
 import ImagesForm from '../images/Form';
 import UserContext from 'contexts/UserContext';
-import useNotification from 'hooks/useNotification';
+import NotificationContext from 'contexts/NotificationContext';
 
 import BasicVenueInterface from 'interfaces/BasicVenueInterface';
 import PropertyInterface from 'interfaces/PropertyInterface';
@@ -27,12 +27,12 @@ interface EditBasicVenueInterface extends BasicVenueInterface {
 }
 
 function EditVenue(props: Props) {
-  const {user} = React.useContext(UserContext);
+  const {user} = useContext(UserContext);
   const host = process.env.REACT_APP_API_HOST;
   const url: string = `${host}/user/venues/${props.id}`;
   const id = props.id;
   const token = user.token;
-  const [notification, setNotification] = useNotification();
+  const {setNotification} = useContext(NotificationContext);
   let defaultValues: EditBasicVenueInterface = {
     id: props.id,
     name: '',
@@ -103,12 +103,6 @@ function EditVenue(props: Props) {
   return (
     <div>
       <h1>Edit Venue</h1>
-
-      {notification && (
-        <p>
-          <b>{notification.type.toUpperCase()}</b>: {notification.message}
-        </p>
-      )}
 
       <Form values={values.venue} save={save} />
       <ImagesForm

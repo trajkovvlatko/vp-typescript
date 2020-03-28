@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 
 import Form from './Form';
 import GenresForm from './genres/Form';
 import YoutubeLinksForm from '../youtube_links/Form';
 import ImagesForm from '../images/Form';
 import UserContext from 'contexts/UserContext';
-import useNotification from 'hooks/useNotification';
+import NotificationContext from 'contexts/NotificationContext';
 
 import BasicPerformerInterface from 'interfaces/BasicPerformerInterface';
 import GenreInterface from 'interfaces/GenreInterface';
@@ -27,12 +27,12 @@ interface EditBasicPerformerInterface extends BasicPerformerInterface {
 }
 
 function EditPerformer(props: Props) {
-  const {user} = React.useContext(UserContext);
+  const {user} = useContext(UserContext);
+  const {setNotification} = useContext(NotificationContext);
   const host = process.env.REACT_APP_API_HOST;
   const url: string = `${host}/user/performers/${props.id}`;
   const id = props.id;
   const token = user.token;
-  const [notification, setNotification] = useNotification();
   let defaultValues: EditBasicPerformerInterface = {
     id: props.id,
     name: '',
@@ -103,12 +103,6 @@ function EditPerformer(props: Props) {
   return (
     <div>
       <h1>Edit Performer</h1>
-
-      {notification && (
-        <p>
-          <b>{notification.type.toUpperCase()}</b>: {notification.message}
-        </p>
-      )}
 
       <Form values={values.performer} save={save} />
       <ImagesForm

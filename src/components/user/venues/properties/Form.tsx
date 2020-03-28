@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useFetch} from 'hooks/useFetch';
 import PropertyInterface from 'interfaces/PropertyInterface';
 import PropertyCheckbox from './Checkbox';
 import axios from 'axios';
 import {getAuthHeader} from 'helpers/main';
 import UserContext from 'contexts/UserContext';
-import useNotification from 'hooks/useNotification';
+import NotificationContext from 'contexts/NotificationContext';
 
 interface Props {
   venueId: number;
@@ -13,12 +13,12 @@ interface Props {
 }
 
 function PropertiesForm(props: Props) {
-  const {user} = React.useContext(UserContext);
+  const {user} = useContext(UserContext);
   const host = process.env.REACT_APP_API_HOST;
   const url = `${host}/properties`;
   const {error, loading, results} = useFetch(url);
   const {selected} = props;
-  const [notification, setNotification] = useNotification();
+  const {setNotification} = useContext(NotificationContext);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -61,12 +61,6 @@ function PropertiesForm(props: Props) {
   return (
     <div>
       <h2>Properties</h2>
-
-      {notification && (
-        <p>
-          <b>{notification.type.toUpperCase()}</b>: {notification.message}
-        </p>
-      )}
 
       {results.map((row: PropertyInterface) => {
         return (

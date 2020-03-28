@@ -1,7 +1,7 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useContext} from 'react';
 import axios from 'axios';
 import {getAuthHeader} from 'helpers/main';
-import useNotification from 'hooks/useNotification';
+import NotificationContext from 'contexts/NotificationContext';
 import UserContext from 'contexts/UserContext';
 import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
 import Persisted from './Persisted';
@@ -14,9 +14,9 @@ interface Props {
 }
 
 function YoutubeLinksForm(props: Props) {
-  const {user} = React.useContext(UserContext);
+  const {user} = useContext(UserContext);
   const host = process.env.REACT_APP_API_HOST;
-  const [notification, setNotification] = useNotification();
+  const {setNotification} = useContext(NotificationContext);
   const [links, setLinks] = useState(props.links);
   const [newLinks, setNewLinks] = useState<string[]>([]);
   const newLink = useRef<HTMLInputElement>(null);
@@ -69,7 +69,7 @@ function YoutubeLinksForm(props: Props) {
     // TODO: Unique values here
     setNewLinks([...newLinks, newLink.current.value]);
     newLink.current.value = '';
-    setNotification(null);
+    setNotification({type: '', message: ''});
   }
 
   function removeNewLink(link: string) {
@@ -79,12 +79,6 @@ function YoutubeLinksForm(props: Props) {
   return (
     <div>
       <h2>Youtube Links</h2>
-
-      {notification && (
-        <p>
-          <b>{notification.type.toUpperCase()}</b>: {notification.message}
-        </p>
-      )}
 
       {links.map((row: YoutubeLinkInterface) => (
         <Persisted

@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
-import {useFetch} from 'hooks/useFetch';
-import BookSelectorItem from 'components/BookSelectorItem';
-import UserContext from 'contexts/UserContext';
+import React, {useState, useContext} from 'react';
 import axios from 'axios';
+
+import {useFetch} from 'hooks/useFetch';
+
+import UserContext from 'contexts/UserContext';
+import NotificationContext from 'contexts/NotificationContext';
+
+import BookSelectorItem from 'components/BookSelectorItem';
 import {getAuthHeader} from 'helpers/main';
-import useNotification from 'hooks/useNotification';
 const host = process.env.REACT_APP_API_HOST;
 
 interface Props {
@@ -16,9 +19,9 @@ function BookSelector(props: Props) {
   const selectedType =
     props.connectType === 'performer' ? 'venue' : 'performer';
   const url: string = `${host}/user/${selectedType}s/active`;
-  const {user} = React.useContext(UserContext);
+  const {user} = useContext(UserContext);
+  const {setNotification} = useContext(NotificationContext);
   const {error, loading, results} = useFetch(url, user.token);
-  const [notification, setNotification] = useNotification();
   const [selectedId, setSelectedId] = useState<Number | undefined>();
   const [dateTime, setDateTime] = useState<String>('2012-01-02 03:04');
 
@@ -59,12 +62,6 @@ function BookSelector(props: Props) {
 
   return (
     <div>
-      {notification && (
-        <p>
-          <b>{notification.type.toUpperCase()}</b>: {notification.message}
-        </p>
-      )}
-
       <ul>
         {results.map((row: {id: number; name: string}) => (
           <BookSelectorItem

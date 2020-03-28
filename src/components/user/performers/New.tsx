@@ -1,17 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {withRouter} from 'react-router-dom';
 import {RouteComponentProps} from 'react-router-dom';
 import axios from 'axios';
-import useNotification from 'hooks/useNotification';
 
+import NotificationContext from 'contexts/NotificationContext';
 import UserContext from 'contexts/UserContext';
+
 import Form from './Form';
 import BasicPerformerInterface from 'interfaces/BasicPerformerInterface';
 
 function NewPerformer(props: RouteComponentProps) {
-  const {user} = React.useContext(UserContext);
+  const {user} = useContext(UserContext);
+  const {setNotification} = useContext(NotificationContext);
   const host = process.env.REACT_APP_API_HOST;
-  const [notification, setNotification] = useNotification();
   const defaultValues: BasicPerformerInterface = {
     name: '',
     details: '',
@@ -39,12 +40,6 @@ function NewPerformer(props: RouteComponentProps) {
   return (
     <div>
       <h1>New Performer</h1>
-
-      {notification && (
-        <p>
-          <b>{notification.type.toUpperCase()}</b>: {notification.message}
-        </p>
-      )}
 
       <Form values={defaultValues} save={save} />
     </div>

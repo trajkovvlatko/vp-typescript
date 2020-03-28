@@ -8,7 +8,7 @@ import {useFetch} from 'hooks/useFetch';
 import {Link} from 'react-router-dom';
 import Header from 'components/Header';
 import UserContext from 'contexts/UserContext';
-import useNotification from 'hooks/useNotification';
+import NotificationContext from 'contexts/NotificationContext';
 const host = process.env.REACT_APP_API_HOST;
 
 type TParams = {id: string};
@@ -16,7 +16,7 @@ type TParams = {id: string};
 function BookingPage({match}: RouteComponentProps<TParams>) {
   const id = parseInt(match.params.id);
   const {user} = React.useContext(UserContext);
-  const [notification, setNotification] = useNotification();
+  const {setNotification} = React.useContext(NotificationContext);
 
   const url = `${host}/user/bookings/${id}`;
   const {error, loading, results: result} = useFetch(url, user.token);
@@ -32,7 +32,6 @@ function BookingPage({match}: RouteComponentProps<TParams>) {
       },
     };
 
-    console.log(status);
     axios
       .patch(`${host}/user/bookings/${result.id}`, {status}, config)
       .then(function(response) {
@@ -49,14 +48,6 @@ function BookingPage({match}: RouteComponentProps<TParams>) {
   return (
     <div>
       <Header page='home' />
-
-      <div>
-        {notification && (
-          <p>
-            <b>{notification.type.toUpperCase()}</b>: {notification.message}
-          </p>
-        )}
-      </div>
 
       <div>
         {(result.requester_type === 'performer' && (
