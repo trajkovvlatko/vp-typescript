@@ -9,14 +9,14 @@ import PerformerPage from 'pages/PerformerPage';
 import VenuePage from 'pages/VenuePage';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
-import NotificationPage from 'pages/NotificationPage';
+import BookingPage from 'pages/user/BookingPage';
 
 import UserPage from 'pages/user/UserPage';
 import UserPerformerPage from 'pages/user/UserPerformerPage';
 import UserVenuePage from 'pages/user/UserVenuePage';
 
 import WithUser from 'components/WithUser';
-import NotificationsList from 'components/user/notifications/List';
+import BookingsList from 'components/user/bookings/List';
 
 import {useLocalStorage} from 'hooks/useLocalStorage';
 import UserContext from 'contexts/UserContext';
@@ -33,7 +33,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <UserContext.Provider value={{user, setUser}}>
         <WithUser>
-          <NotificationsList />
+          <BookingsList />
         </WithUser>
         <Switch>
           <Route exact path='/' component={FrontPage} />
@@ -42,7 +42,7 @@ const App: React.FC = () => {
           <Route path='/venues/:id' component={VenuePage} />
           <Route exact path='/login' component={LoginPage} />
           <Route exact path='/register' component={RegisterPage} />
-          <Route exact path='/notifications/:id' component={NotificationPage} />
+          <Route exact path='/bookings/:id' component={BookingPage} />
           <WithUser>
             <React.Fragment>
               <Route exact path='/user' component={UserPage} />

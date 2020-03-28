@@ -6,12 +6,12 @@ interface Props {
   message: string;
 }
 
-function NotificatonItem(props: Props) {
+function BookingItem(props: Props) {
   return (
     <div>
-      <Link to={`/notifications/${props.id}`}>{props.message}</Link>
+      <Link to={`/bookings/${props.id}`}>{props.message}</Link>
     </div>
   );
 }
 
-export default NotificatonItem;
+export default BookingItem;

@@ -1,33 +1,33 @@
 import React, {useState} from 'react';
 import {useFetch} from 'hooks/useFetch';
-import NotificationItem from './Item';
+import BookingItem from './Item';
 import UserContext from 'contexts/UserContext';
 const host = process.env.REACT_APP_API_HOST;
 
-function NotificatonsList() {
+function BookingsList() {
   const {user} = React.useContext(UserContext);
 
   const [active, setActive] = useState<Boolean>(false);
-  const url = `${host}/user/notifications`;
+  const url = `${host}/user/bookings`;
   const {error, loading, results} = useFetch(url, user.token);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error while fetching data.</div>;
 
-  const showNotificationsList = () => {
+  const showBookingsList = () => {
     setActive(active ? false : true);
   };
 
   return (
-    <div className='notifications'>
-      <button onClick={showNotificationsList}>Notifications</button>
+    <div className='bookings'>
+      <button onClick={showBookingsList}>Bookings</button>
       <ul className={active ? 'active' : ''}>
         {results.map((row: {id: number; message: string}) => {
           return (
-            <NotificationItem
+            <BookingItem
               id={row.id}
               message={row.message}
-              key={`notification-${row.id}`}
+              key={`booking-${row.id}`}
             />
           );
         })}
@@ -36,4 +36,4 @@ function NotificatonsList() {
   );
 }
 
-export default NotificatonsList;
+export default BookingsList;

@@ -18,10 +18,10 @@
   width: 100px;
 }
 
-.notifications ul {
+.bookings ul {
   display: none;
 }
 
-.notifications ul.active {
+.bookings ul.active {
   display: block;
 }

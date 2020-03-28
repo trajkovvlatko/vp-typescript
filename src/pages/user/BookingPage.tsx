@@ -13,12 +13,12 @@ const host = process.env.REACT_APP_API_HOST;
 
 type TParams = {id: string};
 
-function NotificationPage({match}: RouteComponentProps<TParams>) {
+function BookingPage({match}: RouteComponentProps<TParams>) {
   const id = parseInt(match.params.id);
   const {user} = React.useContext(UserContext);
   const [notification, setNotification] = useNotification();
 
-  const url = `${host}/user/notifications/${id}`;
+  const url = `${host}/user/bookings/${id}`;
   const {error, loading, results: result} = useFetch(url, user.token);
 
   if (loading) return <div>Loading...</div>;
@@ -85,4 +85,4 @@ function NotificationPage({match}: RouteComponentProps<TParams>) {
   );
 }
 
-export default NotificationPage;
+export default BookingPage;
