@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import Header from 'components/Header';
-import AcceptedBookings from 'components/user/bookings/Accepted';
+import UpcomingBookings from 'components/user/bookings/Upcoming';
 
 function UserPage() {
   return (
@@ -15,7 +15,7 @@ function UserPage() {
         <Link to='/user/venues'>My venues</Link>
       </div>
 
-      <AcceptedBookings />
+      <UpcomingBookings />
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import React, {useContext, useState} from 'react';
-import {RouteComponentProps} from 'react-router-dom';
 import axios from 'axios';
 
 import {getAuthHeader} from 'helpers/main';
@@ -8,15 +7,16 @@ import {useFetch} from 'hooks/useFetch';
 import {Link} from 'react-router-dom';
 import Header from 'components/Header';
 import UserContext from 'contexts/UserContext';
+import BookingsContext from 'contexts/BookingsContext';
 import NotificationContext from 'contexts/NotificationContext';
+import UpcomingBookingInterface from 'interfaces/UpcomingBookingInterface';
 const host = process.env.REACT_APP_API_HOST;
 
-type TParams = {id: string};
-
-function BookingPage({match}: RouteComponentProps<TParams>) {
+function BookingPage({match}: any, key: any) {
   const id = parseInt(match.params.id);
   const {user} = useContext(UserContext);
   const {setNotification} = useContext(NotificationContext);
+  const {bookings, setBookings} = useContext(BookingsContext);
   const [status, setStatus] = useState<String>('');
 
   const url = `${host}/user/bookings/${id}`;
@@ -47,6 +47,11 @@ function BookingPage({match}: RouteComponentProps<TParams>) {
       .then(function(response) {
         setStatus(status);
         setNotification({type: 'info', message: 'Successfully sent.'});
+        const newBookings = bookings.filter((row: UpcomingBookingInterface) => {
+          if (row.id === result.id) row.status = status;
+          return row.id !== result.id;
+        });
+        setBookings(newBookings);
       })
       .catch(function(error) {
         setNotification({type: 'info', message: 'Error while sending.'});
@@ -86,7 +91,7 @@ function BookingPage({match}: RouteComponentProps<TParams>) {
         </div>
       )) || (
         <div>
-          This request is already <b>{status}</b>.
+          This request is <b>{status}</b>.
         </div>
       )}
     </div>

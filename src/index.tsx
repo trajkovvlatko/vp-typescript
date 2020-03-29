@@ -24,6 +24,9 @@ import Notification from 'components/Notification';
 import {useLocalStorage} from 'hooks/useLocalStorage';
 import UserContext from 'contexts/UserContext';
 import NotificationContext from 'contexts/NotificationContext';
+import BookingsContext from 'contexts/BookingsContext';
+
+import UpcomingBookingInterface from 'interfaces/UpcomingBookingInterface';
 
 import 'styles/index.css';
 import 'styles/App.css';
@@ -33,50 +36,62 @@ import * as serviceWorker from 'serviceWorker';
 const App: React.FC = () => {
   const [user, setUser] = useLocalStorage('vp-user', {});
   const [notification, setNotification] = useState({type: '', message: ''});
+  const [bookings, setBookings] = useState<UpcomingBookingInterface[]>([]);
 
   return (
     <BrowserRouter>
       <UserContext.Provider value={{user, setUser}}>
         <NotificationContext.Provider value={{notification, setNotification}}>
-          <Notification />
+          <BookingsContext.Provider value={{bookings, setBookings}}>
+            <Notification />
 
-          <WithUser>
-            <BookingsList />
-          </WithUser>
-
-          <Switch>
-            <Route exact path='/' component={FrontPage} />
-            <Route
-              path='/search/:type/:location/:ids?'
-              component={SearchPage}
-            />
-            <Route path='/performers/:id' component={PerformerPage} />
-            <Route path='/venues/:id' component={VenuePage} />
-            <Route exact path='/login' component={LoginPage} />
-            <Route exact path='/register' component={RegisterPage} />
-            <Route exact path='/bookings/:id' component={BookingPage} />
             <WithUser>
-              <React.Fragment>
-                <Route exact path='/user' component={UserPage} />
-                <Route
-                  exact
-                  path='/user/performers'
-                  component={UserPerformersPage}
-                />
-                <Route exact path='/user/venues' component={UserVenuesPage} />
-                <Route
-                  path='/user/performers/:id/edit'
-                  component={UserPerformerPage}
-                />
-                <Route
-                  path='/user/performers/new'
-                  component={UserPerformerPage}
-                />
-                <Route path='/user/venues/:id/edit' component={UserVenuePage} />
-                <Route path='/user/venues/new' component={UserVenuePage} />
-              </React.Fragment>
+              <BookingsList />
             </WithUser>
-          </Switch>
+
+            <Switch>
+              <Route exact path='/' component={FrontPage} />
+              <Route
+                path='/search/:type/:location/:ids?'
+                component={SearchPage}
+              />
+              <Route path='/performers/:id' component={PerformerPage} />
+              <Route path='/venues/:id' component={VenuePage} />
+              <Route exact path='/login' component={LoginPage} />
+              <Route exact path='/register' component={RegisterPage} />
+              <Route
+                exact
+                path='/bookings/:id'
+                render={({match}) => (
+                  <BookingPage match={match} key={match.params.id} />
+                )}
+              />
+              <WithUser>
+                <React.Fragment>
+                  <Route exact path='/user' component={UserPage} />
+                  <Route
+                    exact
+                    path='/user/performers'
+                    component={UserPerformersPage}
+                  />
+                  <Route exact path='/user/venues' component={UserVenuesPage} />
+                  <Route
+                    path='/user/performers/:id/edit'
+                    component={UserPerformerPage}
+                  />
+                  <Route
+                    path='/user/performers/new'
+                    component={UserPerformerPage}
+                  />
+                  <Route
+                    path='/user/venues/:id/edit'
+                    component={UserVenuePage}
+                  />
+                  <Route path='/user/venues/new' component={UserVenuePage} />
+                </React.Fragment>
+              </WithUser>
+            </Switch>
+          </BookingsContext.Provider>
         </NotificationContext.Provider>
       </UserContext.Provider>
     </BrowserRouter>

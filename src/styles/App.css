@@ -25,3 +25,15 @@
 .bookings ul.active {
   display: block;
 }
+
+.upcoming-bookings .accepted,
+.upcoming-bookings .accepted a {
+  background-color: green;
+  color: white;
+}
+
+.upcoming-bookings .canceled,
+.upcoming-bookings .canceled a {
+  background-color: red;
+  color: white;
+}
