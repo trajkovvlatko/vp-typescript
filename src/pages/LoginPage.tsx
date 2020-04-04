@@ -36,12 +36,16 @@ function LoginPage(props: RouteComponentProps) {
 
     axios
       .post(`${host}/auth/login`, {email, password})
-      .then(function(response) {
+      .then(function (response) {
         setUser(response.data);
         props.history.push('/');
       })
-      .catch(function(error) {
-        updateData({error: true, message: error.response.data.error});
+      .catch(function (error) {
+        let message = 'Error';
+        if (error && error.response && error.response.data) {
+          message = error.response.data.error;
+        }
+        updateData({error: true, message});
       });
   }
 
@@ -50,14 +54,14 @@ function LoginPage(props: RouteComponentProps) {
       <Header page='login' />
       <h1>Login Page</h1>
 
-      {data.error && data.message}
+      {data.error && <div className='error-message'>{data.message}</div>}
 
       <div className='form-group'>
         <label htmlFor='email'>Email:</label>
         <input
           type='email'
           id='email'
-          onChange={e => (email = e.target.value)}
+          onChange={(e) => (email = e.target.value)}
         />
       </div>
       <div className='form-group'>
@@ -65,7 +69,7 @@ function LoginPage(props: RouteComponentProps) {
         <input
           type='password'
           id='password'
-          onChange={e => (password = e.target.value)}
+          onChange={(e) => (password = e.target.value)}
         />
       </div>
       <div className='form-group'>
