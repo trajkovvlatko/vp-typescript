@@ -18,11 +18,11 @@
   width: 100px;
 }
 
-.bookings ul {
+.bookings .list {
   display: none;
 }
 
-.bookings ul.active {
+.bookings .list.active {
   display: block;
 }
 
