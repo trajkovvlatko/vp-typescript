@@ -1,5 +1,5 @@
 export default interface ImageInterface {
   id: number;
-  image: string;
+  imageUrl: string;
   selected: boolean;
 }

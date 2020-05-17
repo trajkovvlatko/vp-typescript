@@ -17,24 +17,18 @@ function ImagesForm(props: Props) {
   const host = process.env.REACT_APP_API_HOST;
   const [images, setImages] = useState(props.images);
   const [newImages, setNewImages] = useState<File[]>([]);
+  const [removedImages, setRemovedImages] = useState<number[]>([]);
   const newImage = useRef<HTMLInputElement>(null);
-  const initialImageIds = props.images.map((i) => i.id);
 
   function remove(id: number) {
-    setImages(
-      images.filter((i) => {
-        return i.id !== id;
-      })
-    );
+    const currentImages = images.filter((i) => i.id !== id);
+    setImages(currentImages);
+    removedImages.push(id);
+    setRemovedImages(removedImages);
   }
 
   function removeNewImage(name: string) {
     setNewImages(newImages.filter((i) => i.name !== name));
-  }
-
-  function getRemovedIds() {
-    const imageIds = images.map((v) => v.id);
-    return initialImageIds.filter((v) => !imageIds.includes(v));
   }
 
   async function save(e: React.FormEvent<HTMLFormElement>) {
@@ -51,12 +45,13 @@ function ImagesForm(props: Props) {
     for (let i = 0; i < newImages.length; i++) {
       formData.append('images[]', newImages[i]);
     }
-    formData.append('remove_image_ids', getRemovedIds().toString());
+    formData.append('remove_image_ids', removedImages.toString());
     const url = `${host}/user/${props.type}s/${props.id}/images`;
     try {
       const response = await axios.post(url, formData, config);
       setImages(response.data);
       setNewImages([]);
+      setRemovedImages([]);
       setNotification({type: 'info', message: 'Successfully saved images.'});
     } catch (e) {
       setNotification({type: 'error', message: 'Error saving images.'});
@@ -84,11 +79,7 @@ function ImagesForm(props: Props) {
       {images.map((row: ImageInterface) => {
         return (
           <div key={`image-${row.id}`}>
-            <img
-              src={`${host}/uploads/${row.image}`}
-              alt={`alt-${row.image}`}
-              width='100'
-            />
+            <img src={row.imageUrl} alt={`alt-${row.imageUrl}`} width='100' />
             <button
               onClick={() => {
                 remove(row.id);

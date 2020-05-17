@@ -48,7 +48,7 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
   }
 
   const bookingsCount = venue.Bookings.length;
-  const image = venue.Images.filter((i) => i.selected)[0].image;
+  const image = venue.Images.filter((i) => i.selected)[0].imageUrl;
 
   return (
     <div>
@@ -90,7 +90,12 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
       })}
       <div>
         {venue.Images.map((img) => (
-          <img width='150' src={img.image} key={img.image} alt={img.image} />
+          <img
+            width='150'
+            src={img.imageUrl}
+            key={img.imageUrl}
+            alt={img.imageUrl}
+          />
         ))}
       </div>
       <div>

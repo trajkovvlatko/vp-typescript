@@ -48,7 +48,7 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
   }
 
   const bookingsCount = performer.Bookings.length;
-  const image = performer.Images.filter((i) => i.selected)[0].image;
+  const image = performer.Images.filter((i) => i.selected)[0].imageUrl;
 
   return (
     <div>
@@ -94,8 +94,13 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
         );
       })}
       <div>
-        {performer.Images.map((img: {image: string}) => (
-          <img width='150' src={img.image} key={img.image} alt={img.image} />
+        {performer.Images.map((img: {imageUrl: string}) => (
+          <img
+            width='150'
+            src={img.imageUrl}
+            key={img.imageUrl}
+            alt={img.imageUrl}
+          />
         ))}
       </div>
       <div>
