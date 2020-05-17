@@ -1,7 +1,7 @@
 export default interface PromoItemInterface {
   id: number;
   name: string;
-  image: string;
+  imageUrl: string;
   rating: string;
   type: string;
 }

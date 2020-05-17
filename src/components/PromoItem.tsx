@@ -8,10 +8,10 @@ interface Props {
 }
 
 function PromoItem(props: Props) {
-  const {id, name, image, rating, type} = props.data;
+  const {id, name, imageUrl, rating, type} = props.data;
   return (
     <div className='promo-item'>
-      <img src={image} width='100' alt={name} />
+      <img src={imageUrl} width='100' alt={name} />
       <p>{name}</p>
       <Rating stars={parseInt(rating)} />
       <Link to={`/${type}s/${id}`}>Book</Link>

@@ -18,26 +18,26 @@ function ImagesForm(props: Props) {
   const [images, setImages] = useState(props.images);
   const [newImages, setNewImages] = useState<File[]>([]);
   const newImage = useRef<HTMLInputElement>(null);
-  const initialImageIds = props.images.map(i => i.id);
+  const initialImageIds = props.images.map((i) => i.id);
 
   function remove(id: number) {
     setImages(
-      images.filter(i => {
+      images.filter((i) => {
         return i.id !== id;
       })
     );
   }
 
   function removeNewImage(name: string) {
-    setNewImages(newImages.filter(i => i.name !== name));
+    setNewImages(newImages.filter((i) => i.name !== name));
   }
 
   function getRemovedIds() {
-    const imageIds = images.map(v => v.id);
-    return initialImageIds.filter(v => !imageIds.includes(v));
+    const imageIds = images.map((v) => v.id);
+    return initialImageIds.filter((v) => !imageIds.includes(v));
   }
 
-  function save(e: React.FormEvent<HTMLFormElement>) {
+  async function save(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const config = {
@@ -53,14 +53,14 @@ function ImagesForm(props: Props) {
     }
     formData.append('remove_image_ids', getRemovedIds().toString());
     const url = `${host}/user/${props.type}s/${props.id}/images`;
-    axios
-      .post(url, formData, config)
-      .then(response => {
-        setImages([...images, ...response.data]);
-        setNewImages([]);
-        setNotification({type: 'info', message: 'Successfully saved images.'});
-      })
-      .catch(error => {});
+    try {
+      const response = await axios.post(url, formData, config);
+      setImages(response.data);
+      setNewImages([]);
+      setNotification({type: 'info', message: 'Successfully saved images.'});
+    } catch (e) {
+      setNotification({type: 'error', message: 'Error saving images.'});
+    }
   }
 
   function onFileInputChange(e: React.ChangeEvent<HTMLInputElement>) {
