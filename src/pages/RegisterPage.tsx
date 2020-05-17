@@ -22,7 +22,7 @@ function RegisterPage(props: RouteComponentProps) {
     message: '',
   });
 
-  function onRegister() {
+  async function onRegister() {
     name = name.trim();
     email = email.trim();
     password = password.trim();
@@ -41,15 +41,17 @@ function RegisterPage(props: RouteComponentProps) {
       return updateData({error: true, message: "Passwords don't match."});
     }
 
-    axios
-      .post(`${host}/auth/register`, {name, email, password, confirmPassword})
-      .then(function(response) {
-        console.log(response.data);
-        props.history.push('/');
-      })
-      .catch(function(error) {
-        updateData({error: true, message: error.response.data.error});
+    try {
+      await axios.post(`${host}/auth/register`, {
+        name,
+        email,
+        password,
+        confirmPassword,
       });
+      props.history.push('/login');
+    } catch (e) {
+      updateData({error: true, message: e.response.data.error});
+    }
   }
 
   return (
@@ -61,14 +63,18 @@ function RegisterPage(props: RouteComponentProps) {
 
       <div className='form-group'>
         <label htmlFor='name'>Name:</label>
-        <input type='name' id='name' onChange={e => (name = e.target.value)} />
+        <input
+          type='name'
+          id='name'
+          onChange={(e) => (name = e.target.value)}
+        />
       </div>
       <div className='form-group'>
         <label htmlFor='email'>Email:</label>
         <input
           type='email'
           id='email'
-          onChange={e => (email = e.target.value)}
+          onChange={(e) => (email = e.target.value)}
         />
       </div>
       <div className='form-group'>
@@ -76,7 +82,7 @@ function RegisterPage(props: RouteComponentProps) {
         <input
           type='password'
           id='password'
-          onChange={e => (password = e.target.value)}
+          onChange={(e) => (password = e.target.value)}
         />
       </div>
       <div className='form-group'>
@@ -84,7 +90,7 @@ function RegisterPage(props: RouteComponentProps) {
         <input
           type='password'
           id='confirm-password'
-          onChange={e => (confirmPassword = e.target.value)}
+          onChange={(e) => (confirmPassword = e.target.value)}
         />
       </div>
       <div className='form-group'>

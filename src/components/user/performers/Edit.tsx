@@ -21,9 +21,9 @@ interface Props {
 
 interface EditBasicPerformerInterface extends BasicPerformerInterface {
   id: number;
-  genres_list: GenreInterface[];
-  youtube_links_list: YoutubeLinkInterface[];
-  images_list: ImageInterface[];
+  Genres: GenreInterface[];
+  YoutubeLinks: YoutubeLinkInterface[];
+  Images: ImageInterface[];
 }
 
 function EditPerformer(props: Props) {
@@ -40,9 +40,9 @@ function EditPerformer(props: Props) {
     location: '',
     phone: '',
     website: '',
-    genres_list: [],
-    youtube_links_list: [],
-    images_list: [],
+    Genres: [],
+    YoutubeLinks: [],
+    Images: [],
   };
 
   const [values, setValues] = useState({
@@ -53,8 +53,8 @@ function EditPerformer(props: Props) {
 
   useEffect(() => {
     fetch(url, {headers: getAuthHeader(token as string)})
-      .then(response => response.json())
-      .then(response => {
+      .then((response) => response.json())
+      .then((response) => {
         const newValues: EditBasicPerformerInterface = {
           id: id,
           name: response.name,
@@ -62,9 +62,9 @@ function EditPerformer(props: Props) {
           location: response.location,
           phone: response.phone,
           website: response.website,
-          genres_list: response.genres_list,
-          youtube_links_list: response.youtube_links_list,
-          images_list: response.images_list,
+          Genres: response.Genres,
+          YoutubeLinks: response.YoutubeLinks,
+          Images: response.Images,
         };
         setValues({
           loading: false,
@@ -96,9 +96,7 @@ function EditPerformer(props: Props) {
     return <div>Loading...</div>;
   }
 
-  const selectedGenreIds: number[] = values.performer.genres_list.map(
-    r => r.id
-  );
+  const selectedGenreIds: number[] = values.performer.Genres.map((r) => r.id);
 
   return (
     <div>
@@ -108,13 +106,13 @@ function EditPerformer(props: Props) {
       <ImagesForm
         id={props.id}
         type='performer'
-        images={values.performer.images_list}
+        images={values.performer.Images}
       />
       <GenresForm performerId={props.id} selected={selectedGenreIds} />
       <YoutubeLinksForm
         id={props.id}
         type='performer'
-        links={values.performer.youtube_links_list}
+        links={values.performer.YoutubeLinks}
       />
     </div>
   );

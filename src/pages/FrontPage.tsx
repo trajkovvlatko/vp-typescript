@@ -17,12 +17,8 @@ function FrontPage() {
           type='performer'
         />
         <PromoList title='Latest venues' sorting='latest' type='venue' />
-        <PromoList
-          title='Trending performers'
-          sorting='trending'
-          type='performer'
-        />
-        <PromoList title='Trending venues' sorting='trending' type='venue' />
+        <PromoList title='Top performers' sorting='top' type='performer' />
+        <PromoList title='Top venues' sorting='top' type='venue' />
       </div>
     </div>
   );

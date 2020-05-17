@@ -23,7 +23,7 @@ function LoginPage(props: RouteComponentProps) {
   const userContext = useContext(UserContext);
   const setUser = userContext.setUser;
 
-  function onLogin() {
+  async function onLogin() {
     email = email.trim();
     password = password.trim();
 
@@ -34,19 +34,20 @@ function LoginPage(props: RouteComponentProps) {
       });
     }
 
-    axios
-      .post(`${host}/auth/login`, {email, password})
-      .then(function (response) {
-        setUser(response.data);
-        props.history.push('/');
-      })
-      .catch(function (error) {
-        let message = 'Error';
-        if (error && error.response && error.response.data) {
-          message = error.response.data.error;
-        }
-        updateData({error: true, message});
+    try {
+      const response = await axios.post(`${host}/auth/login`, {
+        email,
+        password,
       });
+      setUser(response.data);
+      props.history.push('/');
+    } catch (e) {
+      let message = 'Error';
+      if (e && e.response && e.response.data) {
+        message = e.response.data.error;
+      }
+      updateData({error: true, message});
+    }
   }
 
   return (

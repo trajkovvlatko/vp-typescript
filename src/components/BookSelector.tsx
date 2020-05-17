@@ -23,7 +23,7 @@ function BookSelector(props: Props) {
   const {setNotification} = useContext(NotificationContext);
   const {error, loading, results} = useFetch(url, user.token);
   const [selectedId, setSelectedId] = useState<Number | undefined>();
-  const [dateTime, setDateTime] = useState<String>('2012-01-02 03:04');
+  const [date, setDate] = useState<String>('2012-01-02');
 
   if (error) return <div>Error while fetching data.</div>;
   if (loading) return <div>Loading...</div>;
@@ -48,14 +48,14 @@ function BookSelector(props: Props) {
 
     axios
       .post(
-        `${host}/user/bookings/${dateTime}/${props.connectType}/${props.connectId}/${selectedType}/${selectedId}`,
+        `${host}/user/bookings/${date}/${selectedType}/${selectedId}/${props.connectType}/${props.connectId}`,
         {},
         config
       )
-      .then(function(response) {
+      .then(function () {
         setNotification({type: 'info', message: 'Booking request sent.'});
       })
-      .catch(function(error) {
+      .catch(function () {
         setNotification({type: 'info', message: 'Error while booking.'});
       });
   }
@@ -77,9 +77,9 @@ function BookSelector(props: Props) {
       <input
         type='text'
         placeholder='Select date and time'
-        value={dateTime.toString()}
-        onChange={e => {
-          setDateTime(e.target.value);
+        value={date.toString()}
+        onChange={(e) => {
+          setDate(e.target.value);
         }}
       />
 

@@ -12,6 +12,7 @@ import RegisterPage from 'pages/RegisterPage';
 import BookingPage from 'pages/user/BookingPage';
 
 import UserPage from 'pages/user/UserPage';
+import UserProfilePage from 'pages/user/UserProfilePage';
 import UserPerformersPage from 'pages/user/UserPerformersPage';
 import UserPerformerPage from 'pages/user/UserPerformerPage';
 import UserVenuesPage from 'pages/user/UserVenuesPage';
@@ -69,6 +70,11 @@ const App: React.FC = () => {
               <WithUser>
                 <React.Fragment>
                   <Route exact path='/user' component={UserPage} />
+                  <Route
+                    exact
+                    path='/user/profile'
+                    component={UserProfilePage}
+                  />
                   <Route
                     exact
                     path='/user/performers'

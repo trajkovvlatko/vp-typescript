@@ -7,16 +7,16 @@ function BookingItem(props: BookingItemInterface) {
   return (
     <div>
       <Link to={`/bookings/${props.id}`}>
-        {(props.requester_type === 'performer' && (
+        {(props.requesterType === 'performer' && (
           <div>
-            {props.performer_name} requested to perform at {props.venue_name}
+            {props.performerName} requested to perform at {props.venueName}
           </div>
         )) || (
           <div>
-            {props.venue_name} invited {props.performer_name}
+            {props.venueName} invited {props.performerName}
           </div>
         )}
-        on {props.booking_date.substring(0, 10)}
+        on {props.bookingDate.substring(0, 10)}
       </Link>
     </div>
   );

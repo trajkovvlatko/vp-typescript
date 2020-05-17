@@ -35,13 +35,13 @@ function BookingsList() {
               return (
                 <BookingItem
                   id={row.id}
-                  requester_id={row.requester_id}
-                  requester_type={row.requester_type}
-                  requested_id={row.requested_id}
-                  requested_type={row.requested_type}
-                  booking_date={row.booking_date}
-                  performer_name={row.performer_name}
-                  venue_name={row.venue_name}
+                  requesterId={row.requesterId}
+                  requesterType={row.requesterType}
+                  requestedId={row.requestedId}
+                  requestedType={row.requestedType}
+                  bookingDate={row.bookingDate}
+                  performerName={row.performerName}
+                  venueName={row.venueName}
                   key={`booking-${row.id}`}
                 />
               );

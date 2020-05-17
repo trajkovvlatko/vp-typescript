@@ -12,10 +12,10 @@ function UpcomingBookingItem(props: Props) {
 
   return (
     <li className={row.status}>
-      <Link to={`/venues/${row.venue_id}`}>{row.venue_name}</Link> -
-      <Link to={`/performers/${row.performer_id}`}>{row.performer_name}</Link>
+      <Link to={`/venues/${row.venueId}`}>{row.venueName}</Link> -
+      <Link to={`/performers/${row.performerId}`}>{row.performerName}</Link>
       on
-      {row.booking_date.replace('T', ' ').substring(0, 16)}
+      {row.bookingDate.replace('T', ' ').substring(0, 16)}
       {row.status !== 'canceled' && (
         <button onClick={() => cancel(row.id)}>Cancel</button>
       )}

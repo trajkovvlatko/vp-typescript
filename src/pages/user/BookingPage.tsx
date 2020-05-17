@@ -44,7 +44,7 @@ function BookingPage({match}: any, key: any) {
 
     axios
       .patch(`${host}/user/bookings/${result.id}`, {status}, config)
-      .then(function(response) {
+      .then(function (response) {
         setStatus(status);
         setNotification({type: 'info', message: 'Successfully sent.'});
         const newBookings = bookings.filter((row: UpcomingBookingInterface) => {
@@ -53,7 +53,7 @@ function BookingPage({match}: any, key: any) {
         });
         setBookings(newBookings);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         setNotification({type: 'info', message: 'Error while sending.'});
       });
   };
@@ -66,20 +66,20 @@ function BookingPage({match}: any, key: any) {
       <Header page='home' />
 
       <div>
-        {(result.requester_type === 'performer' && (
+        {(result.requesterType === 'performer' && (
           <div>
-            <Link to={`/performers/${result.performer_id}`}>
-              {result.performer_name}
+            <Link to={`/performers/${result.performerId}`}>
+              {result.performerName}
             </Link>
             requested to perform at
-            <Link to={`/venues/${result.venue_id}`}>{result.venue_name}</Link>
+            <Link to={`/venues/${result.venueId}`}>{result.venueName}</Link>
           </div>
         )) || (
           <div>
-            <Link to={`/venues/${result.venue_id}`}>{result.venue_name}</Link>
+            <Link to={`/venues/${result.venueId}`}>{result.venueName}</Link>
             invited
-            <Link to={`/performers/${result.performer_id}`}>
-              {result.performer_name}
+            <Link to={`/performers/${result.performerId}`}>
+              {result.performerName}
             </Link>
           </div>
         )}

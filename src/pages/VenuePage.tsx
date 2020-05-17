@@ -7,9 +7,9 @@ import Header from 'components/Header';
 import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
 import ImageInterface from 'interfaces/ImageInterface';
 import PropertyInterface from 'interfaces/PropertyInterface';
-import {VenueBookingInterface} from 'interfaces/BookingInterface';
 import BookSelector from 'components/BookSelector';
 import UserContext from 'contexts/UserContext';
+import BookingItemInterface from 'interfaces/BookingItemInterface';
 
 type TParams = {id: string};
 
@@ -21,10 +21,10 @@ interface Venue {
   phone: string;
   website: string;
   rating: number;
-  properties_list: PropertyInterface[];
-  images_list: ImageInterface[];
-  youtube_links_list: YoutubeLinkInterface[];
-  bookings_list: VenueBookingInterface[];
+  Properties: PropertyInterface[];
+  Images: ImageInterface[];
+  YoutubeLinks: YoutubeLinkInterface[];
+  Bookings: BookingItemInterface[];
 }
 
 function VenuePage({match}: RouteComponentProps<TParams>) {
@@ -42,20 +42,13 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
   if (error) return <div>Error while fetching data.</div>;
 
   const venue: Venue = result;
-  const upcoming = venue.bookings_list.filter(
-    (booking: VenueBookingInterface) => {
-      return new Date(booking.date) > new Date();
-    }
-  );
-  const previous = venue.bookings_list.filter(
-    (booking: VenueBookingInterface) => {
-      return new Date(booking.date) < new Date();
-    }
-  );
 
   function onShowBookSelectorClick() {
     updateShowBookSelector(true);
   }
+
+  const bookingsCount = venue.Bookings.length;
+  const image = venue.Images.filter((i) => i.selected)[0].image;
 
   return (
     <div>
@@ -74,14 +67,14 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
       )}
 
       <h2>{venue.name}</h2>
-      <img src={venue.image} alt='selected' />
+      <img src={image} alt={image} />
       <div>Location: {venue.location}</div>
       <div>
         Phone: <a href={`tel:${venue.phone}`}>{venue.phone}</a>
       </div>
-      <div>Properties: {venue.properties_list.map(p => p.name).join(', ')}</div>
+      <div>Properties: {venue.Properties.map((p) => p.name).join(', ')}</div>
       <div>Website: {venue.website}</div>
-      {venue.youtube_links_list.map((yt: YoutubeLinkInterface) => {
+      {venue.YoutubeLinks.map((yt: YoutubeLinkInterface) => {
         return (
           <iframe
             title={yt.link}
@@ -96,38 +89,13 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
         );
       })}
       <div>
-        {venue.images_list.map(img => (
+        {venue.Images.map((img) => (
           <img width='150' src={img.image} key={img.image} alt={img.image} />
         ))}
       </div>
-      {previous.length > 0 && (
-        <div>
-          Previous:
-          {previous.map((b: VenueBookingInterface) => (
-            <div key={`prev-${b.performer_id}-${b.date}`}>
-              Hosted
-              <Link to={`/performers/${b.performer_id}`}>
-                {b.performer_name}
-              </Link>{' '}
-              on {b.date}
-            </div>
-          ))}
-        </div>
-      )}
-      {upcoming.length > 0 && (
-        <div>
-          Upcoming:
-          {upcoming.map((b: VenueBookingInterface) => (
-            <div key={`upcoming-${b.date}`}>
-              Will host
-              <Link to={`/performers/${b.performer_id}`}>
-                {b.performer_name}
-              </Link>{' '}
-              on {b.date}
-            </div>
-          ))}
-        </div>
-      )}
+      <div>
+        {bookingsCount} {(bookingsCount > 1 && 'bookings') || 'booking'} so far
+      </div>
       <div>Rating: {venue.rating}</div>
     </div>
   );

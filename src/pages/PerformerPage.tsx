@@ -9,8 +9,8 @@ import BookSelector from 'components/BookSelector';
 import GenreInterface from 'interfaces/GenreInterface';
 import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
 import ImageInterface from 'interfaces/ImageInterface';
-import {PerformerBookingInterface} from 'interfaces/BookingInterface';
 import UserContext from 'contexts/UserContext';
+import BookingItemInterface from 'interfaces/BookingItemInterface';
 
 type TParams = {id: string};
 
@@ -22,10 +22,10 @@ interface Performer {
   phone: string;
   website: string;
   rating: number;
-  genres_list: GenreInterface[];
-  images_list: ImageInterface[];
-  youtube_links_list: YoutubeLinkInterface[];
-  bookings_list: PerformerBookingInterface[];
+  Genres: GenreInterface[];
+  Images: ImageInterface[];
+  YoutubeLinks: YoutubeLinkInterface[];
+  Bookings: BookingItemInterface[];
 }
 
 function PerformerPage({match}: RouteComponentProps<TParams>) {
@@ -43,20 +43,12 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
   if (error) return <div>Error while fetching data.</div>;
 
   const performer: Performer = result;
-  const upcoming = performer.bookings_list.filter(
-    (booking: PerformerBookingInterface) => {
-      return new Date(booking.date) > new Date();
-    }
-  );
-  const previous = performer.bookings_list.filter(
-    (booking: PerformerBookingInterface) => {
-      return new Date(booking.date) < new Date();
-    }
-  );
-
   function onShowBookSelectorClick() {
     updateShowBookSelector(true);
   }
+
+  const bookingsCount = performer.Bookings.length;
+  const image = performer.Images.filter((i) => i.selected)[0].image;
 
   return (
     <div>
@@ -68,26 +60,26 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
           {showBookSelector ? (
             <BookSelector connectType='performer' connectId={performer.id} />
           ) : (
-            <button onClick={onShowBookSelectorClick}>Book this venue</button>
+            <button onClick={onShowBookSelectorClick}>
+              Book this performer
+            </button>
           )}
         </div>
       ) : (
         <Link to='/login'>Book</Link>
       )}
 
-      <img src={performer.image} alt='selected' />
+      <img src={image} alt={image} />
       <div>Location: {performer.location}</div>
       <div>
         Phone: <a href={`tel:${performer.phone}`}>{performer.phone}</a>
       </div>
       <div>
         Genres:{' '}
-        {performer.genres_list
-          .map((genre: GenreInterface) => genre.name)
-          .join(', ')}
+        {performer.Genres.map((genre: GenreInterface) => genre.name).join(', ')}
       </div>
       <div>Website: {performer.website}</div>
-      {performer.youtube_links_list.map((yt: YoutubeLinkInterface) => {
+      {performer.YoutubeLinks.map((yt: YoutubeLinkInterface) => {
         return (
           <iframe
             title={yt.link}
@@ -102,34 +94,13 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
         );
       })}
       <div>
-        {performer.images_list.map((img: {image: string}) => (
+        {performer.Images.map((img: {image: string}) => (
           <img width='150' src={img.image} key={img.image} alt={img.image} />
         ))}
       </div>
-      {previous.length > 0 && (
-        <div>
-          Previous:
-          {previous.map((b: PerformerBookingInterface) => (
-            <div key={`prev-${b.date}`}>
-              Performed at:{' '}
-              <Link to={`/venues/${b.venue_id}`}>{b.venue_name}</Link> on{' '}
-              {b.date}
-            </div>
-          ))}
-        </div>
-      )}
-      {upcoming.length > 0 && (
-        <div>
-          Upcoming:
-          {upcoming.map((b: PerformerBookingInterface) => (
-            <div key={`upcoming-${b.date}`}>
-              Will perform at:{' '}
-              <Link to={`/venues/${b.venue_id}`}>{b.venue_name}</Link> on{' '}
-              {b.date}
-            </div>
-          ))}
-        </div>
-      )}
+      <div>
+        {bookingsCount} {(bookingsCount > 1 && 'bookings') || 'booking'} so far
+      </div>
       <div>Rating: {performer.rating}</div>
     </div>
   );

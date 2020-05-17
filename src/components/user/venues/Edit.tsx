@@ -21,9 +21,9 @@ interface Props {
 
 interface EditBasicVenueInterface extends BasicVenueInterface {
   id: number;
-  properties_list: PropertyInterface[];
-  youtube_links_list: YoutubeLinkInterface[];
-  images_list: ImageInterface[];
+  Properties: PropertyInterface[];
+  YoutubeLinks: YoutubeLinkInterface[];
+  Images: ImageInterface[];
 }
 
 function EditVenue(props: Props) {
@@ -40,9 +40,9 @@ function EditVenue(props: Props) {
     location: '',
     phone: '',
     website: '',
-    properties_list: [],
-    youtube_links_list: [],
-    images_list: [],
+    Properties: [],
+    YoutubeLinks: [],
+    Images: [],
   };
 
   const [values, setValues] = useState({
@@ -53,8 +53,8 @@ function EditVenue(props: Props) {
 
   useEffect(() => {
     fetch(url, {headers: getAuthHeader(token as string)})
-      .then(response => response.json())
-      .then(response => {
+      .then((response) => response.json())
+      .then((response) => {
         const newValues: EditBasicVenueInterface = {
           id: id,
           name: response.name,
@@ -62,9 +62,9 @@ function EditVenue(props: Props) {
           location: response.location,
           phone: response.phone,
           website: response.website,
-          properties_list: response.properties_list,
-          youtube_links_list: response.youtube_links_list,
-          images_list: response.images_list,
+          Properties: response.Properties,
+          YoutubeLinks: response.YoutubeLinks,
+          Images: response.Images,
         };
         setValues({
           loading: false,
@@ -96,8 +96,8 @@ function EditVenue(props: Props) {
     return <div>Loading...</div>;
   }
 
-  const selectedPropertyIds: number[] = values.venue.properties_list.map(
-    r => r.id
+  const selectedPropertyIds: number[] = values.venue.Properties.map(
+    (r) => r.id
   );
 
   return (
@@ -105,16 +105,12 @@ function EditVenue(props: Props) {
       <h1>Edit Venue</h1>
 
       <Form values={values.venue} save={save} />
-      <ImagesForm
-        id={props.id}
-        type='venue'
-        images={values.venue.images_list}
-      />
+      <ImagesForm id={props.id} type='venue' images={values.venue.Images} />
       <PropertiesForm venueId={props.id} selected={selectedPropertyIds} />
       <YoutubeLinksForm
         id={props.id}
         type='venue'
-        links={values.venue.youtube_links_list}
+        links={values.venue.YoutubeLinks}
       />
     </div>
   );
