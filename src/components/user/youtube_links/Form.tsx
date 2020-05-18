@@ -19,20 +19,15 @@ function YoutubeLinksForm(props: Props) {
   const {setNotification} = useContext(NotificationContext);
   const [links, setLinks] = useState(props.links);
   const [newLinks, setNewLinks] = useState<string[]>([]);
+  const [removedIds, setRemovedIds] = useState<number[]>([]);
   const newLink = useRef<HTMLInputElement>(null);
-  const initialLinkIds = props.links.map(i => i.id);
-
-  function getRemovedIds() {
-    const linkIds = links.map(v => v.id);
-    return initialLinkIds.filter(v => !linkIds.includes(v));
-  }
 
   async function save() {
     try {
       const resp = await axios.patch(
         `${host}/user/${props.type}s/${props.id}/youtube_links`,
         {
-          remove_youtube_link_ids: getRemovedIds(),
+          remove_youtube_link_ids: removedIds,
           new_youtube_links: newLinks,
         },
         {headers: getAuthHeader(user.token as string)}
@@ -49,11 +44,10 @@ function YoutubeLinksForm(props: Props) {
   }
 
   function remove(id: number) {
-    setLinks(
-      links.filter(l => {
-        return l.id !== id;
-      })
-    );
+    removedIds.push(id);
+    setRemovedIds(removedIds);
+    const withoutRemoved = links.filter((l) => l.id !== id);
+    setLinks(withoutRemoved);
   }
 
   function addNewLink() {
@@ -73,7 +67,7 @@ function YoutubeLinksForm(props: Props) {
   }
 
   function removeNewLink(link: string) {
-    setNewLinks(newLinks.filter(l => l !== link));
+    setNewLinks(newLinks.filter((l) => l !== link));
   }
 
   return (
