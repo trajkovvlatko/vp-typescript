@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {useFetch} from 'hooks/useFetch';
 import GenreInterface from 'interfaces/GenreInterface';
 import GenreCheckbox from './Checkbox';
@@ -18,7 +18,7 @@ function GenresForm(props: Props) {
   const host = process.env.REACT_APP_API_HOST;
   const url = `${host}/genres`;
   const {error, loading, results} = useFetch(url);
-  const {selected} = props;
+  const [selected, setSelected] = useState<number[]>(props.selected);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -30,11 +30,12 @@ function GenresForm(props: Props) {
 
   async function save() {
     try {
-      await axios.patch(
+      const response = await axios.patch(
         `${host}/user/performers/${props.performerId}/genres`,
         {genre_ids: selected},
         {headers: getAuthHeader(user.token as string)}
       );
+      setSelected(response.data.map((r: GenreInterface) => r.id));
       setNotification({type: 'info', message: 'Successfully saved genres.'});
     } catch (e) {
       setNotification({
@@ -53,6 +54,7 @@ function GenresForm(props: Props) {
       const index = selected.indexOf(id);
       if (index !== -1) selected.splice(index, 1);
     }
+    setSelected(selected);
   }
 
   return (
@@ -66,7 +68,7 @@ function GenresForm(props: Props) {
             name={row.name}
             key={`genre-${row.id}`}
             onChange={handleChange}
-            checked={props.selected.includes(row.id)}
+            checked={selected.includes(row.id)}
           />
         );
       })}

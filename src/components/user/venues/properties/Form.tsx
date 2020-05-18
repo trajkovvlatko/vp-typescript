@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {useFetch} from 'hooks/useFetch';
 import PropertyInterface from 'interfaces/PropertyInterface';
 import PropertyCheckbox from './Checkbox';
@@ -17,8 +17,8 @@ function PropertiesForm(props: Props) {
   const host = process.env.REACT_APP_API_HOST;
   const url = `${host}/properties`;
   const {error, loading, results} = useFetch(url);
-  const {selected} = props;
   const {setNotification} = useContext(NotificationContext);
+  const [selected, setSelected] = useState<number[]>(props.selected);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -30,11 +30,12 @@ function PropertiesForm(props: Props) {
 
   async function save() {
     try {
-      await axios.patch(
+      const response = await axios.patch(
         `${host}/user/venues/${props.venueId}/properties`,
         {property_ids: selected},
         {headers: getAuthHeader(user.token as string)}
       );
+      setSelected(response.data.map((r: PropertyInterface) => r.id));
       setNotification({
         type: 'info',
         message: 'Successfully saved properties.',
@@ -56,6 +57,7 @@ function PropertiesForm(props: Props) {
       const index = selected.indexOf(id);
       if (index !== -1) selected.splice(index, 1);
     }
+    setSelected(selected);
   }
 
   return (
@@ -69,7 +71,7 @@ function PropertiesForm(props: Props) {
             name={row.name}
             key={`property-${row.id}`}
             onChange={handleChange}
-            checked={props.selected.includes(row.id)}
+            checked={selected.includes(row.id)}
           />
         );
       })}
