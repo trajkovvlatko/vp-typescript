@@ -1,11 +1,8 @@
 import React, {useContext, useState} from 'react';
 import axios from 'axios';
-
 import {getAuthHeader} from 'helpers/main';
-
 import {useFetch} from 'hooks/useFetch';
 import {Link} from 'react-router-dom';
-import Header from 'components/Header';
 import UserContext from 'contexts/UserContext';
 import BookingsContext from 'contexts/BookingsContext';
 import NotificationContext from 'contexts/NotificationContext';
@@ -63,8 +60,6 @@ function BookingPage({match}: any, key: any) {
 
   return (
     <div>
-      <Header page='home' />
-
       <div>
         {(result.requesterType === 'performer' && (
           <div>

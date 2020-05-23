@@ -33,6 +33,7 @@ import 'styles/index.css';
 import 'styles/App.css';
 
 import * as serviceWorker from 'serviceWorker';
+import Header from 'components/Header';
 
 const App: React.FC = () => {
   const [user, setUser] = useLocalStorage('vp-user', {});
@@ -42,6 +43,8 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <UserContext.Provider value={{user, setUser}}>
+        <Header />
+
         <NotificationContext.Provider value={{notification, setNotification}}>
           <BookingsContext.Provider value={{bookings, setBookings}}>
             <Notification />

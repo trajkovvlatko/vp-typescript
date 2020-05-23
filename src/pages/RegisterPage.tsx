@@ -1,7 +1,6 @@
 import React from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 
-import Header from 'components/Header';
 import axios from 'axios';
 import {useState} from 'react';
 
@@ -56,7 +55,6 @@ function RegisterPage(props: RouteComponentProps) {
 
   return (
     <div>
-      <Header page='register' />
       <h1>Register Page</h1>
 
       {data.error && data.message}

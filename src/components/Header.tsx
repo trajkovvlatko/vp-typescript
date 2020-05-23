@@ -1,16 +1,13 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import UserContext from 'contexts/UserContext';
-import NavLink from 'components/NavLink';
 import {useLocalStorage} from 'hooks/useLocalStorage';
+import SwitchNavLink from './SwitchNavLink';
 
-interface Props {
-  page: string;
-}
-
-function Header(props: Props) {
+function Header() {
   const {user, setUser} = React.useContext(UserContext);
   const [_, setLocalStorageValue] = useLocalStorage('vp-user', {});
+  const current = useLocation().pathname;
 
   function logout() {
     setUser({});
@@ -19,18 +16,18 @@ function Header(props: Props) {
 
   return (
     <div>
-      <Link to='/'>Home</Link>
+      <SwitchNavLink to='/' current={current} label='Home' />
       {(user.token && (
         <div key='logged-in'>
-          <NavLink currentPage={props.page} label='User' page='user' />
+          <SwitchNavLink to='/user' current={current} label='User' />
           <div className='logout' onClick={logout}>
             Logout
           </div>
         </div>
       )) || [
         <div key='logged-out'>
-          <NavLink currentPage={props.page} label='Login' page='login' />
-          <NavLink currentPage={props.page} label='Register' page='register' />
+          <SwitchNavLink to='/login' current={current} label='Login' />
+          <SwitchNavLink to='/register' current={current} label='Register' />
         </div>,
       ]}
     </div>

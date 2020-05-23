@@ -3,7 +3,6 @@ import {RouteComponentProps} from 'react-router-dom';
 
 import {useFetch} from 'hooks/useFetch';
 import {Link} from 'react-router-dom';
-import Header from 'components/Header';
 import BookSelector from 'components/BookSelector';
 
 import GenreInterface from 'interfaces/GenreInterface';
@@ -52,7 +51,6 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
 
   return (
     <div>
-      <Header page='home' />
       <h2>{performer.name}</h2>
 
       {user.token ? (

@@ -4,7 +4,6 @@ import {RouteComponentProps} from 'react-router-dom';
 import Filters from 'components/Filters';
 import Results from 'components/Results';
 import {withRouter} from 'react-router-dom';
-import Header from 'components/Header';
 
 interface Filters {
   type: string;
@@ -36,7 +35,6 @@ function SearchPage(props: RouteComponentProps<TParams>) {
 
   return (
     <div>
-      <Header page='home' />
       <h1>Search Page</h1>
       <div>
         <Filters filters={filters} onChange={search} />

@@ -3,7 +3,6 @@ import {RouteComponentProps} from 'react-router-dom';
 
 import {useFetch} from 'hooks/useFetch';
 import {Link} from 'react-router-dom';
-import Header from 'components/Header';
 import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
 import ImageInterface from 'interfaces/ImageInterface';
 import PropertyInterface from 'interfaces/PropertyInterface';
@@ -52,8 +51,6 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
 
   return (
     <div>
-      <Header page='home' />
-
       {user.token ? (
         <div>
           {showBookSelector ? (

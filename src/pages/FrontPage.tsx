@@ -1,12 +1,10 @@
 import React from 'react';
 import BasicSearch from 'components/BasicSearch';
 import PromoList from 'components/PromoList';
-import Header from 'components/Header';
 
 function FrontPage() {
   return (
     <div>
-      <Header page='home' />
       <h1>Front Page</h1>
       <BasicSearch />
       <div className='promo-lists'>

@@ -1,7 +1,6 @@
 import React from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 
-import Header from 'components/Header';
 import axios from 'axios';
 import {useState, useContext} from 'react';
 import UserContext from 'contexts/UserContext';
@@ -52,7 +51,6 @@ function LoginPage(props: RouteComponentProps) {
 
   return (
     <div>
-      <Header page='login' />
       <h1>Login Page</h1>
 
       {data.error && <div className='error-message'>{data.message}</div>}
