@@ -19,6 +19,8 @@ function ImagesForm(props: Props) {
   const [newImages, setNewImages] = useState<File[]>([]);
   const [removedImages, setRemovedImages] = useState<number[]>([]);
   const newImage = useRef<HTMLInputElement>(null);
+  const selectedImageId = images.filter((img) => img.selected)[0]?.id;
+  const [selected, setSelected] = useState<number | null>(selectedImageId);
 
   function remove(id: number) {
     const currentImages = images.filter((i) => i.id !== id);
@@ -42,16 +44,25 @@ function ImagesForm(props: Props) {
     };
 
     const formData = new FormData();
-    for (let i = 0; i < newImages.length; i++) {
-      formData.append('images[]', newImages[i]);
-    }
+    newImages.forEach((img) => {
+      formData.append('images[]', img);
+    });
     formData.append('remove_image_ids', removedImages.toString());
+    if (selected) {
+      formData.append('selected_image_id', selected.toString());
+    }
     const url = `${host}/user/${props.type}s/${props.id}/images`;
     try {
       const response = await axios.post(url, formData, config);
       setImages(response.data);
       setNewImages([]);
       setRemovedImages([]);
+      const selectedImage = response.data.filter(
+        (img: {selected: boolean}) => img.selected
+      )[0];
+      if (selectedImage) {
+        setSelected(selectedImage.id);
+      }
       setNotification({type: 'info', message: 'Successfully saved images.'});
     } catch (e) {
       setNotification({type: 'error', message: 'Error saving images.'});
@@ -79,6 +90,9 @@ function ImagesForm(props: Props) {
       {images.map((row: ImageInterface) => {
         return (
           <div key={`image-${row.id}`}>
+            {selected !== row.id && (
+              <button onClick={() => setSelected(row.id)}>Set selected</button>
+            )}
             <img src={row.imageUrl} alt={`alt-${row.imageUrl}`} width='100' />
             <button
               onClick={() => {
