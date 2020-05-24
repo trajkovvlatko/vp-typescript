@@ -11,7 +11,7 @@ function Location(props: Props) {
   }
 
   return (
-    <div>
+    <div className='location'>
       <select value={props.value} onChange={handleChange}>
         <option value='sweden'>Sweden</option>
         <option value='norway'>Norway</option>

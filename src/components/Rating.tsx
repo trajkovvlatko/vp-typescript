@@ -6,7 +6,7 @@ interface Props {
 
 function Rating(props: Props) {
   return (
-    <div>
+    <div className='rating'>
       {[...Array(props.stars)].map((e, i) => (
         <span key={`star-${i}`} className='star'>
           ★

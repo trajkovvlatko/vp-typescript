@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import './variables.scss';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-family;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: $header-font-size;
+  font-weight: 700;
+}
+
+div,
+ul,
+li,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.type .active {
+  color: red;
+  font-weight: bold;
+}
+
+.result-item {
+  display: inline-block;
+  width: 100px;
+}
+
+.bookings .list {
+  display: none;
+}
+
+.bookings .list.active {
+  display: block;
+}
+
+.upcoming-bookings .accepted,
+.upcoming-bookings .accepted a {
+  background-color: green;
+  color: white;
+}
+
+.upcoming-bookings .canceled,
+.upcoming-bookings .canceled a {
+  background-color: red;
+  color: white;
+}
+
+.main {
+  width: 100%;
+}
+
+.container {
+  background-color: #fff;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  @include flex;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  list-style: none;
+}

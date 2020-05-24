@@ -1,0 +1,14 @@
+@import './variables.scss';
+
+button.button {
+  font-size: $button-font-size;
+  color: $font-color;
+
+  &.primary {
+    background-color: $primary-color;
+  }
+
+  &.secondary {
+    background-color: $secondary-color;
+  }
+}

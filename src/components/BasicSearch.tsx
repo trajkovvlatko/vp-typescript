@@ -5,6 +5,8 @@ import Type from './Type';
 import Location from './Location';
 import {withRouter} from 'react-router-dom';
 
+import '../styles/components/BasicSearch.scss';
+
 interface StateInterface {
   type: string;
   location: string;
@@ -17,7 +19,7 @@ interface UpdateStateInterface {
 
 function BasicSearch(props: RouteComponentProps) {
   const [state, setState] = useState<StateInterface>({
-    type: 'performer',
+    type: 'Performer',
     location: 'sweden',
   });
 
@@ -25,23 +27,19 @@ function BasicSearch(props: RouteComponentProps) {
     setState({...state, ...data});
   }
 
-  function onSearch() {
-    props.history.push(`/search/${state.type}/${state.location}`);
+  function onSearch(data: UpdateStateInterface) {
+    props.history.push(`/search/${state.type.toLowerCase()}/${data.location}`);
   }
 
   return (
-    <div>
-      <h2>Basic search</h2>
-      I'm looking for a:
+    <div className='basic-search'>
       <Type
-        value='performer'
-        active={state.type === 'performer'}
+        value='Performer'
+        active={state.type === 'Performer'}
         onClick={update}
       />
-      <Type value='venue' active={state.type === 'venue'} onClick={update} />
-      in:
-      <Location value={state.location} onChange={update} />
-      <button onClick={onSearch}>Search</button>
+      <Type value='Venue' active={state.type === 'Venue'} onClick={update} />
+      <Location value={state.location} onChange={onSearch} />
     </div>
   );
 }

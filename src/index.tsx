@@ -29,8 +29,7 @@ import BookingsContext from 'contexts/BookingsContext';
 
 import UpcomingBookingInterface from 'interfaces/UpcomingBookingInterface';
 
-import 'styles/index.css';
-import 'styles/App.css';
+import 'styles/App.scss';
 
 import * as serviceWorker from 'serviceWorker';
 import Header from 'components/Header';
@@ -42,67 +41,80 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{user, setUser}}>
-        <Header />
+      <div className='main'>
+        <div className='container'>
+          <UserContext.Provider value={{user, setUser}}>
+            <Header />
 
-        <NotificationContext.Provider value={{notification, setNotification}}>
-          <BookingsContext.Provider value={{bookings, setBookings}}>
-            <Notification />
+            <NotificationContext.Provider
+              value={{notification, setNotification}}
+            >
+              <BookingsContext.Provider value={{bookings, setBookings}}>
+                <Notification />
 
-            <WithUser>
-              <BookingsList />
-            </WithUser>
+                <WithUser>
+                  <BookingsList />
+                </WithUser>
 
-            <Switch>
-              <Route exact path='/' component={FrontPage} />
-              <Route
-                path='/search/:type/:location/:ids?'
-                component={SearchPage}
-              />
-              <Route path='/performers/:id' component={PerformerPage} />
-              <Route path='/venues/:id' component={VenuePage} />
-              <Route exact path='/login' component={LoginPage} />
-              <Route exact path='/register' component={RegisterPage} />
-              <Route
-                exact
-                path='/bookings/:id'
-                render={({match}) => (
-                  <BookingPage match={match} key={match.params.id} />
-                )}
-              />
-              <WithUser>
-                <React.Fragment>
-                  <Route exact path='/user' component={UserPage} />
+                <Switch>
+                  <Route exact path='/' component={FrontPage} />
+                  <Route
+                    path='/search/:type/:location/:ids?'
+                    component={SearchPage}
+                  />
+                  <Route path='/performers/:id' component={PerformerPage} />
+                  <Route path='/venues/:id' component={VenuePage} />
+                  <Route exact path='/login' component={LoginPage} />
+                  <Route exact path='/register' component={RegisterPage} />
                   <Route
                     exact
-                    path='/user/profile'
-                    component={UserProfilePage}
+                    path='/bookings/:id'
+                    render={({match}) => (
+                      <BookingPage match={match} key={match.params.id} />
+                    )}
                   />
-                  <Route
-                    exact
-                    path='/user/performers'
-                    component={UserPerformersPage}
-                  />
-                  <Route exact path='/user/venues' component={UserVenuesPage} />
-                  <Route
-                    path='/user/performers/:id/edit'
-                    component={UserPerformerPage}
-                  />
-                  <Route
-                    path='/user/performers/new'
-                    component={UserPerformerPage}
-                  />
-                  <Route
-                    path='/user/venues/:id/edit'
-                    component={UserVenuePage}
-                  />
-                  <Route path='/user/venues/new' component={UserVenuePage} />
-                </React.Fragment>
-              </WithUser>
-            </Switch>
-          </BookingsContext.Provider>
-        </NotificationContext.Provider>
-      </UserContext.Provider>
+                  <WithUser>
+                    <React.Fragment>
+                      <Route exact path='/user' component={UserPage} />
+                      <Route
+                        exact
+                        path='/user/profile'
+                        component={UserProfilePage}
+                      />
+                      <Route
+                        exact
+                        path='/user/performers'
+                        component={UserPerformersPage}
+                      />
+                      <Route
+                        exact
+                        path='/user/venues'
+                        component={UserVenuesPage}
+                      />
+                      <Route
+                        path='/user/performers/:id/edit'
+                        component={UserPerformerPage}
+                      />
+                      <Route
+                        path='/user/performers/new'
+                        component={UserPerformerPage}
+                      />
+                      <Route
+                        path='/user/venues/:id/edit'
+                        component={UserVenuePage}
+                      />
+                      <Route
+                        path='/user/venues/new'
+                        component={UserVenuePage}
+                      />
+                    </React.Fragment>
+                  </WithUser>
+                </Switch>
+              </BookingsContext.Provider>
+            </NotificationContext.Provider>
+          </UserContext.Provider>
+        </div>
+      </div>
     </BrowserRouter>
   );
 };

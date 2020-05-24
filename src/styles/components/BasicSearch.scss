@@ -1,0 +1,32 @@
+@import '../variables.scss';
+
+.basic-search {
+  .type {
+    display: inline-block;
+
+    button {
+      border: 0 none;
+      background-color: #ffffff;
+      color: $font-color;
+      font-size: $subheader-font-size;
+      cursor: pointer;
+      padding: 0;
+      padding-right: 40px;
+
+      &.active,
+      &:hover {
+        color: $primary-color;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .location {
+    padding-top: 20px;
+
+    select {
+      width: 80%;
+      height: 30px;
+    }
+  }
+}
