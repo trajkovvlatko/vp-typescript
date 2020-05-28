@@ -15,7 +15,9 @@ function SwitchNavLink(props: Props) {
   const {to, current, label} = props;
   return (
     <>
-      {(to === current && <span>{label}</span>) || (
+      {(to === current && (
+        <span className='nav-link disabled'>{label}</span>
+      )) || (
         <NavLink className={`nav-link ${type}`} exact to={to}>
           {label}
         </NavLink>

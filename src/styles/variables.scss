@@ -1,6 +1,8 @@
 $font-family: 'Lato', sans-serif;
 $font-color: #4e4d58;
 
+$background-color: #E9E9E9;
+
 $primary-color: #5e53d4;
 $secondary-color: #ffffff;
 $highlight-color: #eabb17;
@@ -8,6 +10,8 @@ $highlight-color: #eabb17;
 $header-font-size: 32px;
 $subheader-font-size: 18px;
 $button-font-size: 16px;
+
+$input-border-color: #e5e5e5;
 
 @mixin flex {
   display: flex;

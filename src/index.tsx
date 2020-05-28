@@ -45,7 +45,6 @@ const App: React.FC = () => {
         <div className='container'>
           <UserContext.Provider value={{user, setUser}}>
             <Header />
-
             <NotificationContext.Provider
               value={{notification, setNotification}}
             >
@@ -115,6 +114,7 @@ const App: React.FC = () => {
           </UserContext.Provider>
         </div>
       </div>
+      <div className='footer'></div>
     </BrowserRouter>
   );
 };
