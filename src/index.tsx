@@ -32,7 +32,7 @@ import UpcomingBookingInterface from 'interfaces/UpcomingBookingInterface';
 import 'styles/App.scss';
 
 import * as serviceWorker from 'serviceWorker';
-import Header from 'components/Header';
+import Header from 'components/headers/Switch';
 
 const App: React.FC = () => {
   const [user, setUser] = useLocalStorage('vp-user', {});

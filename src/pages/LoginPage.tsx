@@ -5,7 +5,7 @@ import axios from 'axios';
 import {useState, useContext} from 'react';
 import UserContext from 'contexts/UserContext';
 
-import '../styles/pages/LoginPage.scss';
+import '../styles/Auth.scss';
 
 const host = process.env.REACT_APP_API_HOST;
 let email = '',
@@ -54,29 +54,32 @@ function LoginPage(props: RouteComponentProps) {
   return (
     <div className='login-page container'>
       <div className='row center'>
-        <div className='col-8'>
-          <h1>Welcome back!</h1>
+        <div className='col-8 content'>
+          <h2>Welcome back!</h2>
           <p className='form-group'>Sign in to your account</p>
 
           {data.error && <div className='error-message'>{data.message}</div>}
 
-          <div className='form-group col-8 center'>
-            <input
-              type='email'
-              id='email'
-              onChange={(e) => (email = e.target.value)}
-              placeholder='Email'
-            />
+          <div className='form-groups col-6 center'>
+            <div className='form-group'>
+              <input
+                type='email'
+                id='email'
+                onChange={(e) => (email = e.target.value)}
+                placeholder='Email'
+              />
+            </div>
+
+            <div className='form-group'>
+              <input
+                type='password'
+                id='password'
+                onChange={(e) => (password = e.target.value)}
+                placeholder='Password'
+              />
+            </div>
           </div>
 
-          <div className='form-group col-8 center'>
-            <input
-              type='password'
-              id='password'
-              onChange={(e) => (password = e.target.value)}
-              placeholder='Password'
-            />
-          </div>
           <div className='form-group row'>
             <div className='center'>
               <button onClick={onLogin} className='nav-link primary'>
@@ -86,10 +89,9 @@ function LoginPage(props: RouteComponentProps) {
           </div>
         </div>
 
-        <div className='col-4 with-background right'>
-          <h1>Join us</h1>
+        <div className='col-4 with-background sidebar'>
+          <h2>Join us</h2>
           <p>Not a member yet?</p>
-
           <p>
             Create an account to VP and find the best performer or a venue for
             tonight.

@@ -10,7 +10,7 @@ interface Props {
 function PromoItem(props: Props) {
   const {id, name, imageUrl, rating, type} = props.data;
   return (
-    <div className='promo-item'>
+    <div className='col col-4 promo-item'>
       <img src={imageUrl} alt={name} />
       <p>{name}</p>
       <Rating stars={parseInt(rating)} />

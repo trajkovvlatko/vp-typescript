@@ -1,8 +1,10 @@
 import React from 'react';
-import {RouteComponentProps} from 'react-router-dom';
+import {RouteComponentProps, NavLink} from 'react-router-dom';
 
 import axios from 'axios';
 import {useState} from 'react';
+
+import '../styles/Auth.scss';
 
 const host = process.env.REACT_APP_API_HOST;
 let email = '',
@@ -54,45 +56,66 @@ function RegisterPage(props: RouteComponentProps) {
   }
 
   return (
-    <div>
-      <h1>Register Page</h1>
+    <div className='register-page'>
+      <div className='row center'>
+        <div className='col-4 with-background sidebar'>
+          <h2>Already registered?</h2>
 
-      {data.error && data.message}
+          <p>Login to your account to continue using VP</p>
 
-      <div className='form-group'>
-        <label htmlFor='name'>Name:</label>
-        <input
-          type='name'
-          id='name'
-          onChange={(e) => (name = e.target.value)}
-        />
-      </div>
-      <div className='form-group'>
-        <label htmlFor='email'>Email:</label>
-        <input
-          type='email'
-          id='email'
-          onChange={(e) => (email = e.target.value)}
-        />
-      </div>
-      <div className='form-group'>
-        <label htmlFor='password'>Password:</label>
-        <input
-          type='password'
-          id='password'
-          onChange={(e) => (password = e.target.value)}
-        />
-      </div>
-      <div className='form-group'>
-        <label htmlFor='confirm-password'>Password:</label>
-        <input
-          type='password'
-          id='confirm-password'
-          onChange={(e) => (confirmPassword = e.target.value)}
-        />
-      </div>
-      <div className='form-group'>
-        <button onClick={onRegister}>Register</button>
+          <NavLink className='nav-link primary' to='/login'>
+            Login
+          </NavLink>
+        </div>
+
+        <div className='col-8 content'>
+          <h2>Register to VP</h2>
+          <p className='form-group'>
+            Create an account for your performer or venue
+          </p>
+
+          {data.error && data.message}
+
+          <div className='form-groups col-6 center'>
+            <div className='form-group'>
+              <input
+                type='text'
+                id='name'
+                onChange={(e) => (name = e.target.value)}
+                placeholder='Name'
+              />
+            </div>
+            <div className='form-group'>
+              <input
+                type='email'
+                id='email'
+                onChange={(e) => (email = e.target.value)}
+                placeholder='Email'
+              />
+            </div>
+            <div className='form-group'>
+              <input
+                type='password'
+                id='password'
+                onChange={(e) => (password = e.target.value)}
+                placeholder='Password'
+              />
+            </div>
+            <div className='form-group'>
+              <input
+                type='password'
+                id='confirm-password'
+                onChange={(e) => (confirmPassword = e.target.value)}
+                placeholder='Confirm password'
+              />
+            </div>
+          </div>
+          <div className='form-group'>
+            <button onClick={onRegister} className='nav-link primary'>
+              Register
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

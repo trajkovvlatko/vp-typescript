@@ -25,7 +25,7 @@ function PromoList(props: Props) {
   return (
     <div className='promo-list'>
       <h1>{props.title}</h1>
-      <div className='promo-items'>
+      <div className='promo-items row'>
         {results.map((row: PromoItemInterface) => (
           <PromoItem data={row} key={`promo-item-${row.id}`} />
         ))}

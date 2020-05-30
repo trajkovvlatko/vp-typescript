@@ -1,14 +1,6 @@
 @import '../variables.scss';
 
 .front-page {
-  .top-container {
-    @include flex;
-
-    > div {
-      width: 100%;
-    }
-  }
-
   .promo-list {
     margin-top: 50px;
 
@@ -17,14 +9,9 @@
     }
 
     .promo-items {
-      @include flex;
-      max-width: 80%;
       margin: 0 auto;
 
       .promo-item {
-        padding-left: 10px;
-        padding-right: 10px;
-
         p {
           font-size: $button-font-size;
           color: $font-color;

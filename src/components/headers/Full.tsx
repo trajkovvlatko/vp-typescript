@@ -1,10 +1,11 @@
 import React from 'react';
-import {useLocation, NavLink} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import UserContext from 'contexts/UserContext';
 import {useLocalStorage} from 'hooks/useLocalStorage';
-import SwitchNavLink from './ui/SwitchNavLink';
+import SwitchNavLink from '../ui/SwitchNavLink';
+import Logo from '../Logo';
 
-function Header() {
+function FullHeader() {
   const {user, setUser} = React.useContext(UserContext);
   const arr = useLocalStorage('vp-user', {});
   const setLocalStorageValue = arr[1];
@@ -16,14 +17,12 @@ function Header() {
   }
 
   return (
-    <div className='header'>
-      <div className='logo'>
-        <NavLink to='/'>
-          <img src='/images/logo.svg' alt='logo' />
-        </NavLink>
+    <div className='full-header row'>
+      <div className='col col-1'>
+        <Logo />
       </div>
 
-      <ul className='menu'>
+      <ul className='col col-11 right menu'>
         {(user.token && (
           <>
             <li>
@@ -55,4 +54,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default FullHeader;

@@ -7,12 +7,12 @@ import '../styles/pages/FrontPage.scss';
 function FrontPage() {
   return (
     <div className='front-page'>
-      <div className='top-container'>
-        <div>
+      <div className='row'>
+        <div className='col-6'>
           <h1>Lorem ipsum dolor sit</h1>
           <BasicSearch />
         </div>
-        <div>
+        <div className='col-6 hidden-sm'>
           <img src='/images/poster.png' alt='poster' />
         </div>
       </div>
