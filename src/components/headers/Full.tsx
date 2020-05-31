@@ -18,7 +18,7 @@ function FullHeader() {
 
   return (
     <div className='full-header row'>
-      <div className='col col-1'>
+      <div className='col col-1 col-1-sm'>
         <Logo />
       </div>
 

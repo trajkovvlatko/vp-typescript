@@ -21,7 +21,7 @@ function Properties(props: Props) {
     return <div>Error while fetching data.</div>;
   }
 
-  let selected = props.values.map(g => parseInt(g));
+  let selected = props.values.map((g) => parseInt(g));
 
   function onChange(strValue: string, checked: boolean) {
     const value: number = parseInt(strValue);
@@ -29,7 +29,7 @@ function Properties(props: Props) {
     if (checked) {
       newProperties = [...newProperties, value];
     } else {
-      newProperties = selected.filter(g => g !== value);
+      newProperties = selected.filter((g) => g !== value);
     }
     selected = newProperties;
     props.onChange({ids: newProperties});
@@ -37,6 +37,7 @@ function Properties(props: Props) {
 
   return (
     <div>
+      <h4>Properties</h4>
       {results.map((property: PropertyInterface) => (
         <Property
           checked={selected.indexOf(property.id) > -1}

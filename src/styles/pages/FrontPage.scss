@@ -10,24 +10,6 @@
 
     .promo-items {
       margin: 0 auto;
-
-      .promo-item {
-        p {
-          font-size: $button-font-size;
-          color: $font-color;
-          font-weight: 700;
-        }
-
-        img {
-          width: 100%;
-        }
-
-        .rating {
-          color: $highlight-color;
-          padding-top: 5px;
-          padding-bottom: 10px;
-        }
-      }
     }
   }
 }

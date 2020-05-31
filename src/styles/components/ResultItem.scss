@@ -1,0 +1,27 @@
+@import '../variables.scss';
+
+.result-item {
+  padding-bottom: 40px;
+
+  p {
+    font-size: $button-font-size;
+    color: $font-color;
+    font-weight: 700;
+    padding-bottom: 8px;
+    @include ellipsis;
+  }
+
+  img {
+    width: 100%;
+    padding-bottom: 8px;
+  }
+
+  .rating {
+    padding-bottom: 8px;
+  }
+
+  .star {
+    color: $highlight-color;
+    padding-top: 5px;
+  }
+}

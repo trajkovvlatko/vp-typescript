@@ -21,7 +21,7 @@ function Genres(props: Props) {
     return <div>Error while fetching data.</div>;
   }
 
-  let selected: number[] = props.values.map(g => parseInt(g));
+  let selected: number[] = props.values.map((g) => parseInt(g));
 
   function onChange(strValue: string, checked: boolean) {
     const value = parseInt(strValue);
@@ -29,7 +29,7 @@ function Genres(props: Props) {
     if (checked) {
       newGenres = [...newGenres, value];
     } else {
-      newGenres = selected.filter(g => g !== value);
+      newGenres = selected.filter((g) => g !== value);
     }
     selected = newGenres;
     props.onChange({ids: newGenres});
@@ -37,6 +37,7 @@ function Genres(props: Props) {
 
   return (
     <div>
+      <h4>Genres</h4>
       {results.map((genre: GenreInterface) => (
         <Genre
           checked={selected.indexOf(genre.id) > -1}

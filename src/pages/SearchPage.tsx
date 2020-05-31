@@ -5,6 +5,8 @@ import Filters from 'components/Filters';
 import Results from 'components/Results';
 import {withRouter} from 'react-router-dom';
 
+import '../styles/pages/SearchPage.scss';
+
 interface Filters {
   type: string;
   location: string;
@@ -34,13 +36,13 @@ function SearchPage(props: RouteComponentProps<TParams>) {
   }
 
   return (
-    <div>
-      <h1>Search Page</h1>
-      <div>
+    <div className='row'>
+      <div className='col col-2 search-sidebar'>
         <Filters filters={filters} onChange={search} />
       </div>
-      -----------------
-      <Results filters={filters} />
+      <div className='col col-10 search-results'>
+        <Results filters={filters} />
+      </div>
     </div>
   );
 }

@@ -10,6 +10,7 @@ $disabled-color: #cccccc;
 
 $header-font-size: 32px;
 $subheader-font-size: 18px;
+$h4-font-size: 14px;
 $button-font-size: 16px;
 
 $input-border-color: #e5e5e5;
@@ -24,4 +25,10 @@ $breakpoint-large: 60em; // 960px
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+}
+
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

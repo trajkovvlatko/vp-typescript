@@ -25,6 +25,16 @@ h2 {
   margin: 0;
 }
 
+h3 {
+  font-size: $subheader-font-size;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: $h4-font-size;
+  font-weight: bold;
+}
+
 div,
 ul,
 li,
@@ -68,9 +78,9 @@ input[type="url"] {
   font-weight: bold;
 }
 
-.result-item {
-  display: inline-block;
-  width: 100px;
+.ruler {
+  border-bottom: 1px solid $background-color;
+  margin-top: 20px;
 }
 
 .bookings .list {
@@ -118,6 +128,10 @@ input[type="url"] {
   padding-bottom: 15px;
   margin-left: 50px;
   margin-top: 25px;
+}
+
+.logo img {
+  width: 65px;
 }
 
 .menu {

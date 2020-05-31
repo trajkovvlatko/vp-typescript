@@ -36,12 +36,12 @@ function Results(props: Props) {
 
   return (
     <div>
-      <h3>Results</h3>
+      <h3 className='col-12'>{results.length} results</h3>
       <div className='results'>
         {results.map((row: ResultInterface) => (
           <ResultItem
             data={row}
-            type={filters.type}
+            sizeClass='col-3'
             key={`result-item-${row.id}`}
           />
         ))}

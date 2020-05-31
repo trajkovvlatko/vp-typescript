@@ -10,12 +10,18 @@ interface Props {
   onChange: (data: {}) => void;
 }
 
-const Filters: React.FC<Props> = props => {
+const Filters: React.FC<Props> = (props) => {
   return (
     <div>
-      <h1>Filters</h1>
+      <h4>Type</h4>
+
       <TypeDropDown value={props.filters.type} onChange={props.onChange} />
+      <div className='ruler'></div>
+
+      <h4>Location</h4>
       <Location value={props.filters.location} onChange={props.onChange} />
+      <div className='ruler'></div>
+
       {(props.filters.type === 'performer' && (
         <Genres values={props.filters.ids} onChange={props.onChange} />
       )) || <Properties values={props.filters.ids} onChange={props.onChange} />}

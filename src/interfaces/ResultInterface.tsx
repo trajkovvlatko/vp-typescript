@@ -1,6 +1,9 @@
+import ImageInterface from 'interfaces/ImageInterface';
+
 export default interface ResultInterface {
   id: number;
   name: string;
-  image: string;
+  imageUrl: string;
   rating: string;
+  type: string;
 }

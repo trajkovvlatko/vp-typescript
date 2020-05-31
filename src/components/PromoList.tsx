@@ -1,7 +1,7 @@
 import React from 'react';
-import PromoItem from './PromoItem';
+import ResultItem from './ResultItem';
 import {useFetch} from 'hooks/useFetch';
-import PromoItemInterface from 'interfaces/PromoItemInterface';
+import ResultInterface from 'interfaces/ResultInterface';
 
 interface Props {
   title: string;
@@ -26,8 +26,12 @@ function PromoList(props: Props) {
     <div className='promo-list'>
       <h1>{props.title}</h1>
       <div className='promo-items row'>
-        {results.map((row: PromoItemInterface) => (
-          <PromoItem data={row} key={`promo-item-${row.id}`} />
+        {results.map((row: ResultInterface) => (
+          <ResultItem
+            data={row}
+            sizeClass='col-4'
+            key={`promo-item-${row.id}`}
+          />
         ))}
       </div>
     </div>
