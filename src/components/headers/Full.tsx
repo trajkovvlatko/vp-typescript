@@ -2,6 +2,7 @@ import React from 'react';
 import {useLocation} from 'react-router-dom';
 import UserContext from 'contexts/UserContext';
 import {useLocalStorage} from 'hooks/useLocalStorage';
+import BookingsList from 'components/user/bookings/List';
 import SwitchNavLink from '../ui/SwitchNavLink';
 import Logo from '../Logo';
 
@@ -25,11 +26,12 @@ function FullHeader() {
       <ul className='col col-11 right menu'>
         {(user.token && (
           <>
+            <BookingsList />
             <li>
               <SwitchNavLink to='/user' current={current} label='User' />
             </li>
             <li>
-              <div className='logout' onClick={logout}>
+              <div className='logout nav-link' onClick={logout}>
                 Logout
               </div>
             </li>

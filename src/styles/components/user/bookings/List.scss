@@ -1,0 +1,14 @@
+@import '../../../variables.scss';
+
+.bookings {
+  position: relative;
+  .list {
+    position: absolute;
+    background-color: white;
+    padding: 20px;
+    z-index: 1000;
+    border: 1px solid $input-border-color;
+    width: 175px;
+    margin-left: -130px;
+  }
+}

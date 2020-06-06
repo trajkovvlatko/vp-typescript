@@ -4,6 +4,13 @@ import BookingItem from './Item';
 import UserContext from 'contexts/UserContext';
 import BookingsContext from 'contexts/BookingsContext';
 import BookingItemInterface from 'interfaces/BookingItemInterface';
+import {
+  NotificationsOutlined,
+  NotificationsActiveOutlined,
+} from '@material-ui/icons';
+
+import '../../../styles/components/user/bookings/List.scss';
+
 const host = process.env.REACT_APP_API_HOST;
 
 function BookingsList() {
@@ -18,7 +25,7 @@ function BookingsList() {
     setBookings(results);
   }, [results, setBookings]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <></>;
   if (error) return <div>Error while fetching data.</div>;
 
   const showBookingsList = () => {
@@ -27,7 +34,12 @@ function BookingsList() {
 
   return (
     <div className='bookings'>
-      <button onClick={showBookingsList}>Booking requests</button>
+      <div className='nav-link' onClick={showBookingsList}>
+        {(bookings.length > 0 && (
+          <NotificationsActiveOutlined></NotificationsActiveOutlined>
+        )) || <NotificationsOutlined></NotificationsOutlined>}
+      </div>
+
       <div className={`list ${active ? 'active' : ''}`}>
         {(bookings.length > 0 && (
           <ul>

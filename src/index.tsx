@@ -19,7 +19,6 @@ import UserVenuesPage from 'pages/user/UserVenuesPage';
 import UserVenuePage from 'pages/user/UserVenuePage';
 
 import WithUser from 'components/WithUser';
-import BookingsList from 'components/user/bookings/List';
 import Notification from 'components/Notification';
 
 import {useLocalStorage} from 'hooks/useLocalStorage';
@@ -50,10 +49,6 @@ const App: React.FC = () => {
             >
               <BookingsContext.Provider value={{bookings, setBookings}}>
                 <Notification />
-
-                <WithUser>
-                  <BookingsList />
-                </WithUser>
 
                 <Switch>
                   <Route exact path='/' component={FrontPage} />
