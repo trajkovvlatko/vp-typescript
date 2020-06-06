@@ -14,6 +14,8 @@ body {
 h1 {
   font-size: $header-font-size;
   font-weight: 700;
+  margin: 0;
+  line-height: 1;
 }
 
 h2 {
@@ -63,6 +65,15 @@ input[type="url"] {
   padding-left: 10px;
   font-size: 14px;
   box-sizing: border-box;
+}
+
+a {
+  text-decoration: underline;
+  color: $primary-color;
+}
+
+.clear-both {
+  clear: both;
 }
 
 .with-background {
@@ -144,4 +155,13 @@ input[type="url"] {
 
 .footer {
   height: 60px;
+}
+
+.rating {
+  padding-bottom: 8px;
+
+  .star {
+    color: $highlight-color;
+    padding-top: 5px;
+  }
 }

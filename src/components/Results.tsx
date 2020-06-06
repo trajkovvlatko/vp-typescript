@@ -35,7 +35,7 @@ function Results(props: Props) {
   }
 
   return (
-    <div>
+    <>
       <h3 className='col-12'>{results.length} results</h3>
       <div className='results'>
         {results.map((row: ResultInterface) => (
@@ -46,7 +46,7 @@ function Results(props: Props) {
           />
         ))}
       </div>
-    </div>
+    </>
   );
 }
 

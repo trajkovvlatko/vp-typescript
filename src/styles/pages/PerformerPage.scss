@@ -1,0 +1,31 @@
+@import '../variables.scss';
+
+.performer {
+  .meta {
+    background-color: $secondary-background-color;
+    padding: 20px;
+
+    div {
+      line-height: 2;
+      font-size: 14px;
+    }
+
+    .genres-list {
+      overflow: auto;
+      li {
+        float: left;
+        margin-right: 22px;
+
+        &:first-child {
+          list-style-type: none;
+        }
+      }
+    }
+  }
+
+  .booking-form {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid $primary-color;
+  }
+}

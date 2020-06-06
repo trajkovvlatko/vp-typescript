@@ -14,14 +14,15 @@ function ResultItem(props: Props) {
   const {id, name, imageUrl, rating, type} = props.data;
 
   return (
-    <div className={`col ${props.sizeClass} result-item`}>
+    <Link
+      to={`/${type}s/${id}`}
+      className={`col ${props.sizeClass} result-item`}
+    >
       <img src={imageUrl} alt={name} />
       <p>{name}</p>
       <Rating stars={parseInt(rating)} />
-      <Link to={`/${type}s/${id}`} className='nav-link primary small'>
-        Book
-      </Link>
-    </div>
+      <button className='nav-link primary small'>Book</button>
+    </Link>
   );
 }
 

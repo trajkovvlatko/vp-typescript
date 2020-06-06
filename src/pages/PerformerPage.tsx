@@ -4,12 +4,15 @@ import {RouteComponentProps} from 'react-router-dom';
 import {useFetch} from 'hooks/useFetch';
 import {Link} from 'react-router-dom';
 import BookSelector from 'components/BookSelector';
+import Rating from 'components/Rating';
 
 import GenreInterface from 'interfaces/GenreInterface';
 import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
 import ImageInterface from 'interfaces/ImageInterface';
 import UserContext from 'contexts/UserContext';
 import BookingItemInterface from 'interfaces/BookingItemInterface';
+
+import '../styles/pages/PerformerPage.scss';
 
 type TParams = {id: string};
 
@@ -26,6 +29,10 @@ interface Performer {
   YoutubeLinks: YoutubeLinkInterface[];
   Bookings: BookingItemInterface[];
 }
+
+const toTitleCase = (term: string) => {
+  return term.charAt(0).toUpperCase() + term.slice(1);
+};
 
 function PerformerPage({match}: RouteComponentProps<TParams>) {
   const id = parseInt(match.params.id);
@@ -50,61 +57,88 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
   const image = performer.Images.filter((i) => i.selected)[0].imageUrl;
 
   return (
-    <div>
-      <h2>{performer.name}</h2>
-
-      {user.token ? (
+    <div className='row performer'>
+      <div className='col-8'>
+        <img src={image} alt={image} />
+        {performer.YoutubeLinks.map((yt: YoutubeLinkInterface) => {
+          return (
+            <iframe
+              title={yt.link}
+              key={yt.link}
+              width='560'
+              height='315'
+              src={yt.link}
+              frameBorder='0'
+              allow='accelerometer; autoplay; encrypted-media; gyroscope;'
+              allowFullScreen
+            />
+          );
+        })}
         <div>
-          {showBookSelector ? (
-            <BookSelector connectType='performer' connectId={performer.id} />
-          ) : (
-            <button onClick={onShowBookSelectorClick}>
-              Book this performer
-            </button>
-          )}
+          {performer.Images.map((img: {imageUrl: string}) => (
+            <img
+              width='150'
+              src={img.imageUrl}
+              key={img.imageUrl}
+              alt={img.imageUrl}
+            />
+          ))}
         </div>
-      ) : (
-        <Link to='/login'>Book</Link>
-      )}
+        <div>
+          {bookingsCount} {(bookingsCount > 1 && 'bookings') || 'booking'} so
+          far
+        </div>
+      </div>
+      <div className='col-4'>
+        <div className='meta'>
+          <h1>{performer.name}</h1>
+          <Rating stars={performer.rating} />
+          <div>Location: {toTitleCase(performer.location)}</div>
+          <br />
+          <div>
+            <Link to={performer.website} target='_blank'>
+              {performer.website}
+            </Link>
+          </div>
+          <div>
+            <Link to={`tel:${performer.phone}`}>{performer.phone}</Link>
+          </div>
 
-      <img src={image} alt={image} />
-      <div>Location: {performer.location}</div>
-      <div>
-        Phone: <a href={`tel:${performer.phone}`}>{performer.phone}</a>
+          <div>Add Email Here</div>
+
+          <br />
+
+          <div className='genres-list'>
+            <ul>
+              {performer.Genres.map((genre: GenreInterface) => {
+                return <li>{genre.name}</li>;
+              })}
+            </ul>
+          </div>
+
+          <div className='clear-both booking-form center'>
+            {user.token ? (
+              <div>
+                {showBookSelector ? (
+                  <BookSelector
+                    connectType='performer'
+                    connectId={performer.id}
+                  />
+                ) : (
+                  <button
+                    className='nav-link primary'
+                    onClick={onShowBookSelectorClick}
+                  >
+                    Book now
+                  </button>
+                )}
+              </div>
+            ) : (
+              <Link to='/login'>Book</Link>
+            )}
+          </div>
+        </div>
       </div>
-      <div>
-        Genres:{' '}
-        {performer.Genres.map((genre: GenreInterface) => genre.name).join(', ')}
-      </div>
-      <div>Website: {performer.website}</div>
-      {performer.YoutubeLinks.map((yt: YoutubeLinkInterface) => {
-        return (
-          <iframe
-            title={yt.link}
-            key={yt.link}
-            width='560'
-            height='315'
-            src={yt.link}
-            frameBorder='0'
-            allow='accelerometer; autoplay; encrypted-media; gyroscope;'
-            allowFullScreen
-          />
-        );
-      })}
-      <div>
-        {performer.Images.map((img: {imageUrl: string}) => (
-          <img
-            width='150'
-            src={img.imageUrl}
-            key={img.imageUrl}
-            alt={img.imageUrl}
-          />
-        ))}
-      </div>
-      <div>
-        {bookingsCount} {(bookingsCount > 1 && 'bookings') || 'booking'} so far
-      </div>
-      <div>Rating: {performer.rating}</div>
     </div>
   );
 }
