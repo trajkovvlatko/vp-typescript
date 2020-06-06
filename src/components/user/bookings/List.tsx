@@ -34,7 +34,7 @@ function BookingsList() {
 
   return (
     <div className='bookings'>
-      <div className='nav-link' onClick={showBookingsList}>
+      <div onClick={showBookingsList}>
         {(bookings.length > 0 && (
           <NotificationsActiveOutlined></NotificationsActiveOutlined>
         )) || <NotificationsOutlined></NotificationsOutlined>}

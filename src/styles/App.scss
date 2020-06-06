@@ -94,14 +94,6 @@ a {
   margin-top: 20px;
 }
 
-.bookings .list {
-  display: none;
-}
-
-.bookings .list.active {
-  display: block;
-}
-
 .upcoming-bookings .accepted,
 .upcoming-bookings .accepted a {
   background-color: green;
@@ -130,6 +122,47 @@ a {
   @include flex;
   padding-top: 15px;
   padding-bottom: 15px;
+
+  .user-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    width: 175px;
+    z-index: 1200;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+    padding-left: 20px;
+    margin-left: -74px;
+
+    &.active {
+      display: block;
+    }
+
+    li {
+      list-style: none;
+      display: block;
+      height: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      &:last-child {
+        border-top: 1px solid $separator-color;
+        cursor: pointer;
+        margin-right: 20px;
+        margin-top: 10px;
+      }
+    }
+
+    a, div {
+      color: $font-color;
+      text-decoration: none;
+      width: 100%;
+      display: inline-block;
+    }
+  }
 }
 
 .simple-header {
@@ -149,8 +182,29 @@ a {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: end;
+  justify-content: flex-end;
   list-style: none;
+  user-select: none;
+
+  > li {
+    > div {
+      cursor: pointer;
+    }
+
+    span {
+      vertical-align: top;
+      &:first-child {
+        padding-right: 10px;
+      }
+    }
+  }
+
+  .with-left-separator {
+    margin-left: 20px;
+    padding-left: 20px;
+    border-left: 1px solid $separator-color;
+    display: inline-block;
+  }
 }
 
 .footer {

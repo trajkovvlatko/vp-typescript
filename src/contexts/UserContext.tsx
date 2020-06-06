@@ -3,6 +3,7 @@ import React from 'react';
 interface UserContextInterface {
   user: {
     token?: string;
+    name?: string;
   };
   setUser: (data: {}) => void;
 }

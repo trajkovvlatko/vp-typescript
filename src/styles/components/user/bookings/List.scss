@@ -2,13 +2,20 @@
 
 .bookings {
   position: relative;
+
   .list {
+    display: none;
     position: absolute;
     background-color: white;
     padding: 20px;
     z-index: 1000;
     border: 1px solid $input-border-color;
     width: 175px;
-    margin-left: -130px;
+    margin-left: -170px;
+    border-radius: 6px;
+
+    &.active {
+      display: block;
+    }
   }
 }

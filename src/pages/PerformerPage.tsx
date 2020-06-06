@@ -75,11 +75,11 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
           );
         })}
         <div>
-          {performer.Images.map((img: {imageUrl: string}) => (
+          {performer.Images.map((img: ImageInterface) => (
             <img
               width='150'
               src={img.imageUrl}
-              key={img.imageUrl}
+              key={`performer-image-${img.id}`}
               alt={img.imageUrl}
             />
           ))}
@@ -111,7 +111,7 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
           <div className='genres-list'>
             <ul>
               {performer.Genres.map((genre: GenreInterface) => {
-                return <li>{genre.name}</li>;
+                return <li key={`genre-id-${genre.id}`}>{genre.name}</li>;
               })}
             </ul>
           </div>
