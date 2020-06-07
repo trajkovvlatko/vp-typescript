@@ -37,6 +37,15 @@ h4 {
   font-weight: bold;
 }
 
+h5 {
+  font-size: $h5-font-size;
+  font-weight: bold;
+  color: $primary-color;
+  text-transform: uppercase;
+  padding-top: 30px;
+  padding-bottom: 15px;
+}
+
 div,
 ul,
 li,

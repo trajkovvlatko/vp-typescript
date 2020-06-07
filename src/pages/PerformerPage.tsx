@@ -19,6 +19,7 @@ type TParams = {id: string};
 interface Performer {
   id: number;
   name: string;
+  details: string;
   image: string;
   location: string;
   phone: string;
@@ -54,52 +55,74 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
   }
 
   const bookingsCount = performer.Bookings.length;
-  const image = performer.Images.filter((i) => i.selected)[0].imageUrl;
+  let selectedImage: string = '';
+  let otherImages: string[] = [];
+  performer.Images.forEach((i) => {
+    if (i.selected) {
+      selectedImage = i.imageUrl;
+    } else {
+      otherImages.push(i.imageUrl);
+    }
+  });
 
   return (
     <div className='row performer'>
       <div className='col-8'>
-        <img src={image} alt={image} />
-        {performer.YoutubeLinks.map((yt: YoutubeLinkInterface) => {
-          return (
-            <iframe
-              title={yt.link}
-              key={yt.link}
-              width='560'
-              height='315'
-              src={yt.link}
-              frameBorder='0'
-              allow='accelerometer; autoplay; encrypted-media; gyroscope;'
-              allowFullScreen
-            />
-          );
-        })}
         <div>
-          {performer.Images.map((img: ImageInterface) => (
-            <img
-              width='150'
-              src={img.imageUrl}
-              key={`performer-image-${img.id}`}
-              alt={img.imageUrl}
-            />
-          ))}
+          <div className='col-8'>
+            <img src={selectedImage} alt='main' />
+          </div>
+          <div className='col-4'>
+            <img src={otherImages[0]} alt='side-1' />
+            <img src={otherImages[1]} alt='side-2' />
+          </div>
         </div>
-        <div>
-          {bookingsCount} {(bookingsCount > 1 && 'bookings') || 'booking'} so
-          far
+
+        <div className='clear-both'></div>
+
+        <h5 className='col-12'>About the performer</h5>
+
+        <div className='col-12 details'>{performer.details}</div>
+
+        <h5 className='col-12'>Videos</h5>
+
+        <div className='clear-both videos'>
+          {performer.YoutubeLinks.map((yt: YoutubeLinkInterface) => {
+            return (
+              <div className='col-4'>
+                <iframe
+                  title={yt.link}
+                  key={yt.link}
+                  src={yt.link}
+                  frameBorder='0'
+                  allow='encrypted-media; picture-in-picture'
+                  allowFullScreen
+                ></iframe>
+              </div>
+            );
+          })}
         </div>
       </div>
       <div className='col-4'>
         <div className='meta'>
           <h1>{performer.name}</h1>
+
           <Rating stars={performer.rating} />
+
+          <div>
+            {bookingsCount} {(bookingsCount > 1 && 'bookings') || 'booking'} so
+            far
+          </div>
+
           <div>Location: {toTitleCase(performer.location)}</div>
           <br />
+
           <div>
             <Link to={performer.website} target='_blank'>
               {performer.website}
             </Link>
           </div>
+
           <div>
             <Link to={`tel:${performer.phone}`}>{performer.phone}</Link>
           </div>
