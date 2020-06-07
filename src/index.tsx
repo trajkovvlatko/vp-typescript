@@ -17,6 +17,7 @@ import UserPerformersPage from 'pages/user/UserPerformersPage';
 import UserPerformerPage from 'pages/user/UserPerformerPage';
 import UserVenuesPage from 'pages/user/UserVenuesPage';
 import UserVenuePage from 'pages/user/UserVenuePage';
+import UserHeader from 'components/user/UserHeader';
 
 import WithUser from 'components/WithUser';
 import Notification from 'components/Notification';
@@ -68,7 +69,8 @@ const App: React.FC = () => {
                     )}
                   />
                   <WithUser>
-                    <React.Fragment>
+                    <>
+                      <UserHeader />
                       <Route exact path='/user' component={UserPage} />
                       <Route
                         exact
@@ -101,7 +103,7 @@ const App: React.FC = () => {
                         path='/user/venues/new'
                         component={UserVenuePage}
                       />
-                    </React.Fragment>
+                    </>
                   </WithUser>
                 </Switch>
               </BookingsContext.Provider>

@@ -1,0 +1,31 @@
+@import '../../variables.scss';
+
+.user-header {
+  border-top: 1px solid $separator-color;
+  border-bottom: 1px solid $separator-color;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  ul {
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      padding-right: 35px;
+      color: $primary-color;
+
+      a {
+        svg, span {
+          display: inline-block;
+        }
+
+        span {
+          vertical-align: super;
+          padding-left: 10px;
+        }
+      }
+    }
+  }
+}

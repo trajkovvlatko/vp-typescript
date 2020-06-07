@@ -35,7 +35,7 @@ function BookSelector(props: Props) {
     setSelectedId(parseInt(e.target.value));
   }
 
-  function sendBookingRequest() {
+  async function sendBookingRequest() {
     if (!selectedId) {
       return setNotification({
         type: 'error',
@@ -50,7 +50,7 @@ function BookSelector(props: Props) {
     };
 
     try {
-      axios.post(
+      await axios.post(
         `${host}/user/bookings/${date}/${selectedType}/${selectedId}/${props.connectType}/${props.connectId}`,
         {},
         config

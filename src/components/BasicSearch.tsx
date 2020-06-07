@@ -20,7 +20,7 @@ interface UpdateStateInterface {
 function BasicSearch(props: RouteComponentProps) {
   const [state, setState] = useState<StateInterface>({
     type: 'Performer',
-    location: 'sweden',
+    location: '',
   });
 
   function update(data: UpdateStateInterface) {
@@ -28,6 +28,9 @@ function BasicSearch(props: RouteComponentProps) {
   }
 
   function onSearch(data: UpdateStateInterface) {
+    if (data.location === '') {
+      return;
+    }
     props.history.push(`/search/${state.type.toLowerCase()}/${data.location}`);
   }
 

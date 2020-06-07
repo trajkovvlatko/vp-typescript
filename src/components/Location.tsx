@@ -13,6 +13,7 @@ function Location(props: Props) {
   return (
     <div className='location'>
       <select value={props.value} onChange={handleChange}>
+        <option value=''>Select a location</option>
         <option value='sweden'>Sweden</option>
         <option value='norway'>Norway</option>
         <option value='denmark'>Denmark</option>

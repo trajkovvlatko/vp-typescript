@@ -1,11 +1,18 @@
 import React, {useContext, useState, useEffect} from 'react';
+import axios from 'axios';
+
 import UserContext from 'contexts/UserContext';
 import NotificationContext from 'contexts/NotificationContext';
+
 import {useFetch} from 'hooks/useFetch';
+
 import UpcomingBookingItem from './UpcomingBookingItem';
 import UpcomingBookingInterface from 'interfaces/UpcomingBookingInterface';
-import axios from 'axios';
+
 import {getAuthHeader} from 'helpers/main';
+
+import '../../../styles/components/user/bookings/UpcomingBookings.scss';
+
 const host = process.env.REACT_APP_API_HOST;
 
 function UpcomingBookings() {
@@ -15,14 +22,12 @@ function UpcomingBookings() {
   const {error, loading, results} = useFetch(url, user.token);
   const [rows, setRows] = useState(results);
 
-  useEffect(() => {
-    setRows(results);
-  }, [results, setRows]);
+  useEffect(() => setRows(results), [results, setRows]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error while fetching data.</div>;
 
-  function cancel(id: number) {
+  async function cancel(id: number) {
     if (!window.confirm(`Do you want to cancel this request?`)) {
       return;
     }
@@ -35,26 +40,25 @@ function UpcomingBookings() {
     };
 
     const status = 'canceled';
-    axios
-      .patch(`${host}/user/bookings/${id}`, {status}, config)
-      .then(function (response) {
-        setNotification({type: 'info', message: 'Successfully sent.'});
-        const newRows = rows.map((row: UpcomingBookingInterface) => {
-          if (row.id === id) row.status = status;
-          return row;
-        });
-        setRows(newRows);
-      })
-      .catch(function (error) {
-        setNotification({type: 'info', message: 'Error while sending.'});
+    try {
+      await axios.patch(`${host}/user/bookings/${id}`, {status}, config);
+      setNotification({type: 'info', message: 'Successfully sent.'});
+      const newRows = rows.map((row: UpcomingBookingInterface) => {
+        if (row.id === id) row.status = status;
+        return row;
       });
+      setRows(newRows);
+    } catch (e) {
+      setNotification({type: 'info', message: 'Error while sending.'});
+    }
   }
 
   return (
-    <div>
-      <h2>Upcoming events</h2>
+    <div className='upcoming-bookings'>
+      <h2>Events</h2>
+
       {(rows.length > 0 && (
-        <ul className='upcoming-bookings'>
+        <ul>
           {rows.map((row: UpcomingBookingInterface) => {
             return (
               <UpcomingBookingItem
