@@ -9,7 +9,7 @@ import NotificationContext from 'contexts/NotificationContext';
 import UpcomingBookingInterface from 'interfaces/UpcomingBookingInterface';
 const host = process.env.REACT_APP_API_HOST;
 
-function BookingPage({match}: any, key: any) {
+function UserBookingPage({match}: any, key: any) {
   const id = parseInt(match.params.id);
   const {user} = useContext(UserContext);
   const {setNotification} = useContext(NotificationContext);
@@ -93,4 +93,4 @@ function BookingPage({match}: any, key: any) {
   );
 }
 
-export default BookingPage;
+export default UserBookingPage;

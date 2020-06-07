@@ -9,9 +9,10 @@ import PerformerPage from 'pages/PerformerPage';
 import VenuePage from 'pages/VenuePage';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
-import BookingPage from 'pages/user/BookingPage';
 
-import UserPage from 'pages/user/UserPage';
+import UserBookingPage from 'pages/user/UserBookingPage';
+import UserUpcomingBookingsPage from 'pages/user/UserUpcomingBookingsPage';
+import UserManageVPPage from 'pages/user/UserManageVPPage';
 import UserProfilePage from 'pages/user/UserProfilePage';
 import UserPerformersPage from 'pages/user/UserPerformersPage';
 import UserPerformerPage from 'pages/user/UserPerformerPage';
@@ -61,49 +62,63 @@ const App: React.FC = () => {
                   <Route path='/venues/:id' component={VenuePage} />
                   <Route exact path='/login' component={LoginPage} />
                   <Route exact path='/register' component={RegisterPage} />
-                  <Route
-                    exact
-                    path='/bookings/:id'
-                    render={({match}) => (
-                      <BookingPage match={match} key={match.params.id} />
-                    )}
-                  />
                   <WithUser>
-                    <>
+                    <div className='full-width'>
                       <UserHeader />
-                      <Route exact path='/user' component={UserPage} />
-                      <Route
-                        exact
-                        path='/user/profile'
-                        component={UserProfilePage}
-                      />
-                      <Route
-                        exact
-                        path='/user/performers'
-                        component={UserPerformersPage}
-                      />
-                      <Route
-                        exact
-                        path='/user/venues'
-                        component={UserVenuesPage}
-                      />
-                      <Route
-                        path='/user/performers/:id/edit'
-                        component={UserPerformerPage}
-                      />
-                      <Route
-                        path='/user/performers/new'
-                        component={UserPerformerPage}
-                      />
-                      <Route
-                        path='/user/venues/:id/edit'
-                        component={UserVenuePage}
-                      />
-                      <Route
-                        path='/user/venues/new'
-                        component={UserVenuePage}
-                      />
-                    </>
+                      <div className='user-wrapper-width'>
+                        <Route
+                          exact
+                          path='/bookings/:id'
+                          render={({match}) => (
+                            <UserBookingPage
+                              match={match}
+                              key={match.params.id}
+                            />
+                          )}
+                        />
+                        <Route
+                          exact
+                          path='/user/manage'
+                          component={UserManageVPPage}
+                        />
+                        <Route
+                          exact
+                          path='/user'
+                          component={UserUpcomingBookingsPage}
+                        />
+                        <Route
+                          exact
+                          path='/user/profile'
+                          component={UserProfilePage}
+                        />
+                        <Route
+                          exact
+                          path='/user/performers'
+                          component={UserPerformersPage}
+                        />
+                        <Route
+                          exact
+                          path='/user/venues'
+                          component={UserVenuesPage}
+                        />
+                        <Route
+                          path='/user/performers/:id/edit'
+                          component={UserPerformerPage}
+                        />
+                        <Route
+                          path='/user/performers/new'
+                          component={UserPerformerPage}
+                        />
+                        <Route
+                          path='/user/venues/:id/edit'
+                          component={UserVenuePage}
+                        />
+                        <Route
+                          path='/user/venues/new'
+                          component={UserVenuePage}
+                        />
+                      </div>
+                    </div>
                   </WithUser>
                 </Switch>
               </BookingsContext.Provider>

@@ -6,16 +6,16 @@ import NotificationContext from 'contexts/NotificationContext';
 
 import {useFetch} from 'hooks/useFetch';
 
-import UpcomingBookingItem from './UpcomingBookingItem';
+import UpcomingBookingItem from '../../components/user/bookings/UpcomingBookingItem';
 import UpcomingBookingInterface from 'interfaces/UpcomingBookingInterface';
 
 import {getAuthHeader} from 'helpers/main';
 
-import '../../../styles/components/user/bookings/UpcomingBookings.scss';
+import '../../styles/pages/user/UserUpcomingBookingsPage.scss';
 
 const host = process.env.REACT_APP_API_HOST;
 
-function UpcomingBookings() {
+function UserUpcomingBookingsPage() {
   const {user} = useContext(UserContext);
   const {setNotification} = useContext(NotificationContext);
   const url = `${host}/user/bookings/upcoming`;
@@ -24,7 +24,7 @@ function UpcomingBookings() {
 
   useEffect(() => setRows(results), [results, setRows]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <></>;
   if (error) return <div>Error while fetching data.</div>;
 
   async function cancel(id: number) {
@@ -74,4 +74,4 @@ function UpcomingBookings() {
   );
 }
 
-export default UpcomingBookings;
+export default UserUpcomingBookingsPage;

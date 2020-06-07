@@ -1,12 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 import '../../styles/components/user/UserHeader.scss';
 
 import {
   CalendarToday,
   SentimentSatisfied,
-  NotificationsOutlined,
+  MusicNoteOutlined,
 } from '@material-ui/icons';
 
 function UserHeader() {
@@ -14,22 +14,22 @@ function UserHeader() {
     <div className='user-header'>
       <ul>
         <li>
-          <Link to='/user'>
+          <NavLink exact to='/user'>
             <CalendarToday />
             <span>Events</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to='/user'>
+          <NavLink exact to='/user/manage'>
+            <MusicNoteOutlined />
+            <span>Manage my VP</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink exact to='/user/profile'>
             <SentimentSatisfied />
             <span>My profile</span>
-          </Link>
-        </li>
-        <li>
-          <Link to='/user'>
-            <NotificationsOutlined />
-            <span>Notifications</span>
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </div>

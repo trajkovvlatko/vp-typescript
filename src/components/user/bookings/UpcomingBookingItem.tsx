@@ -37,7 +37,7 @@ function UpcomingBookingItem(props: Props) {
         </div>
       </div>
 
-      {row.status === 'canceled' && (
+      {row.status !== 'canceled' && (
         <button className='cancel-booking' onClick={() => cancel(row.id)}>
           Cancel
         </button>

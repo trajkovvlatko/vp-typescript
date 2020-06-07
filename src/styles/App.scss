@@ -81,8 +81,29 @@ a {
   color: $primary-color;
 }
 
+svg {
+  width: $icon-size !important;
+}
+
+.user-wrapper-width {
+  width: $container-width;
+  margin: 0 auto;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
 .clear-both {
   clear: both;
+}
+
+.full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background-color: $secondary-background-color;
 }
 
 .with-background {
@@ -109,7 +130,7 @@ a {
 
 .container {
   background-color: #fff;
-  max-width: 1200px;
+  max-width: $container-width;
   width: 100%;
   min-height: 100vh;
   margin: 0 auto;
