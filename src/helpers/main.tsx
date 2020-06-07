@@ -12,3 +12,8 @@ export function getDate() {
 export function getAuthHeader(token: string) {
   return {Authorization: `Bearer ${token}`};
 }
+
+export function toTitleCase(term: string) {
+  return term.charAt(0).toUpperCase() + term.slice(1);
+}
+

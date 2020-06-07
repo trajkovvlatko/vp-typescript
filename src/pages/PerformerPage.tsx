@@ -3,14 +3,19 @@ import {RouteComponentProps} from 'react-router-dom';
 
 import {useFetch} from 'hooks/useFetch';
 import {Link} from 'react-router-dom';
+
 import BookSelector from 'components/BookSelector';
 import Rating from 'components/Rating';
+import ImageGallery from 'components/ui/ImageGallery';
 
 import GenreInterface from 'interfaces/GenreInterface';
 import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
 import ImageInterface from 'interfaces/ImageInterface';
-import UserContext from 'contexts/UserContext';
 import BookingItemInterface from 'interfaces/BookingItemInterface';
+
+import UserContext from 'contexts/UserContext';
+
+import {toTitleCase} from '../helpers/main';
 
 import '../styles/pages/PerformerPage.scss';
 
@@ -30,10 +35,6 @@ interface Performer {
   YoutubeLinks: YoutubeLinkInterface[];
   Bookings: BookingItemInterface[];
 }
-
-const toTitleCase = (term: string) => {
-  return term.charAt(0).toUpperCase() + term.slice(1);
-};
 
 function PerformerPage({match}: RouteComponentProps<TParams>) {
   const id = parseInt(match.params.id);
@@ -55,28 +56,11 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
   }
 
   const bookingsCount = performer.Bookings.length;
-  let selectedImage: string = '';
-  let otherImages: string[] = [];
-  performer.Images.forEach((i) => {
-    if (i.selected) {
-      selectedImage = i.imageUrl;
-    } else {
-      otherImages.push(i.imageUrl);
-    }
-  });
 
   return (
     <div className='row performer'>
       <div className='col-8'>
-        <div>
-          <div className='col-8'>
-            <img src={selectedImage} alt='main' />
-          </div>
-          <div className='col-4'>
-            <img src={otherImages[0]} alt='side-1' />
-            <img src={otherImages[1]} alt='side-2' />
-          </div>
-        </div>
+        <ImageGallery images={performer.Images} />
 
         <div className='clear-both'></div>
 
@@ -114,7 +98,7 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
             far
           </div>
 
-          <div>Location: {toTitleCase(performer.location)}</div>
+          <div>{toTitleCase(performer.location)}</div>
           <br />
 
           <div>

@@ -3,18 +3,28 @@ import {RouteComponentProps} from 'react-router-dom';
 
 import {useFetch} from 'hooks/useFetch';
 import {Link} from 'react-router-dom';
+
+import Rating from 'components/Rating';
+import BookSelector from 'components/BookSelector';
+import ImageGallery from 'components/ui/ImageGallery';
+
 import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
 import ImageInterface from 'interfaces/ImageInterface';
 import PropertyInterface from 'interfaces/PropertyInterface';
-import BookSelector from 'components/BookSelector';
-import UserContext from 'contexts/UserContext';
 import BookingItemInterface from 'interfaces/BookingItemInterface';
+
+import UserContext from 'contexts/UserContext';
+
+import {toTitleCase} from '../helpers/main';
+
+import '../styles/pages/PerformerPage.scss';
 
 type TParams = {id: string};
 
 interface Venue {
   id: number;
   name: string;
+  details: string;
   image: string;
   location: string;
   phone: string;
@@ -47,58 +57,95 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
   }
 
   const bookingsCount = venue.Bookings.length;
-  const image = venue.Images.filter((i) => i.selected)[0].imageUrl;
 
   return (
-    <div>
-      {user.token ? (
-        <div>
-          {showBookSelector ? (
-            <BookSelector connectType='venue' connectId={venue.id} />
-          ) : (
-            <button onClick={onShowBookSelectorClick}>Book this venue</button>
-          )}
-        </div>
-      ) : (
-        <Link to='/login'>Book</Link>
-      )}
+    <div className='row venue'>
+      <div className='col-8'>
+        <ImageGallery images={venue.Images} />
 
-      <h2>{venue.name}</h2>
-      <img src={image} alt={image} />
-      <div>Location: {venue.location}</div>
-      <div>
-        Phone: <a href={`tel:${venue.phone}`}>{venue.phone}</a>
+        <div className='clear-both'></div>
+
+        <h5 className='col-12'>About the venue</h5>
+
+        <div className='col-12 details'>{venue.details}</div>
+
+        <h5 className='col-12'>Videos</h5>
+
+        <div className='clear-both videos'>
+          {venue.YoutubeLinks.map((yt: YoutubeLinkInterface) => {
+            return (
+              <div className='col-4'>
+                <iframe
+                  title={yt.link}
+                  key={yt.link}
+                  src={yt.link}
+                  frameBorder='0'
+                  allow='encrypted-media; picture-in-picture'
+                  allowFullScreen
+                ></iframe>
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <div>Properties: {venue.Properties.map((p) => p.name).join(', ')}</div>
-      <div>Website: {venue.website}</div>
-      {venue.YoutubeLinks.map((yt: YoutubeLinkInterface) => {
-        return (
-          <iframe
-            title={yt.link}
-            key={yt.link}
-            width='560'
-            height='315'
-            src={yt.link}
-            frameBorder='0'
-            allow='accelerometer; autoplay; encrypted-media; gyroscope;'
-            allowFullScreen
-          />
-        );
-      })}
-      <div>
-        {venue.Images.map((img) => (
-          <img
-            width='150'
-            src={img.imageUrl}
-            key={img.imageUrl}
-            alt={img.imageUrl}
-          />
-        ))}
+      <div className='col-4'>
+        <div className='meta'>
+          <h1>{venue.name}</h1>
+
+          <Rating stars={venue.rating} />
+
+          <div>
+            {bookingsCount} {(bookingsCount > 1 && 'bookings') || 'booking'} so
+            far
+          </div>
+
+          <div>{toTitleCase(venue.location)}</div>
+          <br />
+
+          <div>
+            <Link to={venue.website} target='_blank'>
+              {venue.website}
+            </Link>
+          </div>
+
+          <div>
+            <Link to={`tel:${venue.phone}`}>{venue.phone}</Link>
+          </div>
+
+          <div>Add Email Here</div>
+
+          <br />
+
+          <div className='genres-list'>
+            <ul>
+              {venue.Properties.map((property: PropertyInterface) => {
+                return (
+                  <li key={`property-id-${property.id}`}>{property.name}</li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <div className='clear-both booking-form center'>
+            {user.token ? (
+              <div>
+                {showBookSelector ? (
+                  <BookSelector connectType='venue' connectId={venue.id} />
+                ) : (
+                  <button
+                    className='nav-link primary'
+                    onClick={onShowBookSelectorClick}
+                  >
+                    Book now
+                  </button>
+                )}
+              </div>
+            ) : (
+              <Link to='/login'>Book</Link>
+            )}
+          </div>
+        </div>
       </div>
-      <div>
-        {bookingsCount} {(bookingsCount > 1 && 'bookings') || 'booking'} so far
-      </div>
-      <div>Rating: {venue.rating}</div>
     </div>
   );
 }
