@@ -1,5 +1,5 @@
 import React from 'react';
-import {RouteComponentProps} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 
 import Filters from 'components/Filters';
 import Results from 'components/Results';
@@ -14,12 +14,11 @@ interface Filters {
   ids: any; // TODO: Fix these anys
 }
 
-type TParams = Filters;
-
 let filters: Filters;
 
-function SearchPage(props: RouteComponentProps<TParams>) {
-  const {type, location, date, ids} = props.match.params;
+function SearchPage() {
+  const history = useHistory();
+  const {type, location, date, ids} = useParams();
   filters = {
     type: type,
     location: location,
@@ -30,7 +29,7 @@ function SearchPage(props: RouteComponentProps<TParams>) {
   function search(data: {}) {
     // TODO
     filters = {...filters, ...data};
-    props.history.push(
+    history.push(
       `/search/${filters.type}/${filters.location}/${filters.ids.join(',')}`
     );
   }

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useLocation, Link} from 'react-router-dom';
+import {useLocation, Link, useHistory} from 'react-router-dom';
 import UserContext from 'contexts/UserContext';
 import {useLocalStorage} from 'hooks/useLocalStorage';
 import BookingsList from 'components/user/bookings/List';
@@ -9,6 +9,7 @@ import Logo from '../Logo';
 import {ExpandMore, ExpandLess} from '@material-ui/icons';
 
 function FullHeader() {
+  const history = useHistory();
   const {user, setUser} = React.useContext(UserContext);
   const arr = useLocalStorage('vp-user', {});
   const setLocalStorageValue = arr[1];
@@ -18,6 +19,7 @@ function FullHeader() {
   const logout = () => {
     setUser({});
     setLocalStorageValue({});
+    history.push('/');
   };
 
   const toggleUserMenu = () => {

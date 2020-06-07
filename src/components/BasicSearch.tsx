@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {RouteComponentProps} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 import Type from './Type';
 import Location from './Location';
@@ -17,7 +17,8 @@ interface UpdateStateInterface {
   location?: string;
 }
 
-function BasicSearch(props: RouteComponentProps) {
+function BasicSearch() {
+  const history = useHistory();
   const [state, setState] = useState<StateInterface>({
     type: 'Performer',
     location: '',
@@ -31,7 +32,7 @@ function BasicSearch(props: RouteComponentProps) {
     if (data.location === '') {
       return;
     }
-    props.history.push(`/search/${state.type.toLowerCase()}/${data.location}`);
+    history.push(`/search/${state.type.toLowerCase()}/${data.location}`);
   }
 
   return (

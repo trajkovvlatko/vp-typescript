@@ -1,5 +1,5 @@
 import React from 'react';
-import {RouteComponentProps, NavLink} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 
 import axios from 'axios';
 import {useState} from 'react';
@@ -17,7 +17,8 @@ interface StateInterface {
   message: string;
 }
 
-function RegisterPage(props: RouteComponentProps) {
+function RegisterPage() {
+  const history = useHistory();
   const [data, updateData] = useState<StateInterface>({
     error: false,
     message: '',
@@ -49,7 +50,7 @@ function RegisterPage(props: RouteComponentProps) {
         password,
         confirmPassword,
       });
-      props.history.push('/login');
+      history.push('/login');
     } catch (e) {
       updateData({error: true, message: e.response.data.error});
     }

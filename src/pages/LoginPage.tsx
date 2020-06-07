@@ -1,5 +1,5 @@
 import React from 'react';
-import {RouteComponentProps, NavLink} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 
 import axios from 'axios';
 import {useState, useContext} from 'react';
@@ -16,7 +16,8 @@ interface StateInterface {
   message: string;
 }
 
-function LoginPage(props: RouteComponentProps) {
+function LoginPage() {
+  const history = useHistory();
   const [data, updateData] = useState<StateInterface>({
     error: false,
     message: '',
@@ -41,7 +42,7 @@ function LoginPage(props: RouteComponentProps) {
         password,
       });
       setUser(response.data);
-      props.history.push('/');
+      history.push('/');
     } catch (e) {
       let message = 'Error';
       if (e && e.response && e.response.data) {

@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {withRouter} from 'react-router-dom';
-import {RouteComponentProps} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import NotificationContext from 'contexts/NotificationContext';
 
@@ -8,7 +8,8 @@ import UserContext from 'contexts/UserContext';
 import Form from './Form';
 import BasicVenueInterface from 'interfaces/BasicVenueInterface';
 
-function NewVenue(props: RouteComponentProps) {
+function NewVenue() {
+  const history = useHistory();
   const {user} = useContext(UserContext);
   const host = process.env.REACT_APP_API_HOST;
   const {setNotification} = useContext(NotificationContext);
@@ -27,7 +28,7 @@ function NewVenue(props: RouteComponentProps) {
           Authorization: `Bearer ${user.token}`,
         },
       });
-      props.history.push(`/user/venues/${resp.data.id}/edit`);
+      history.push(`/user/venues/${resp.data.id}/edit`);
     } catch (e) {
       setNotification({type: 'error', message: 'Error while saving a venue.'});
     }
