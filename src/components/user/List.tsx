@@ -1,10 +1,14 @@
 import React from 'react';
 import {useFetch} from 'hooks/useFetch';
 import UserContext from 'contexts/UserContext';
-import {Link} from 'react-router-dom';
+
+import UserPerformerCard from './performers/Card';
+import UserVenueCard from './venues/Card';
+
+import '../../styles/components/user/List.scss';
 
 interface Props {
-  type: 'performer' | 'venue';
+  type: string;
 }
 
 function List(props: Props) {
@@ -24,31 +28,15 @@ function List(props: Props) {
   }
 
   return (
-    <div className={`${type}s-list`}>
-      <Link to={`/user/${type}s/new`}>New {type}</Link>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {results.map((row: {id: number; name: string}) => {
-            return (
-              <tr key={`${type}-${row.id}`}>
-                <td>{row.id}</td>
-                <td>{row.name}</td>
-                <td>
-                  <Link to={`/user/${type}s/${row.id}/edit`}>Edit</Link>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <ul className={`${type}s-list row`}>
+      {results.map((row: {id: number; name: string}) => {
+        return (
+          (type === 'performer' && (
+            <UserPerformerCard key={`performer-card-${row.id}`} data={row} />
+          )) || <UserVenueCard key={`venue-card-${row.id}`} data={row} />
+        );
+      })}
+    </ul>
   );
 }
 

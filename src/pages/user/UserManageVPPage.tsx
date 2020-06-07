@@ -10,7 +10,7 @@ function UserManageVPPage() {
   return (
     <div className='manage-vp'>
       <h3 className='black'>Manage</h3>
-      <ul>
+      <ul className='manage-menu'>
         <li>
           <NavLink exact to='/user/manage/performers'>
             My performers

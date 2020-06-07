@@ -1,0 +1,28 @@
+@import '../../variables.scss';
+
+.performer-card {
+  background-color: white;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  list-style: none;
+  padding: 15px;
+  box-sizing: border-box;
+  position: relative;
+
+  svg {
+    padding-right: 10px;
+
+    path {
+      color: $primary-color;
+    }
+  }
+
+  .edit {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: $font-color;
+    font-size: $h5-font-size;
+    text-decoration: none;
+  }
+}

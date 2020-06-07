@@ -66,6 +66,16 @@ const App: React.FC = () => {
                       <div className='user-wrapper-width'>
                         <Route
                           exact
+                          path='/user'
+                          component={UserUpcomingBookingsPage}
+                        />
+                        <Route
+                          exact
+                          path='/user/profile'
+                          component={UserProfilePage}
+                        />
+                        <Route
+                          exact
                           path='/bookings/:id'
                           render={({match}) => (
                             <UserBookingPage
@@ -77,16 +87,6 @@ const App: React.FC = () => {
                         <Route
                           path='/user/manage'
                           component={UserManageVPPage}
-                        />
-                        <Route
-                          exact
-                          path='/user'
-                          component={UserUpcomingBookingsPage}
-                        />
-                        <Route
-                          exact
-                          path='/user/profile'
-                          component={UserProfilePage}
                         />
                         <Route
                           path='/user/performers/:id/edit'

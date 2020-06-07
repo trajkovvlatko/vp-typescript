@@ -20,7 +20,7 @@ function UserHeader() {
           </NavLink>
         </li>
         <li>
-          <NavLink to='/user/manage'>
+          <NavLink to='/user/manage/performers'>
             <MusicNoteOutlined />
             <span>Manage my VP</span>
           </NavLink>
