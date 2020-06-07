@@ -6,8 +6,10 @@ import {useFetch} from 'hooks/useFetch';
 import UserContext from 'contexts/UserContext';
 import NotificationContext from 'contexts/NotificationContext';
 
-import BookSelectorItem from 'components/BookSelectorItem';
 import {getAuthHeader} from 'helpers/main';
+
+import '../styles/components/BookingSelector.scss';
+
 const host = process.env.REACT_APP_API_HOST;
 
 interface Props {
@@ -18,18 +20,19 @@ interface Props {
 function BookSelector(props: Props) {
   const selectedType =
     props.connectType === 'performer' ? 'venue' : 'performer';
-  const url: string = `${host}/user/${selectedType}s/active`;
+  const url = `${host}/user/${selectedType}s/active`;
   const {user} = useContext(UserContext);
   const {setNotification} = useContext(NotificationContext);
   const {error, loading, results} = useFetch(url, user.token);
-  const [selectedId, setSelectedId] = useState<Number | undefined>();
-  const [date, setDate] = useState<String>('2012-01-02');
+  const [selectedId, setSelectedId] = useState<number | undefined>();
+  const [date, setDate] = useState<string>('2012-01-02');
+  const [booked, setBooked] = useState<boolean>(false);
 
   if (error) return <div>Error while fetching data.</div>;
   if (loading) return <div>Loading...</div>;
 
-  function onBookableClick(id: number) {
-    setSelectedId(id);
+  function onBookableSelect(e: React.ChangeEvent<HTMLSelectElement>) {
+    setSelectedId(parseInt(e.target.value));
   }
 
   function sendBookingRequest() {
@@ -46,44 +49,46 @@ function BookSelector(props: Props) {
       },
     };
 
-    axios
-      .post(
+    try {
+      axios.post(
         `${host}/user/bookings/${date}/${selectedType}/${selectedId}/${props.connectType}/${props.connectId}`,
         {},
         config
-      )
-      .then(function () {
-        setNotification({type: 'info', message: 'Booking request sent.'});
-      })
-      .catch(function () {
-        setNotification({type: 'info', message: 'Error while booking.'});
-      });
+      );
+      setNotification({type: 'info', message: 'Booking request sent.'});
+      setBooked(true);
+    } catch (e) {
+      setNotification({type: 'info', message: 'Error while booking.'});
+    }
   }
 
   return (
-    <div>
-      <ul>
-        {results.map((row: {id: number; name: string}) => (
-          <BookSelectorItem
-            id={row.id}
-            name={row.name}
-            selected={row.id === selectedId}
-            onClick={onBookableClick}
-            key={`book-selector-item-${row.id}`}
-          />
-        ))}
-      </ul>
+    <div className='booking-selector'>
+      <select onChange={onBookableSelect}>
+        <option key='bookable-default' value=''>
+          Select {selectedType}
+        </option>
+        {results.map((row: {id: number; name: string}) => {
+          return (
+            <option key={`bookable-${row.id}`} value={row.id}>
+              {row.name}
+            </option>
+          );
+        })}
+      </select>
 
       <input
         type='text'
         placeholder='Select date and time'
         value={date.toString()}
-        onChange={(e) => {
-          setDate(e.target.value);
-        }}
+        onChange={(e) => setDate(e.target.value)}
       />
 
-      <button onClick={sendBookingRequest}>Send booking request</button>
+      {(booked && <h5>Booked successfully.</h5>) || (
+        <button className='nav-link primary' onClick={sendBookingRequest}>
+          Book now
+        </button>
+      )}
     </div>
   );
 }
