@@ -14,9 +14,7 @@ import UserBookingPage from 'pages/user/UserBookingPage';
 import UserUpcomingBookingsPage from 'pages/user/UserUpcomingBookingsPage';
 import UserManageVPPage from 'pages/user/UserManageVPPage';
 import UserProfilePage from 'pages/user/UserProfilePage';
-import UserPerformersPage from 'pages/user/UserPerformersPage';
 import UserPerformerPage from 'pages/user/UserPerformerPage';
-import UserVenuesPage from 'pages/user/UserVenuesPage';
 import UserVenuePage from 'pages/user/UserVenuePage';
 import UserHeader from 'components/user/UserHeader';
 
@@ -77,7 +75,6 @@ const App: React.FC = () => {
                           )}
                         />
                         <Route
-                          exact
                           path='/user/manage'
                           component={UserManageVPPage}
                         />
@@ -90,16 +87,6 @@ const App: React.FC = () => {
                           exact
                           path='/user/profile'
                           component={UserProfilePage}
-                        />
-                        <Route
-                          exact
-                          path='/user/performers'
-                          component={UserPerformersPage}
-                        />
-                        <Route
-                          exact
-                          path='/user/venues'
-                          component={UserVenuesPage}
                         />
                         <Route
                           path='/user/performers/:id/edit'

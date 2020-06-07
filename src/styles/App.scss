@@ -30,6 +30,10 @@ h2 {
 h3 {
   font-size: $subheader-font-size;
   font-weight: bold;
+
+  &.black {
+    color: black;
+  }
 }
 
 h4 {
