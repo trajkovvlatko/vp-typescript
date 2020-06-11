@@ -1,0 +1,68 @@
+@import '../../../variables.scss';
+
+.upload-container {
+  width: 100%;
+  border: 1px dashed $primary-color;
+  border-radius: 4px;
+  height: 60px;
+  position: relative;
+  margin-bottom: 50px;
+
+  input {
+    height: 100%;
+    width: 100%;
+    vertical-align: top;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .upload-label {
+    @include flex;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+
+    svg {
+      padding-right: 10px;
+
+      path {
+        color: $primary-color;
+      }
+    }
+
+    p {
+      color: $primary-color;
+    }
+  }
+}
+
+.image-row {
+  @include flex;
+  margin-bottom: 10px;
+
+  button {
+    width: 100%;
+    background-color: white;
+    border: 0 none;
+    cursor: pointer;
+    font-size: $h4-font-size;
+    margin-bottom: 10px;
+    text-align: left;
+
+    svg {
+      vertical-align: bottom;
+      margin-bottom: -1px;
+
+      path {
+        color: $font-color;
+      }
+    }
+
+    span {
+      color: $font-color;
+    }
+  }
+}

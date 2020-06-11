@@ -1,5 +1,14 @@
-table {
-  td, th {
-    padding: 5px;
+@import '../../variables.scss';
+
+.user-profile {
+  height: 100vh;
+
+  table {
+    @include card;
+    padding: 50px;
+
+    td, th {
+      padding: 5px;
+    }
   }
 }

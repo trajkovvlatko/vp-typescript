@@ -82,8 +82,14 @@ input[type="url"] {
   width: 100%;
   padding: 20px;
   padding-left: 10px;
-  font-size: 14px;
+  font-size: $h4-font-size;
   box-sizing: border-box;
+}
+
+textarea {
+  padding-left: 10px;
+  padding-top: 5px;
+  font-size: $h4-font-size;
 }
 
 a {
@@ -100,6 +106,9 @@ svg {
   margin: 0 auto;
   padding: 15px;
   box-sizing: border-box;
+  @media screen and (max-width: $container-width) {
+    width: 100%;
+  }
 }
 
 .clear-both {

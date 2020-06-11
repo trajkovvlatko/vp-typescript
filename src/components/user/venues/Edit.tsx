@@ -15,6 +15,8 @@ import ImageInterface from 'interfaces/ImageInterface';
 import axios from 'axios';
 import {getAuthHeader} from 'helpers/main';
 
+import '../../../styles/pages/user/_SharedForm.scss';
+
 interface Props {
   id: number;
 }

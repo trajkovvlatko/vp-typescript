@@ -22,11 +22,11 @@ function Form(props: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className='form col-5' onSubmit={handleSubmit(onSubmit)}>
       <table>
         <tbody>
           <tr>
-            <td>Name:</td>
+            <td>Name</td>
             <td>
               <input
                 name='name'
@@ -38,7 +38,7 @@ function Form(props: Props) {
             </td>
           </tr>
           <tr>
-            <td>Details:</td>
+            <td className='for-textarea'>Details</td>
             <td>
               <textarea
                 name='details'
@@ -50,7 +50,7 @@ function Form(props: Props) {
             </td>
           </tr>
           <tr>
-            <td>Location:</td>
+            <td>Location</td>
             <td>
               <select
                 name='location'
@@ -66,7 +66,7 @@ function Form(props: Props) {
             </td>
           </tr>
           <tr>
-            <td>Phone:</td>
+            <td>Phone</td>
             <td>
               <input
                 name='phone'
@@ -78,11 +78,11 @@ function Form(props: Props) {
             </td>
           </tr>
           <tr>
-            <td>Website:</td>
+            <td>Website</td>
             <td>
               <input
                 name='website'
-                type='text'
+                type='url'
                 defaultValue={values.website}
                 ref={register({required: true})}
               />
@@ -90,9 +90,9 @@ function Form(props: Props) {
             </td>
           </tr>
           <tr>
-            <td></td>
-            <td>
-              <input type='submit' value='Save' />
+            <td colSpan={2}>
+              <br />
+              <input type='submit' value='Save' className='nav-link primary' />
             </td>
           </tr>
         </tbody>

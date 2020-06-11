@@ -58,9 +58,7 @@ function GenresForm(props: Props) {
   }
 
   return (
-    <div>
-      <h2>Genres</h2>
-
+    <div className='col col-5 form'>
       {results.map((row: GenreInterface) => {
         return (
           <GenreCheckbox
@@ -72,7 +70,10 @@ function GenresForm(props: Props) {
           />
         );
       })}
-      <button onClick={save}>Save genres</button>
+      <br />
+      <button onClick={save} className='nav-link primary'>
+        Save changes
+      </button>
     </div>
   );
 }

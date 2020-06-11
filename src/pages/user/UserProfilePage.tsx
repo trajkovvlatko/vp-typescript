@@ -32,18 +32,19 @@ function UserProfilePage() {
   return (
     <div className='user-profile'>
       <h3 className='black'>My profile</h3>
-      <table className='center'>
+      <table className='col-5'>
         <tbody>
           <tr>
-            <th>Name</th>
+            <td>Name</td>
             <td>{results.name}</td>
           </tr>
           <tr>
-            <th>Email</th>
+            <td>Email</td>
             <td>{results.email}</td>
           </tr>
           <tr>
-            <td colSpan={2} className='center'>
+            <td colSpan={2}>
+              <br />
               <button onClick={logout} className='nav-link primary'>
                 Logout
               </button>

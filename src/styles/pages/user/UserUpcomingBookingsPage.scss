@@ -8,12 +8,10 @@
   }
 
   .upcoming-booking-item {
+    @include card;
     position: relative;
     list-style: none;
     padding: 15px;
-    background: $secondary-color;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
 
     .title,
     .title a,

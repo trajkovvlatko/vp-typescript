@@ -15,6 +15,8 @@ import ImageInterface from 'interfaces/ImageInterface';
 import axios from 'axios';
 import {getAuthHeader} from 'helpers/main';
 
+import '../../../styles/pages/user/_SharedForm.scss';
+
 interface Props {
   id: number;
 }
@@ -29,6 +31,7 @@ interface EditBasicPerformerInterface extends BasicPerformerInterface {
 function EditPerformer(props: Props) {
   const {user} = useContext(UserContext);
   const {setNotification} = useContext(NotificationContext);
+  const [tab, setTab] = useState<string>('profile');
   const host = process.env.REACT_APP_API_HOST;
   const url: string = `${host}/user/performers/${props.id}`;
   const id = props.id;
@@ -99,21 +102,59 @@ function EditPerformer(props: Props) {
   const selectedGenreIds: number[] = values.performer.Genres.map((r) => r.id);
 
   return (
-    <div>
-      <h1>Edit Performer</h1>
+    <div className='edit-form'>
+      <h3 className='black'>Edit Performer</h3>
 
-      <Form values={values.performer} save={save} />
-      <ImagesForm
-        id={props.id}
-        type='performer'
-        images={values.performer.Images}
-      />
-      <GenresForm performerId={props.id} selected={selectedGenreIds} />
-      <YoutubeLinksForm
-        id={props.id}
-        type='performer'
-        links={values.performer.YoutubeLinks}
-      />
+      <ul className='edit-menu'>
+        <li
+          className={`${(tab === 'profile' && 'active') || ''}`}
+          onClick={() => setTab('profile')}
+        >
+          Profile
+        </li>
+        <li
+          className={`${(tab === 'images' && 'active') || ''}`}
+          onClick={() => setTab('images')}
+        >
+          Images
+        </li>
+        <li
+          className={`${(tab === 'genres' && 'active') || ''}`}
+          onClick={() => setTab('genres')}
+        >
+          Genres
+        </li>
+        <li
+          className={`${(tab === 'youtube' && 'active') || ''}`}
+          onClick={() => setTab('youtube')}
+        >
+          Youtube links
+        </li>
+      </ul>
+
+      <div className={`tab ${(tab === 'profile' && 'active') || ''}`}>
+        <Form values={values.performer} save={save} />
+      </div>
+
+      <div className={`tab ${(tab === 'images' && 'active') || ''}`}>
+        <ImagesForm
+          id={props.id}
+          type='performer'
+          images={values.performer.Images}
+        />
+      </div>
+
+      <div className={`tab ${(tab === 'genres' && 'active') || ''}`}>
+        <GenresForm performerId={props.id} selected={selectedGenreIds} />
+      </div>
+
+      <div className={`tab ${(tab === 'youtube' && 'active') || ''}`}>
+        <YoutubeLinksForm
+          id={props.id}
+          type='performer'
+          links={values.performer.YoutubeLinks}
+        />
+      </div>
     </div>
   );
 }

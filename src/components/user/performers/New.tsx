@@ -9,6 +9,8 @@ import UserContext from 'contexts/UserContext';
 import Form from './Form';
 import BasicPerformerInterface from 'interfaces/BasicPerformerInterface';
 
+import '../../../styles/pages/user/_SharedForm.scss';
+
 function NewPerformer() {
   const history = useHistory();
   const {user} = useContext(UserContext);
@@ -39,8 +41,8 @@ function NewPerformer() {
   }
 
   return (
-    <div>
-      <h1>New Performer</h1>
+    <div className='new-form'>
+      <h3 className='black'>New Performer</h3>
 
       <Form values={defaultValues} save={save} />
     </div>

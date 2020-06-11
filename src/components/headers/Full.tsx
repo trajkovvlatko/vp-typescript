@@ -50,10 +50,13 @@ function FullHeader() {
 
               <ul className={`user-menu ${(userMenuActive && 'active') || ''}`}>
                 <li onClick={toggleUserMenu}>
-                  <Link to='/user'>My profile</Link>
+                  <Link to='/user'>Events</Link>
                 </li>
                 <li onClick={toggleUserMenu}>
-                  <Link to='/user'>Upcoming events</Link>
+                  <Link to='/user/manage/performers'>Manage my VP</Link>
+                </li>
+                <li onClick={toggleUserMenu}>
+                  <Link to='/user/profile'>My profile</Link>
                 </li>
                 <li className='with-top-separator' onClick={toggleUserMenu}>
                   <div className='logout' onClick={logout}>

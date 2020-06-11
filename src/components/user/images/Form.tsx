@@ -5,6 +5,14 @@ import UserContext from 'contexts/UserContext';
 import NotificationContext from 'contexts/NotificationContext';
 import ImageInterface from 'interfaces/ImageInterface';
 
+import {
+  CloudUploadOutlined,
+  DeleteOutlined,
+  CheckOutlined,
+} from '@material-ui/icons';
+
+import '../../../styles/components/user/images/Form.scss';
+
 interface Props {
   id: number;
   type: 'performer' | 'venue';
@@ -85,45 +93,12 @@ function ImagesForm(props: Props) {
 
   return (
     <div>
-      <h2>Images</h2>
-
-      {images.map((row: ImageInterface) => {
-        return (
-          <div key={`image-${row.id}`}>
-            {selected !== row.id && (
-              <button onClick={() => setSelected(row.id)}>Set selected</button>
-            )}
-            <img src={row.imageUrl} alt={`alt-${row.imageUrl}`} width='100' />
-            <button
-              onClick={() => {
-                remove(row.id);
-              }}
-            >
-              Remove
-            </button>
+      <form onSubmit={save} className='col-5 form'>
+        <div className='upload-container clear-both'>
+          <div className='upload-label'>
+            <CloudUploadOutlined />
+            <p>Browse files from your computer</p>
           </div>
-        );
-      })}
-
-      {newImages.length > 0 && <p>New images</p>}
-
-      {newImages.map((image: File) => {
-        return (
-          <div key={`${image.name}-${Math.random()}`}>
-            <img src={URL.createObjectURL(image)} width='100' alt='' />
-            <button
-              onClick={() => {
-                removeNewImage(image.name);
-              }}
-            >
-              Remove
-            </button>
-          </div>
-        );
-      })}
-
-      <form onSubmit={save}>
-        <div>
           <input
             type='file'
             name='images[]'
@@ -133,7 +108,69 @@ function ImagesForm(props: Props) {
           />
         </div>
 
-        <button type='submit'>Save images</button>
+        <div>
+          {images.map((row: ImageInterface) => {
+            return (
+              <div key={`image-${row.id}`} className='image-row'>
+                <img
+                  src={row.imageUrl}
+                  alt={`alt-${row.imageUrl}`}
+                  className='col-5'
+                />
+
+                <div className='col-7'>
+                  {selected !== row.id && (
+                    <button onClick={() => setSelected(row.id)}>
+                      <CheckOutlined />
+                      <span>Set selected</span>
+                    </button>
+                  )}
+
+                  <button
+                    onClick={() => {
+                      remove(row.id);
+                    }}
+                  >
+                    <DeleteOutlined />
+                    <span>Remove</span>
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {newImages.length > 0 && <h4>New images</h4>}
+
+        <div>
+          {newImages.map((image: File) => {
+            return (
+              <div key={`${image.name}-${Math.random()}`} className='image-row'>
+                <img
+                  src={URL.createObjectURL(image)}
+                  alt=''
+                  className='col-5'
+                />
+                <div className='col-7'>
+                  <button
+                    onClick={() => {
+                      removeNewImage(image.name);
+                    }}
+                  >
+                    <DeleteOutlined />
+                    <span>Remove</span>
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <br />
+
+        <button className='nav-link primary' type='submit'>
+          Save changes
+        </button>
       </form>
     </div>
   );

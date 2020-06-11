@@ -1,0 +1,76 @@
+@import '../../variables.scss';
+
+.new-form, .edit-form {
+  min-height: 100vh;
+
+  .edit-menu {
+    display: block;
+    margin-bottom: 25px;
+
+    li {
+      cursor: pointer;
+      list-style: none;
+      display: inline-block;
+      margin-right: 35px;
+
+      &.active {
+        color: $primary-color;
+        border-bottom: 2px solid $primary-color;
+        padding-bottom: 5px;
+      }
+    }
+  }
+
+  .tab {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  .form {
+    @include card();
+    padding: 50px;
+    box-sizing: border-box;
+
+    table {
+      width: 100%;
+
+      td {
+        font-size: $h4-font-size;
+
+        &.for-textarea {
+          vertical-align: top;
+        }
+      }
+
+      textarea,
+      select,
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="url"] {
+        border: 2px solid $input-border-color;
+        width: 100%;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="url"] {
+        height: 35px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      select {
+        height: 35px;
+      }
+
+      textarea {
+        width: calc(100% - 15px);
+      }
+    }
+  }
+}
