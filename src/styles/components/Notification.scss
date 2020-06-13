@@ -1,0 +1,41 @@
+@import '../variables.scss';
+
+.notification {
+  @include card;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 400px;
+  height: 40px;
+  z-index: 999999;
+  visibility: hidden;
+
+  &.active {
+    visibility: visible;
+
+    .notification-content {
+      .side {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 5px;
+
+        &.error {
+          background-color: red;
+        }
+
+        &.info {
+          background-color: green;
+        }
+      }
+
+      p {
+        margin-left: 15px;
+        margin-top: 8px;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+    }
+  }
+}
