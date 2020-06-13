@@ -26,9 +26,16 @@
   .location {
     padding-top: 20px;
 
-    select {
+    .MuiFormLabel-root {
+      top: 13px;
+    }
+
+    .MuiFormControl-root {
       width: 80%;
-      height: 30px;
+
+      .MuiInputBase-root {
+        height: 54px;
+      }
     }
   }
 }

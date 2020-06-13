@@ -1,6 +1,32 @@
+@import '../variables.scss';
+
 .booking-selector {
-  select, button, input {
+  select, button, input, .MuiFormControl-root {
     width: 100%;
     margin-bottom: 10px;
+  }
+
+  .MuiFormLabel-root {
+    top: -5px;
+    font-size: $h4-font-size;
+  }
+
+  .MuiSelect-root {
+    padding-top: 13px;
+  }
+
+  .MuiInputBase-root {
+    height: 40px;
+    background-color: white;
+  }
+
+  .MuiFilledInput-root:hover,
+  .MuiSelect-select:focus {
+    background-color: white !important;
+  }
+
+  .MuiSelect-select:focus {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
