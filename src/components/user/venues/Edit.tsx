@@ -35,6 +35,7 @@ function EditVenue(props: Props) {
   const id = props.id;
   const token = user.token;
   const {setNotification} = useContext(NotificationContext);
+  const [tab, setTab] = useState<string>('profile');
   let defaultValues: EditBasicVenueInterface = {
     id: props.id,
     name: '',
@@ -103,17 +104,55 @@ function EditVenue(props: Props) {
   );
 
   return (
-    <div>
-      <h1>Edit Venue</h1>
+    <div className='edit-form'>
+      <h3 className='black'>Edit Venue</h3>
 
-      <Form values={values.venue} save={save} />
-      <ImagesForm id={props.id} type='venue' images={values.venue.Images} />
-      <PropertiesForm venueId={props.id} selected={selectedPropertyIds} />
-      <YoutubeLinksForm
-        id={props.id}
-        type='venue'
-        links={values.venue.YoutubeLinks}
-      />
+      <ul className='edit-menu'>
+        <li
+          className={`${(tab === 'profile' && 'active') || ''}`}
+          onClick={() => setTab('profile')}
+        >
+          Profile
+        </li>
+        <li
+          className={`${(tab === 'images' && 'active') || ''}`}
+          onClick={() => setTab('images')}
+        >
+          Images
+        </li>
+        <li
+          className={`${(tab === 'properties' && 'active') || ''}`}
+          onClick={() => setTab('properties')}
+        >
+          Properties
+        </li>
+        <li
+          className={`${(tab === 'youtube' && 'active') || ''}`}
+          onClick={() => setTab('youtube')}
+        >
+          Youtube links
+        </li>
+      </ul>
+
+      <div className={`tab ${(tab === 'profile' && 'active') || ''}`}>
+        <Form values={values.venue} save={save} />
+      </div>
+
+      <div className={`tab ${(tab === 'images' && 'active') || ''}`}>
+        <ImagesForm id={props.id} type='venue' images={values.venue.Images} />
+      </div>
+
+      <div className={`tab ${(tab === 'properties' && 'active') || ''}`}>
+        <PropertiesForm venueId={props.id} selected={selectedPropertyIds} />
+      </div>
+
+      <div className={`tab ${(tab === 'youtube' && 'active') || ''}`}>
+        <YoutubeLinksForm
+          id={props.id}
+          type='venue'
+          links={values.venue.YoutubeLinks}
+        />
+      </div>
     </div>
   );
 }

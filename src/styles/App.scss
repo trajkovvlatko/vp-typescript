@@ -101,6 +101,11 @@ svg {
   width: $icon-size !important;
 }
 
+iframe {
+  border: 1px solid $font-color;
+  width: 100%;
+}
+
 .user-wrapper-width {
   width: $container-width;
   margin: 0 auto;

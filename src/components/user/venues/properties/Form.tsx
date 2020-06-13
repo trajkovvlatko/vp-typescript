@@ -61,9 +61,7 @@ function PropertiesForm(props: Props) {
   }
 
   return (
-    <div>
-      <h2>Properties</h2>
-
+    <div className='col col-5 form'>
       {results.map((row: PropertyInterface) => {
         return (
           <PropertyCheckbox
@@ -75,7 +73,10 @@ function PropertiesForm(props: Props) {
           />
         );
       })}
-      <button onClick={save}>Save properties</button>
+      <br />
+      <button onClick={save} className='nav-link primary'>
+        Save changes
+      </button>
     </div>
   );
 }

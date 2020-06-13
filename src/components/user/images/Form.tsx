@@ -140,7 +140,11 @@ function ImagesForm(props: Props) {
           })}
         </div>
 
-        {newImages.length > 0 && <h4>New images</h4>}
+        {newImages.length > 0 && (
+          <h4>
+            New images <small>(not saved yet)</small>
+          </h4>
+        )}
 
         <div>
           {newImages.map((image: File) => {

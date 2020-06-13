@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom';
 import Rating from 'components/Rating';
 import BookSelector from 'components/BookSelector';
 import ImageGallery from 'components/ui/ImageGallery';
+import Iframe from 'components/ui/Iframe';
 
 import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
 import ImageInterface from 'interfaces/ImageInterface';
@@ -75,14 +76,7 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
           {venue.YoutubeLinks.map((yt: YoutubeLinkInterface) => {
             return (
               <div className='col-4' key={`div-${yt.link}`}>
-                <iframe
-                  title={yt.link}
-                  key={yt.link}
-                  src={yt.link}
-                  frameBorder='0'
-                  allow='encrypted-media; picture-in-picture'
-                  allowFullScreen
-                ></iframe>
+                <Iframe src={yt.link} />
               </div>
             );
           })}

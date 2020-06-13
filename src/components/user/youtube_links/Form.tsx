@@ -7,6 +7,8 @@ import YoutubeLinkInterface from 'interfaces/YoutubeLinkInterface';
 import Persisted from './Persisted';
 import New from './New';
 
+import '../../../styles/components/user/youtube_links/Form.scss';
+
 interface Props {
   id: number;
   type: 'performer' | 'venue';
@@ -71,33 +73,43 @@ function YoutubeLinksForm(props: Props) {
   }
 
   return (
-    <div>
-      <h2>Youtube Links</h2>
-
+    <div className='col-5 form'>
       {links.map((row: YoutubeLinkInterface) => (
-        <Persisted
-          id={row.id}
-          link={row.link}
-          remove={remove}
-          key={`youtube-link-${row.id}`}
-        />
+        <div className='iframe-row' key={`youtube-link-${row.id}`}>
+          <Persisted id={row.id} link={row.link} remove={remove} />
+        </div>
       ))}
 
       {newLinks.length > 0 && (
-        <p>
+        <h4>
           New links <small>(not saved yet)</small>
-        </p>
+        </h4>
       )}
+
       {newLinks.map((link: string) => (
-        <New link={link} remove={removeNewLink} key={Math.random()} />
+        <div className='iframe-row' key={`new-yt-link-${link}`}>
+          <New link={link} remove={removeNewLink} />
+        </div>
       ))}
 
-      <div>
-        <input type='text' ref={newLink} placeholder='Add new link' />
-        <button onClick={addNewLink}>Add link</button>
+      <br />
+
+      <div className='row'>
+        <div className='col-7'>
+          <input type='text' ref={newLink} placeholder='Add new link' />
+        </div>
+        <div className='col-5'>
+          <button onClick={addNewLink} className='nav-link primary'>
+            Add link
+          </button>
+        </div>
       </div>
 
-      <button onClick={save}>Save</button>
+      <br />
+
+      <button onClick={save} className='nav-link primary'>
+        Save changes
+      </button>
     </div>
   );
 }

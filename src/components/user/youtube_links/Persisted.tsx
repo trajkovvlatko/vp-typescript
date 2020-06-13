@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Iframe from '../../../components/ui/Iframe';
+import {DeleteOutlined} from '@material-ui/icons';
+
 interface Props {
   id: number;
   link: string;
@@ -9,10 +12,18 @@ interface Props {
 function Persisted(props: Props) {
   const {id, link, remove} = props;
   return (
-    <div>
-      {link}
-      <button onClick={() => remove(id)}>Remove</button>
-    </div>
+    <>
+      <div className='col-9'>
+        <Iframe src={link} />
+      </div>
+
+      <div className='col-3'>
+        <button onClick={() => remove(id)}>
+          <DeleteOutlined />
+          <span>Remove</span>
+        </button>
+      </div>
+    </>
   );
 }
 
