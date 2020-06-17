@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
 
 import {useFetch} from 'hooks/useFetch';
 
@@ -27,6 +28,12 @@ interface SelectedInterface {
   name?: string;
 }
 
+function tomorrow(): string {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  return tomorrow.toISOString().slice(0, 10);
+}
+
 function BookSelector(props: Props) {
   const selectedType =
     props.connectType === 'performer' ? 'venue' : 'performer';
@@ -35,7 +42,7 @@ function BookSelector(props: Props) {
   const {setNotification} = useContext(NotificationContext);
   const {error, loading, results} = useFetch(url, user.token);
   const [selected, setSelected] = useState<SelectedInterface>();
-  const [date, setDate] = useState<string>('2012-01-02');
+  const [date, setDate] = useState<string>(tomorrow());
   const [booked, setBooked] = useState<boolean>(false);
 
   if (error) return <div>Error while fetching data.</div>;
@@ -100,14 +107,25 @@ function BookSelector(props: Props) {
         </Select>
       </FormControl>
 
-      <input
-        type='text'
-        placeholder='Select date and time'
-        value={date.toString()}
+      <TextField
+        label=''
+        type='date'
+        defaultValue={date.toString()}
         onChange={(e) => setDate(e.target.value)}
+        InputLabelProps={{
+          shrink: true,
+        }}
       />
 
-      {(booked && <h5>Booked successfully.</h5>) || (
+      {(booked && typeof selected !== 'undefined' && (
+        <div>
+          <h4>You just booked {selected.name}.</h4>
+          <div>
+            We will notify you as soon as <b>{selected.name}</b> accepts your
+            booking.
+          </div>
+        </div>
+      )) || (
         <button className='nav-link primary' onClick={sendBookingRequest}>
           Book now
         </button>
