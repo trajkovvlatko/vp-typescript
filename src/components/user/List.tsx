@@ -5,6 +5,8 @@ import UserContext from 'contexts/UserContext';
 import UserPerformerCard from './performers/Card';
 import UserVenueCard from './venues/Card';
 
+import CardInterface from 'interfaces/CardInterface';
+
 import '../../styles/components/user/List.scss';
 
 interface Props {
@@ -29,7 +31,7 @@ function List(props: Props) {
 
   return (
     <ul className={`${type}s-list row`}>
-      {results.map((row: {id: number; name: string}) => {
+      {results.map((row: CardInterface) => {
         return (
           (type === 'performer' && (
             <UserPerformerCard key={`performer-card-${row.id}`} data={row} />

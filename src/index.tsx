@@ -43,11 +43,11 @@ const App: React.FC = () => {
       <div className='main'>
         <div className='container'>
           <UserContext.Provider value={{user, setUser}}>
-            <Header />
             <NotificationContext.Provider
               value={{notification, setNotification}}
             >
               <BookingsContext.Provider value={{bookings, setBookings}}>
+                <Header />
                 <Notification />
 
                 <Switch>
@@ -76,7 +76,7 @@ const App: React.FC = () => {
                         />
                         <Route
                           exact
-                          path='/bookings/:id'
+                          path='/user/bookings/:id'
                           render={({match}) => (
                             <UserBookingPage
                               match={match}

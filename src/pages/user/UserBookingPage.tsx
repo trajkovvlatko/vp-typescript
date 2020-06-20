@@ -7,6 +7,7 @@ import UserContext from 'contexts/UserContext';
 import BookingsContext from 'contexts/BookingsContext';
 import NotificationContext from 'contexts/NotificationContext';
 import UpcomingBookingInterface from 'interfaces/UpcomingBookingInterface';
+
 const host = process.env.REACT_APP_API_HOST;
 
 function UserBookingPage({match}: any, key: any) {
@@ -26,7 +27,7 @@ function UserBookingPage({match}: any, key: any) {
     setStatus(result.status);
   }
 
-  const sendRequest = (status: string) => {
+  const sendRequest = async (status: string) => {
     const verb = status === 'accepted' ? 'accept' : 'reject';
     if (!window.confirm(`Do you want to ${verb} this request?`)) {
       return;
@@ -39,20 +40,18 @@ function UserBookingPage({match}: any, key: any) {
       },
     };
 
-    axios
-      .patch(`${host}/user/bookings/${result.id}`, {status}, config)
-      .then(function (response) {
-        setStatus(status);
-        setNotification({type: 'info', message: 'Successfully sent.'});
-        const newBookings = bookings.filter((row: UpcomingBookingInterface) => {
-          if (row.id === result.id) row.status = status;
-          return row.id !== result.id;
-        });
-        setBookings(newBookings);
-      })
-      .catch(function (error) {
-        setNotification({type: 'info', message: 'Error while sending.'});
+    try {
+      await axios.patch(`${host}/user/bookings/${result.id}`, {status}, config);
+      setStatus(status);
+      setNotification({type: 'info', message: 'Successfully sent.'});
+      const newBookings = bookings.filter((row: UpcomingBookingInterface) => {
+        if (row.id === result.id) row.status = status;
+        return row.id !== result.id;
       });
+      setBookings(newBookings);
+    } catch (e) {
+      setNotification({type: 'info', message: 'Error while sending.'});
+    }
   };
 
   const accept = () => sendRequest('accepted');

@@ -6,9 +6,8 @@ interface BookingsContextInterface {
   setBookings: (bookings: UpcomingBookingInterface[]) => void;
 }
 
-const BookingsContext = React.createContext<BookingsContextInterface>({
-  bookings: [],
-  setBookings: (bookings: UpcomingBookingInterface[]) => {},
-});
-
+const defaultBookings: UpcomingBookingInterface[] = [];
+const setBookings = () => defaultBookings;
+const defaults = {bookings: [], setBookings: setBookings};
+const BookingsContext = React.createContext<BookingsContextInterface>(defaults);
 export default BookingsContext;

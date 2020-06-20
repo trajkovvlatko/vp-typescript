@@ -21,7 +21,9 @@ function UpcomingBookingItem(props: Props) {
       </h3>
 
       <div className='row'>
-        <img src='' alt='img' className='col-3' />
+        <Link to={`/venues/${row.venueId}`}>
+          <img src={row.venueImageUrl} alt='img' className='col-3' />
+        </Link>
 
         <div className='col-9'>
           <h4 className='connected'>

@@ -21,6 +21,10 @@
     background-color: white;
   }
 
+  .MuiInputBase-input {
+    text-align: center !important;
+  }
+
   .MuiFilledInput-root:hover,
   .MuiSelect-select:focus {
     background-color: white !important;

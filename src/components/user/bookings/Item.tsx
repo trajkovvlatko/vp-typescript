@@ -6,7 +6,7 @@ import BookingItemInterface from 'interfaces/BookingItemInterface';
 function BookingItem(props: BookingItemInterface) {
   return (
     <div>
-      <Link to={`/bookings/${props.id}`}>
+      <Link to={`/user/bookings/${props.id}`}>
         {(props.requesterType === 'performer' && (
           <div>
             {props.performerName} requested to perform at {props.venueName}
