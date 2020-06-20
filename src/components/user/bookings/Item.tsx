@@ -5,20 +5,23 @@ import BookingItemInterface from 'interfaces/BookingItemInterface';
 
 function BookingItem(props: BookingItemInterface) {
   return (
-    <div>
+    <li>
       <Link to={`/user/bookings/${props.id}`}>
         {(props.requesterType === 'performer' && (
-          <div>
-            {props.performerName} requested to perform at {props.venueName}
-          </div>
+          <span>
+            <b>{props.performerName}</b> requested to perform at{' '}
+            <b>{props.venueName}</b>
+          </span>
         )) || (
-          <div>
-            {props.venueName} invited {props.performerName}
-          </div>
+          <span>
+            <b>{props.venueName}</b> invited <b>{props.performerName}</b> to
+            perform
+          </span>
         )}
-        on {props.bookingDate.substring(0, 10)}
+        <span>on {props.bookingDate}</span>
+        <div className='created-at'>{props.createdAt.substring(0, 10)}</div>
       </Link>
-    </div>
+    </li>
   );
 }
 

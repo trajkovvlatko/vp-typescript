@@ -7,4 +7,5 @@ export default interface BookingItemInterface {
   bookingDate: string;
   performerName: string;
   venueName: string;
+  createdAt: string;
 }

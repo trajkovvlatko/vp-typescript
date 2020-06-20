@@ -36,13 +36,13 @@ function BookingsList() {
     <div className='bookings'>
       <div onClick={showBookingsList}>
         {(bookings.length > 0 && (
-          <NotificationsActiveOutlined></NotificationsActiveOutlined>
+          <NotificationsActiveOutlined className='with-notifications'></NotificationsActiveOutlined>
         )) || <NotificationsOutlined></NotificationsOutlined>}
       </div>
 
       <div className={`list ${active ? 'active' : ''}`}>
         {(bookings.length > 0 && (
-          <ul>
+          <ul className='left'>
             {bookings.map((row: BookingItemInterface) => {
               return (
                 <BookingItem
@@ -54,12 +54,13 @@ function BookingsList() {
                   bookingDate={row.bookingDate}
                   performerName={row.performerName}
                   venueName={row.venueName}
+                  createdAt={row.createdAt}
                   key={`booking-${row.id}`}
                 />
               );
             })}
           </ul>
-        )) || <div>No booking requests yet.</div>}
+        )) || <div className='no-bookings-yet'>No booking requests yet.</div>}
       </div>
     </div>
   );

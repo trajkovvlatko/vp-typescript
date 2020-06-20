@@ -37,8 +37,8 @@ function NewVenue() {
   }
 
   return (
-    <div>
-      <h1>New Venue</h1>
+    <div className='new-form'>
+      <h3 className='black'>New Venue</h3>
 
       <Form values={defaultValues} save={save} />
     </div>

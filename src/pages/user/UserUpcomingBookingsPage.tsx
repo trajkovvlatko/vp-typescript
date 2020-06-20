@@ -54,7 +54,7 @@ function UserUpcomingBookingsPage() {
   }
 
   return (
-    <div className='upcoming-bookings'>
+    <div className='upcoming-bookings row'>
       <h3 className='black'>Events</h3>
 
       {(rows.length > 0 && (

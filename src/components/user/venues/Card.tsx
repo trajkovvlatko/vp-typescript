@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 import Rating from '../../Rating';
 
-import {MicNoneOutlined} from '@material-ui/icons';
+import {LocalBarOutlined} from '@material-ui/icons';
 
 interface Props {
   data: {
@@ -21,7 +21,7 @@ function UserVenueCard(props: Props) {
   return (
     <li className='col-4 performer-card'>
       <h3 className='col-12 black'>
-        <MicNoneOutlined />
+        <LocalBarOutlined />
         <Link to={`/performers/${id}`}>{name}</Link>
       </h3>
 
