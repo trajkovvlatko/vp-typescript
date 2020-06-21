@@ -17,6 +17,8 @@ function NewVenue() {
   const {setNotification} = useContext(NotificationContext);
   const defaultValues: BasicVenueInterface = {
     name: '',
+    email: user.email || '',
+    address: '',
     details: '',
     location: '',
     phone: '',

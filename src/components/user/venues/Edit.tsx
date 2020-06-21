@@ -39,6 +39,8 @@ function EditVenue(props: Props) {
   let defaultValues: EditBasicVenueInterface = {
     id: props.id,
     name: '',
+    email: '',
+    address: '',
     details: '',
     location: '',
     phone: '',
@@ -61,6 +63,8 @@ function EditVenue(props: Props) {
         const newValues: EditBasicVenueInterface = {
           id: id,
           name: response.name,
+          email: response.email,
+          address: response.address,
           details: response.details,
           location: response.location,
           phone: response.phone,

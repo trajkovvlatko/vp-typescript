@@ -10,4 +10,5 @@ export default interface UpcomingBookingInterface extends BookingItemInterface {
   venueId: number;
   venueName: string;
   venueImageUrl: string;
+  venueAddress: string;
 }

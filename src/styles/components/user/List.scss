@@ -1,12 +1,26 @@
 @import '../../variables.scss';
 
-.performer-card {
+.performer-card, .venue-card {
   @include card;
+  height: 165px;
   list-style: none;
   padding: 15px;
   box-sizing: border-box;
   position: relative;
   margin-bottom: 25px !important;
+
+  .info {
+    padding-left: 10px;
+    box-sizing: border-box;
+
+    svg {
+      vertical-align: bottom;
+    }
+  }
+
+  .title {
+    margin-bottom: 10px !important;
+  }
 
   svg {
     padding-right: 10px;

@@ -16,14 +16,16 @@ function UserPerformerCard(props: Props) {
 
   return (
     <li className='col-4 performer-card'>
-      <h3 className='col-12 black'>
+      <h3 className='col-12 black title'>
         <MicNoneOutlined />
         <Link to={`/performers/${id}`}>{name}</Link>
       </h3>
 
       <div className='row clear-both'>
-        <img src={imageUrl} alt='img' className='col-3' />
-        <div className='col-9'>
+        <Link to={`/performers/${id}`} className='col-4'>
+          <img src={imageUrl} alt='Missing image' />
+        </Link>
+        <div className='col-8 info'>
           <div>
             <Rating stars={rating} />
           </div>

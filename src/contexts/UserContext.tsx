@@ -4,6 +4,7 @@ interface UserContextInterface {
   user: {
     token?: string;
     name?: string;
+    email?: string;
   };
   setUser: (data: {}) => void;
 }

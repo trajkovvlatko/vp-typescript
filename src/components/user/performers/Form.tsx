@@ -3,13 +3,7 @@ import {useForm} from 'react-hook-form';
 import BasicPerformerInterface from 'interfaces/BasicPerformerInterface';
 
 interface Props {
-  values: {
-    name: string;
-    details: string;
-    location: string;
-    phone: string;
-    website: string;
-  };
+  values: BasicPerformerInterface;
   save: (values: BasicPerformerInterface) => Promise<void>;
 }
 
@@ -35,6 +29,18 @@ function Form(props: Props) {
                 ref={register({required: true})}
               />
               {errors.name && <p>Invalid name.</p>}
+            </td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>
+              <input
+                name='email'
+                type='email'
+                defaultValue={values.email}
+                ref={register({required: true})}
+              />
+              {errors.email && <p>Invalid email.</p>}
             </td>
           </tr>
           <tr>

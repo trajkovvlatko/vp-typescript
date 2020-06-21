@@ -29,8 +29,20 @@
       padding-bottom: 15px;
     }
 
+    .connected, .connected-info {
+      padding-left: 10px;
+    }
+
     svg, span {
       display: inline-block;
+    }
+
+    svg {
+      margin-right: 5px;
+    }
+
+    path {
+      color: $primary-color;
     }
 
     span {

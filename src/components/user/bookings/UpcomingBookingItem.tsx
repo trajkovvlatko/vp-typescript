@@ -4,7 +4,11 @@ import UpcomingBookingInterface from 'interfaces/UpcomingBookingInterface';
 
 import '../../../styles/components/user/bookings/UpcomingBookings.scss';
 
-import {CalendarToday} from '@material-ui/icons';
+import {
+  CalendarToday,
+  LocalBarOutlined,
+  LocationOnOutlined,
+} from '@material-ui/icons';
 
 interface Props {
   row: UpcomingBookingInterface;
@@ -17,24 +21,32 @@ function UpcomingBookingItem(props: Props) {
   return (
     <li className={`col-4 upcoming-booking-item ${row.status}`}>
       <h3 className='title col-12'>
+        <LocalBarOutlined />
         <Link to={`/venues/${row.venueId}`}>{row.venueName}</Link>
       </h3>
 
       <div className='row'>
-        <Link to={`/venues/${row.venueId}`}>
-          <img src={row.venueImageUrl} alt='img' className='col-3' />
+        <Link to={`/venues/${row.venueId}`} className='col-4'>
+          <img src={row.venueImageUrl} alt='img' />
         </Link>
 
-        <div className='col-9'>
+        <div className='col-8'>
           <h4 className='connected'>
             <Link to={`/performers/${row.performerId}`}>
               {row.performerName}
             </Link>
           </h4>
 
-          <div>
-            <CalendarToday />
-            <span>{row.bookingDate}</span>
+          <div className='connected-info'>
+            <div>
+              <CalendarToday />
+              <span>{row.bookingDate}</span>
+            </div>
+
+            <div>
+              <LocationOnOutlined />
+              <span>{row.venueAddress}</span>
+            </div>
           </div>
         </div>
       </div>

@@ -39,6 +39,7 @@ function EditPerformer(props: Props) {
   let defaultValues: EditBasicPerformerInterface = {
     id: props.id,
     name: '',
+    email: '',
     details: '',
     location: '',
     phone: '',
@@ -61,6 +62,7 @@ function EditPerformer(props: Props) {
         const newValues: EditBasicPerformerInterface = {
           id: id,
           name: response.name,
+          email: response.email,
           details: response.details,
           location: response.location,
           phone: response.phone,

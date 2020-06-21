@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 import Rating from '../../Rating';
 
-import {LocalBarOutlined} from '@material-ui/icons';
+import {LocalBarOutlined, LocationOnOutlined} from '@material-ui/icons';
 
 interface Props {
   data: {
@@ -12,26 +12,35 @@ interface Props {
     imageUrl: string;
     rating: number;
     location: string;
+    address: string;
   };
 }
 
 function UserVenueCard(props: Props) {
-  const {id, name, imageUrl, rating, location} = props.data;
+  const {id, name, imageUrl, rating, location, address} = props.data;
 
   return (
-    <li className='col-4 performer-card'>
-      <h3 className='col-12 black'>
+    <li className='col-4 venue-card'>
+      <h3 className='col-12 black title'>
         <LocalBarOutlined />
-        <Link to={`/performers/${id}`}>{name}</Link>
+        <Link to={`/venues/${id}`}>{name}</Link>
       </h3>
 
       <div className='row clear-both'>
-        <img src={imageUrl} alt='img' className='col-3' />
-        <div className='col-9'>
+        <Link to={`/venues/${id}`} className='col-4'>
+          <img src={imageUrl} alt='Missing image' />
+        </Link>
+        <div className='col-8 info'>
           <div>
             <Rating stars={rating} />
           </div>
-          <div>{location}</div>
+          <div>
+            <div>
+              <LocationOnOutlined />
+              <span>{address}</span>
+            </div>
+            <div>{location}</div>
+          </div>
         </div>
       </div>
 

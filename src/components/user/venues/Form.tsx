@@ -3,13 +3,7 @@ import {useForm} from 'react-hook-form';
 import BasicVenueInterface from 'interfaces/BasicVenueInterface';
 
 interface Props {
-  values: {
-    name: string;
-    details: string;
-    location: string;
-    phone: string;
-    website: string;
-  };
+  values: BasicVenueInterface;
   save: (values: BasicVenueInterface) => Promise<void>;
 }
 
@@ -35,6 +29,30 @@ function Form(props: Props) {
                 ref={register({required: true})}
               />
               {errors.name && <p>Invalid name.</p>}
+            </td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>
+              <input
+                name='email'
+                type='text'
+                defaultValue={values.email}
+                ref={register({required: true})}
+              />
+              {errors.email && <p>Invalid email.</p>}
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>
+              <input
+                name='address'
+                type='text'
+                defaultValue={values.address}
+                ref={register({required: true})}
+              />
+              {errors.address && <p>Invalid address.</p>}
             </td>
           </tr>
           <tr>

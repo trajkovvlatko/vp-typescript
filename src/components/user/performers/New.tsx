@@ -19,6 +19,7 @@ function NewPerformer() {
   const defaultValues: BasicPerformerInterface = {
     name: '',
     details: '',
+    email: user.email || '',
     location: '',
     phone: '',
     website: '',
