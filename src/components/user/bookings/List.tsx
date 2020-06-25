@@ -28,39 +28,42 @@ function BookingsList() {
   if (loading) return <></>;
   if (error) return <div>Error while fetching data.</div>;
 
-  const showBookingsList = () => {
+  const toggleBookingsList = () => {
     setActive(active ? false : true);
   };
 
   return (
     <div className='bookings'>
-      <div onClick={showBookingsList}>
+      <div onClick={toggleBookingsList}>
         {(bookings.length > 0 && (
           <NotificationsActiveOutlined className='with-notifications'></NotificationsActiveOutlined>
         )) || <NotificationsOutlined></NotificationsOutlined>}
       </div>
 
-      <div className={`list ${active ? 'active' : ''}`}>
-        {(bookings.length > 0 && (
-          <ul className='left'>
-            {bookings.map((row: BookingItemInterface) => {
-              return (
-                <BookingItem
-                  id={row.id}
-                  requesterId={row.requesterId}
-                  requesterType={row.requesterType}
-                  requestedId={row.requestedId}
-                  requestedType={row.requestedType}
-                  bookingDate={row.bookingDate}
-                  performerName={row.performerName}
-                  venueName={row.venueName}
-                  createdAt={row.createdAt}
-                  key={`booking-${row.id}`}
-                />
-              );
-            })}
-          </ul>
-        )) || <div className='no-bookings-yet'>No booking requests yet.</div>}
+      <div className={`list-container ${active ? 'active' : ''}`}>
+        <div className='bookings-overlay' onClick={toggleBookingsList}></div>
+        <div className='list'>
+          {(bookings.length > 0 && (
+            <ul className='left' onClick={toggleBookingsList}>
+              {bookings.map((row: BookingItemInterface) => {
+                return (
+                  <BookingItem
+                    id={row.id}
+                    requesterId={row.requesterId}
+                    requesterType={row.requesterType}
+                    requestedId={row.requestedId}
+                    requestedType={row.requestedType}
+                    bookingDate={row.bookingDate}
+                    performerName={row.performerName}
+                    venueName={row.venueName}
+                    createdAt={row.createdAt}
+                    key={`booking-${row.id}`}
+                  />
+                );
+              })}
+            </ul>
+          )) || <div className='no-bookings-yet'>No booking requests yet.</div>}
+        </div>
       </div>
     </div>
   );

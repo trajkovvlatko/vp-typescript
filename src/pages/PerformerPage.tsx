@@ -25,6 +25,7 @@ type TParams = {id: string};
 interface Performer {
   id: number;
   name: string;
+  email: string;
   details: string;
   image: string;
   location: string;
@@ -105,7 +106,9 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
             <Link to={`tel:${performer.phone}`}>{performer.phone}</Link>
           </div>
 
-          <div>Add Email Here</div>
+          <div>
+            <a href={`mailto:${performer.email}`}>{performer.email}</a>
+          </div>
 
           <br />
 

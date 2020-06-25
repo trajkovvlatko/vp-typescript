@@ -25,6 +25,8 @@ type TParams = {id: string};
 interface Venue {
   id: number;
   name: string;
+  email: string;
+  address: string;
   details: string;
   image: string;
   location: string;
@@ -93,6 +95,8 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
             far
           </div>
 
+          <div>{venue.address}</div>
+
           <div>{toTitleCase(venue.location)}</div>
           <br />
 
@@ -106,7 +110,9 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
             <Link to={`tel:${venue.phone}`}>{venue.phone}</Link>
           </div>
 
-          <div>Add Email Here</div>
+          <div>
+            <a href={`mailto:${venue.email}`}>{venue.email}</a>
+          </div>
 
           <br />
 

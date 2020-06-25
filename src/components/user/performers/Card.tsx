@@ -5,7 +5,7 @@ import Rating from '../../Rating';
 
 import CardInterface from 'interfaces/CardInterface';
 
-import {MicNoneOutlined} from '@material-ui/icons';
+import {MicNoneOutlined, PanoramaOutlined} from '@material-ui/icons';
 
 interface Props {
   data: CardInterface;
@@ -22,8 +22,10 @@ function UserPerformerCard(props: Props) {
       </h3>
 
       <div className='row clear-both'>
-        <Link to={`/performers/${id}`} className='col-4'>
-          <img src={imageUrl} alt='Missing image' />
+        <Link to={`/performers/${id}`} className='col-4 image-link'>
+          {(imageUrl && <img src={imageUrl} alt={name} />) || (
+            <PanoramaOutlined />
+          )}
         </Link>
         <div className='col-8 info'>
           <div>

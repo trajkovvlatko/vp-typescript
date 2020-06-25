@@ -19,8 +19,27 @@
     }
   }
 
-  .list {
+  .list-container {
     display: none;
+    z-index: 100;
+
+    &.active {
+      display: block;
+
+      .bookings-overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.5);
+        z-index: 20;
+      }
+    }
+  }
+
+
+  .list {
     position: absolute;
     background-color: white;
     padding-top: 20px;
@@ -43,10 +62,6 @@
       color: $label-color;
       display: block;
       padding-left: 20px;
-    }
-
-    &.active {
-      display: block;
     }
 
     ul {
