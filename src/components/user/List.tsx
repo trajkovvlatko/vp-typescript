@@ -5,9 +5,10 @@ import UserContext from 'contexts/UserContext';
 import UserPerformerCard from './performers/Card';
 import UserVenueCard from './venues/Card';
 
-import CardInterface from 'interfaces/CardInterface';
-
 import '../../styles/components/user/List.scss';
+
+import VenueCardInterface from 'interfaces/CardInterface';
+type PerformerCardInterface = Omit<VenueCardInterface, 'address'>;
 
 interface Props {
   type: string;
@@ -31,7 +32,7 @@ function List(props: Props) {
 
   return (
     <ul className={`${type}s-list row`}>
-      {results.map((row: CardInterface) => {
+      {results.map((row: PerformerCardInterface & VenueCardInterface) => {
         return (
           (type === 'performer' && (
             <UserPerformerCard key={`performer-card-${row.id}`} data={row} />

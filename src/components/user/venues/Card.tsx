@@ -16,7 +16,7 @@ interface Props {
     imageUrl: string;
     rating: number;
     location: string;
-    address: string;
+    address?: string;
   };
 }
 

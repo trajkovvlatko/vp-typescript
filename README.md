@@ -16,3 +16,8 @@ Run development mode:
 ```
 yarn start
 ```
+
+Run in docker:
+```
+docker-compose up --build
+```

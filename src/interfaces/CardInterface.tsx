@@ -4,4 +4,5 @@ export default interface CardInterface {
   imageUrl: string;
   rating: number;
   location: string;
+  address: string;
 }
