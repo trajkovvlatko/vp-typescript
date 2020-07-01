@@ -1,0 +1,37 @@
+@import '../../variables.scss';
+
+.card {
+  @include card;
+  padding: 20px;
+  box-sizing: border-box;
+
+  img {
+    vertical-align: middle;
+  }
+
+  a {
+    color: $font-color;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+
+    &.img {
+      margin-right: 15px;
+    }
+  }
+
+  .term {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    padding-left: calc(100% / 12 * 3);
+  }
+
+  .actions {
+    margin-top: 15px;
+
+    .primary {
+      margin-right: 15px;
+    }
+  }
+}

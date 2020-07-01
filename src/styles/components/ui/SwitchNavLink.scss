@@ -32,4 +32,10 @@
     padding-left: 20px;
     padding-right: 20px;
   }
+
+  &.danger {
+    border: 1px solid red;
+    background: white;
+    color: red;
+  }
 }

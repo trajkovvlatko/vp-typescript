@@ -2,11 +2,13 @@ import React, {useContext, useState} from 'react';
 import axios from 'axios';
 import {getAuthHeader} from 'helpers/main';
 import {useFetch} from 'hooks/useFetch';
-import {Link} from 'react-router-dom';
 import UserContext from 'contexts/UserContext';
 import BookingsContext from 'contexts/BookingsContext';
 import NotificationContext from 'contexts/NotificationContext';
 import UpcomingBookingInterface from 'interfaces/UpcomingBookingInterface';
+
+import 'styles/pages/user/UserBookingPage.scss';
+import BookingRow from 'components/user/bookings/Row';
 
 const host = process.env.REACT_APP_API_HOST;
 
@@ -57,37 +59,76 @@ function UserBookingPage({match}: any, key: any) {
   const accept = () => sendRequest('accepted');
   const reject = () => sendRequest('rejected');
 
+  const {
+    requesterId,
+    requesterType,
+    requestedId,
+    performerName,
+    venueName,
+    performerImageUrl,
+    venueImageUrl,
+  } = result;
+
   return (
-    <div>
-      <div>
-        {(result.requesterType === 'performer' && (
-          <div>
-            <Link to={`/performers/${result.performerId}`}>
-              {result.performerName}
-            </Link>
-            requested to perform at
-            <Link to={`/venues/${result.venueId}`}>{result.venueName}</Link>
-          </div>
+    <div className='col-6 card'>
+      {(requesterType === 'Performer' && (
+        <>
+          <BookingRow
+            type='performer'
+            id={requesterId}
+            image={performerImageUrl}
+            name={performerName}
+          />
+
+          <div className='term col-9'>requested to perform at</div>
+
+          <BookingRow
+            type='venue'
+            id={requestedId}
+            image={venueImageUrl}
+            name={venueName}
+          />
+
+          <div className='term col-9'>on {result.bookingDate}.</div>
+        </>
+      )) || (
+        <>
+          <BookingRow
+            type='venue'
+            id={requesterId}
+            image={venueImageUrl}
+            name={venueName}
+          />
+
+          <div className='term col-9'>invited</div>
+
+          <BookingRow
+            type='performer'
+            id={requestedId}
+            image={performerImageUrl}
+            name={performerName}
+          />
+
+          <div className='term col-9'>to perform on {result.bookingDate}.</div>
+        </>
+      )}
+
+      <div className='actions center'>
+        {(status === 'requested' && (
+          <>
+            <button className='nav-link primary' onClick={accept}>
+              Accept
+            </button>
+            <button className='nav-link danger' onClick={reject}>
+              Reject
+            </button>
+          </>
         )) || (
-          <div>
-            <Link to={`/venues/${result.venueId}`}>{result.venueName}</Link>
-            invited
-            <Link to={`/performers/${result.performerId}`}>
-              {result.performerName}
-            </Link>
-          </div>
+          <>
+            This request is <b>{status}</b>.
+          </>
         )}
       </div>
-      {(status === 'requested' && (
-        <div>
-          <button onClick={accept}>Accept</button>
-          <button onClick={reject}>Reject</button>
-        </div>
-      )) || (
-        <div>
-          This request is <b>{status}</b>.
-        </div>
-      )}
     </div>
   );
 }

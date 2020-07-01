@@ -7,7 +7,7 @@ function BookingItem(props: BookingItemInterface) {
   return (
     <li>
       <Link to={`/user/bookings/${props.id}`}>
-        {(props.requesterType === 'performer' && (
+        {(props.requesterType === 'Performer' && (
           <span>
             <b>{props.performerName}</b> requested to perform at{' '}
             <b>{props.venueName}</b>
