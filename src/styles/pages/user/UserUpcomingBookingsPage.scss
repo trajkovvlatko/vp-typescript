@@ -51,15 +51,24 @@
       margin-left: 5px;
     }
 
-    .cancel-booking {
+    .cancel-booking,
+    .canceled-booking {
       position: absolute;
       top: 15px;
       right: 15px;
       border: 0 none;
-      cursor: pointer;
       background-color: $secondary-color;
       color: $font-color;
       font-size: $h5-font-size;
     }
+
+    .cancel-booking {
+      cursor: pointer;
+    }
+
+    .canceled-booking {
+      color: red;
+    }
+
   }
 }

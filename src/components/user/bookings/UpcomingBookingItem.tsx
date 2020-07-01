@@ -2,8 +2,6 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import UpcomingBookingInterface from 'interfaces/UpcomingBookingInterface';
 
-import '../../../styles/components/user/bookings/UpcomingBookings.scss';
-
 import {
   CalendarToday,
   LocalBarOutlined,
@@ -51,11 +49,11 @@ function UpcomingBookingItem(props: Props) {
         </div>
       </div>
 
-      {row.status !== 'canceled' && (
+      {(row.status !== 'canceled' && (
         <button className='cancel-booking' onClick={() => cancel(row.id)}>
           Cancel
         </button>
-      )}
+      )) || <div className='canceled-booking'>Canceled</div>}
     </li>
   );
 }

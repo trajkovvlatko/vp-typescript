@@ -251,6 +251,15 @@ iframe {
 
 .footer {
   height: 60px;
+  background-color: #444;
+  width: 100%;
+
+  .footer-text {
+    color: white;
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+  }
 }
 
 .rating {
