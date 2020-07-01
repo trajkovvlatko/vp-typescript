@@ -9,7 +9,7 @@ import UserContext from 'contexts/UserContext';
 import Form from './Form';
 import BasicPerformerInterface from 'interfaces/BasicPerformerInterface';
 
-import '../../../styles/pages/user/_SharedForm.scss';
+import 'styles/pages/user/_SharedForm.scss';
 
 function NewPerformer() {
   const history = useHistory();
@@ -23,6 +23,7 @@ function NewPerformer() {
     location: '',
     phone: '',
     website: '',
+    active: false,
   };
 
   async function save(values: BasicPerformerInterface) {

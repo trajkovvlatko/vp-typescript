@@ -15,7 +15,7 @@ import ImageInterface from 'interfaces/ImageInterface';
 import axios from 'axios';
 import {getAuthHeader} from 'helpers/main';
 
-import '../../../styles/pages/user/_SharedForm.scss';
+import 'styles/pages/user/_SharedForm.scss';
 
 interface Props {
   id: number;
@@ -44,6 +44,7 @@ function EditPerformer(props: Props) {
     location: '',
     phone: '',
     website: '',
+    active: false,
     Genres: [],
     YoutubeLinks: [],
     Images: [],
@@ -67,6 +68,7 @@ function EditPerformer(props: Props) {
           location: response.location,
           phone: response.phone,
           website: response.website,
+          active: response.active,
           Genres: response.Genres,
           YoutubeLinks: response.YoutubeLinks,
           Images: response.Images,

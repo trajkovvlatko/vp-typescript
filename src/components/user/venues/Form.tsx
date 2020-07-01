@@ -108,6 +108,17 @@ function Form(props: Props) {
             </td>
           </tr>
           <tr>
+            <td>Active</td>
+            <td>
+              <input
+                name='active'
+                type='checkbox'
+                ref={register()}
+                defaultChecked={values.active}
+              />
+            </td>
+          </tr>
+          <tr>
             <td colSpan={2}>
               <br />
               <input type='submit' value='Save' className='nav-link primary' />

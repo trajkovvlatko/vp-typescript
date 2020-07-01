@@ -6,4 +6,5 @@ export default interface BasicVenueInterface {
   location: string;
   phone: string;
   website: string;
+  active: boolean;
 }

@@ -8,7 +8,7 @@ import UserContext from 'contexts/UserContext';
 import Form from './Form';
 import BasicVenueInterface from 'interfaces/BasicVenueInterface';
 
-import '../../../styles/pages/user/_SharedForm.scss';
+import 'styles/pages/user/_SharedForm.scss';
 
 function NewVenue() {
   const history = useHistory();
@@ -23,6 +23,7 @@ function NewVenue() {
     location: '',
     phone: '',
     website: '',
+    active: false,
   };
 
   async function save(values: BasicVenueInterface) {

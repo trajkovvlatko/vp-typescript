@@ -5,4 +5,5 @@ export default interface BasicPerformerInterface {
   location: string;
   phone: string;
   website: string;
+  active: boolean;
 }
