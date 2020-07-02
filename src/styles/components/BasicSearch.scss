@@ -33,6 +33,10 @@
     .MuiFormControl-root {
       width: 80%;
 
+      @media screen and (max-width: $breakpoint-small) {
+        width: 100%;
+      }
+
       .MuiInputBase-root {
         height: 54px;
       }

@@ -8,14 +8,30 @@
   box-sizing: border-box;
   position: relative;
   margin-bottom: 25px !important;
+  @media screen and (max-width: $breakpoint-small) {
+    height: 137px;
+  }
+
+  .address {
+    @include ellipsis;
+    width: 100%;
+  }
 
   .info {
     padding-left: 10px;
     box-sizing: border-box;
+    @media screen and (max-width: $breakpoint-small) {
+      width: calc(70% - 15px);
+    }
 
     svg {
       vertical-align: bottom;
     }
+  }
+
+  h3 {
+    @include ellipsis;
+    width: 85%;
   }
 
   .title {
@@ -23,6 +39,10 @@
   }
 
   .image-link {
+    @media screen and (max-width: $breakpoint-small) {
+      width: 30%;
+    }
+
     svg {
       width: 80px !important;
       font-size: 80px;
@@ -44,5 +64,11 @@
     color: $font-color;
     font-size: $h5-font-size;
     text-decoration: none;
+  }
+}
+
+.venue-card {
+  @media screen and (max-width: $breakpoint-small) {
+    height: 150px;
   }
 }

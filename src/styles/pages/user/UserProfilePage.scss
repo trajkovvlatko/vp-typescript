@@ -6,6 +6,9 @@
   table {
     @include card;
     padding: 50px;
+    @media screen and (max-width: $breakpoint-small) {
+      padding: 15px;
+    }
 
     td, th {
       padding: 5px;

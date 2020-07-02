@@ -1,3 +1,22 @@
+@import '../../variables.scss';
+
 img {
   cursor: pointer;
+}
+
+@media screen and (max-width: $breakpoint-small) {
+  .main-image {
+    margin-bottom: 0 !important;
+  }
+
+  .other-images {
+    img {
+      width: calc(50% - 5px);
+      display: inline-block;
+
+      &:last-child {
+        float: right;
+      }
+    }
+  }
 }

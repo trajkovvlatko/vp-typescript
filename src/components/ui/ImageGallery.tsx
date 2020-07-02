@@ -32,10 +32,10 @@ function ImageGallery(props: Props) {
 
   return (
     <div>
-      <div className='col-8'>
+      <div className='col-8 main-image'>
         <img src={selectedImage} alt='main' onClick={click} />
       </div>
-      <div className='col-4'>
+      <div className='col-4 other-images'>
         <img src={otherImages[0]} alt='side-1' onClick={click} />
         <img src={otherImages[1]} alt='side-2' onClick={click} />
       </div>

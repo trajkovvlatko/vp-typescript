@@ -41,7 +41,7 @@ function UserVenueCard(props: Props) {
             <Rating stars={rating} />
           </div>
           <div>
-            <div>
+            <div className='address'>
               <LocationOnOutlined />
               <span>{address}</span>
             </div>

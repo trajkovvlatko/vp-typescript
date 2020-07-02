@@ -61,7 +61,7 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
 
   return (
     <div className='row performer'>
-      <div className='col-8'>
+      <div className='col-8 left-side'>
         <ImageGallery images={performer.Images} />
 
         <div className='clear-both'></div>
@@ -82,7 +82,7 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
           })}
         </div>
       </div>
-      <div className='col-4'>
+      <div className='col-4 right-side'>
         <div className='meta'>
           <h1>{performer.name}</h1>
 

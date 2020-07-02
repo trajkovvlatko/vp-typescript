@@ -150,6 +150,11 @@ iframe {
 
 .main {
   width: 100%;
+  @media screen and (max-width: $breakpoint-small) {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+  }
 }
 
 .container {
@@ -178,6 +183,9 @@ iframe {
     text-align: left;
     padding-left: 20px;
     margin-left: -74px;
+    @media screen and (max-width: $breakpoint-small) {
+      margin-left: -87px;
+    }
 
     &.active {
       display: block;

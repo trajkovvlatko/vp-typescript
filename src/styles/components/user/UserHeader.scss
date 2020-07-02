@@ -17,6 +17,11 @@
       padding-right: 35px;
       color: $primary-color;
 
+      @media screen and (max-width: $breakpoint-small) {
+        width: 100%;
+        padding: 0 !important;
+      }
+
       a {
         svg, span {
           display: inline-block;

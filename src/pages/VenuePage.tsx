@@ -63,7 +63,7 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
 
   return (
     <div className='row venue'>
-      <div className='col-8'>
+      <div className='col-8 left-side'>
         <ImageGallery images={venue.Images} />
 
         <div className='clear-both'></div>
@@ -84,7 +84,7 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
           })}
         </div>
       </div>
-      <div className='col-4'>
+      <div className='col-4 right-side'>
         <div className='meta'>
           <h1>{venue.name}</h1>
 

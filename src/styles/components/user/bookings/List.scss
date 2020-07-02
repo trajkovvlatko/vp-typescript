@@ -51,6 +51,9 @@
     max-height: 70vh;
     overflow-x: hidden;
     overflow-y: auto;
+    @media screen and (max-width: $breakpoint-small) {
+      margin-left: -177px;
+    }
 
     &:before {
       cursor: auto;
