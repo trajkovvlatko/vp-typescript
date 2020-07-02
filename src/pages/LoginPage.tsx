@@ -8,8 +8,8 @@ import UserContext from 'contexts/UserContext';
 import '../styles/Auth.scss';
 
 const host = process.env.REACT_APP_API_HOST;
-let email = '',
-  password = '';
+let email = 'user-1@name.com';
+let password = 'password';
 
 interface StateInterface {
   error: boolean;
@@ -68,6 +68,7 @@ function LoginPage() {
                 id='email'
                 onChange={(e) => (email = e.target.value)}
                 placeholder='Email'
+                defaultValue='user-1@name.com'
               />
             </div>
 
@@ -77,6 +78,7 @@ function LoginPage() {
                 id='password'
                 onChange={(e) => (password = e.target.value)}
                 placeholder='Password'
+                defaultValue='password'
               />
             </div>
           </div>

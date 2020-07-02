@@ -95,7 +95,15 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
             far
           </div>
 
-          <div>{venue.address}</div>
+          <div>
+            <a
+              href={`https://www.google.se/maps/place/${venue.address}`}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              {venue.address}
+            </a>
+          </div>
 
           <div>{toTitleCase(venue.location)}</div>
           <br />

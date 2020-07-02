@@ -17,7 +17,7 @@ function UpcomingBookingItem(props: Props) {
   const {row, cancel} = props;
 
   return (
-    <li className={`col-4 upcoming-booking-item ${row.status}`}>
+    <li className={`col-6 upcoming-booking-item ${row.status}`}>
       <h3 className='title col-12'>
         <LocalBarOutlined />
         <Link to={`/venues/${row.venueId}`}>{row.venueName}</Link>

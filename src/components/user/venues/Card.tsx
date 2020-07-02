@@ -24,7 +24,7 @@ function UserVenueCard(props: Props) {
   const {id, name, imageUrl, rating, location, address} = props.data;
 
   return (
-    <li className='col-4 venue-card'>
+    <li className='col-6 venue-card'>
       <h3 className='col-12 black title'>
         <LocalBarOutlined />
         <Link to={`/venues/${id}`}>{name}</Link>

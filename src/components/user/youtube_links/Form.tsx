@@ -63,7 +63,8 @@ function YoutubeLinksForm(props: Props) {
     }
 
     // TODO: Unique values here
-    setNewLinks([...newLinks, newLink.current.value]);
+    const embedLink = newLink.current.value.replace('watch?v=', 'embed/');
+    setNewLinks([...newLinks, embedLink]);
     newLink.current.value = '';
     setNotification({type: '', message: ''});
   }

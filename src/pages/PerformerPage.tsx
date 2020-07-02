@@ -75,7 +75,7 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
         <div className='clear-both videos'>
           {performer.YoutubeLinks.map((yt: YoutubeLinkInterface) => {
             return (
-              <div className='col-4' key={`div-${yt.link}`}>
+              <div className='col-6' key={`div-${yt.link}`}>
                 <Iframe src={yt.link} />
               </div>
             );

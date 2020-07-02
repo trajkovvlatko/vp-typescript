@@ -15,7 +15,7 @@ function UserPerformerCard(props: Props) {
   const {id, name, imageUrl, rating, location} = props.data;
 
   return (
-    <li className='col-4 performer-card'>
+    <li className='col-6 performer-card'>
       <h3 className='col-12 black title'>
         <MicNoneOutlined />
         <Link to={`/performers/${id}`}>{name}</Link>
