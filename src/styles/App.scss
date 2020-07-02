@@ -128,6 +128,10 @@ iframe {
   margin-left: -50vw;
   margin-right: -50vw;
   background-color: $secondary-background-color;
+
+  @media screen and (max-width: $breakpoint-small) {
+    width: 100vw;
+  }
 }
 
 .with-background {
@@ -184,7 +188,7 @@ iframe {
     padding-left: 20px;
     margin-left: -74px;
     @media screen and (max-width: $breakpoint-small) {
-      margin-left: -87px;
+      margin-left: -79px;
     }
 
     &.active {
