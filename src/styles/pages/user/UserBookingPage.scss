@@ -1,5 +1,9 @@
 @import '../../variables.scss';
 
+.user-booking-page {
+  min-height: 100vh;
+}
+
 .card {
   @include card;
   padding: 20px;

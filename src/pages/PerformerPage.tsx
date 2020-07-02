@@ -97,13 +97,22 @@ function PerformerPage({match}: RouteComponentProps<TParams>) {
           <br />
 
           <div>
-            <Link to={performer.website} target='_blank'>
+            <a
+              href={performer.website}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
               {performer.website}
-            </Link>
+            </a>
           </div>
 
           <div>
-            <Link to={`tel:${performer.phone}`}>{performer.phone}</Link>
+            <a
+              href={`tel:${performer.phone.replace(/ /g, '')}`}
+              rel='noopener noreferrer'
+            >
+              {performer.phone}
+            </a>
           </div>
 
           <div>

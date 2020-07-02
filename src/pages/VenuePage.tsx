@@ -77,7 +77,7 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
         <div className='clear-both videos'>
           {venue.YoutubeLinks.map((yt: YoutubeLinkInterface) => {
             return (
-              <div className='col-4' key={`div-${yt.link}`}>
+              <div className='col-6' key={`div-${yt.link}`}>
                 <Iframe src={yt.link} />
               </div>
             );
@@ -109,13 +109,18 @@ function VenuePage({match}: RouteComponentProps<TParams>) {
           <br />
 
           <div>
-            <Link to={venue.website} target='_blank'>
+            <a href={venue.website} target='_blank' rel='noopener noreferrer'>
               {venue.website}
-            </Link>
+            </a>
           </div>
 
           <div>
-            <Link to={`tel:${venue.phone}`}>{venue.phone}</Link>
+            <a
+              href={`tel:${venue.phone.replace(/ /g, '')}`}
+              rel='noopener noreferrer'
+            >
+              {venue.phone}
+            </a>
           </div>
 
           <div>

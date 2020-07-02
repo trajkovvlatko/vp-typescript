@@ -34,7 +34,6 @@ function Location(props: Props) {
           <MenuItem value='sweden'>Sweden</MenuItem>
           <MenuItem value='norway'>Norway</MenuItem>
           <MenuItem value='denmark'>Denmark</MenuItem>
-          <MenuItem value='finland'>Finland</MenuItem>
         </Select>
       </FormControl>
     </div>

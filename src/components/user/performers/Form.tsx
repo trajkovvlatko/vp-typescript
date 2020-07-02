@@ -66,7 +66,6 @@ function Form(props: Props) {
                 <option>Sweden</option>
                 <option>Denmark</option>
                 <option>Norway</option>
-                <option>Finland</option>
               </select>
               {errors.location && <p>Invalid location.</p>}
             </td>

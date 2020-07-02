@@ -70,64 +70,68 @@ function UserBookingPage({match}: any, key: any) {
   } = result;
 
   return (
-    <div className='col-6 card'>
-      {(requesterType === 'Performer' && (
-        <>
-          <BookingRow
-            type='performer'
-            id={requesterId}
-            image={performerImageUrl}
-            name={performerName}
-          />
-
-          <div className='term col-9'>requested to perform at</div>
-
-          <BookingRow
-            type='venue'
-            id={requestedId}
-            image={venueImageUrl}
-            name={venueName}
-          />
-
-          <div className='term col-9'>on {result.bookingDate}.</div>
-        </>
-      )) || (
-        <>
-          <BookingRow
-            type='venue'
-            id={requesterId}
-            image={venueImageUrl}
-            name={venueName}
-          />
-
-          <div className='term col-9'>invited</div>
-
-          <BookingRow
-            type='performer'
-            id={requestedId}
-            image={performerImageUrl}
-            name={performerName}
-          />
-
-          <div className='term col-9'>to perform on {result.bookingDate}.</div>
-        </>
-      )}
-
-      <div className='actions center'>
-        {(status === 'requested' && (
+    <div className='user-booking-page'>
+      <div className='col-6 card'>
+        {(requesterType === 'Performer' && (
           <>
-            <button className='nav-link primary' onClick={accept}>
-              Accept
-            </button>
-            <button className='nav-link danger' onClick={reject}>
-              Reject
-            </button>
+            <BookingRow
+              type='performer'
+              id={requesterId}
+              image={performerImageUrl}
+              name={performerName}
+            />
+
+            <div className='term col-9'>requested to perform at</div>
+
+            <BookingRow
+              type='venue'
+              id={requestedId}
+              image={venueImageUrl}
+              name={venueName}
+            />
+
+            <div className='term col-9'>on {result.bookingDate}.</div>
           </>
         )) || (
           <>
-            This request is <b>{status}</b>.
+            <BookingRow
+              type='venue'
+              id={requesterId}
+              image={venueImageUrl}
+              name={venueName}
+            />
+
+            <div className='term col-9'>invited</div>
+
+            <BookingRow
+              type='performer'
+              id={requestedId}
+              image={performerImageUrl}
+              name={performerName}
+            />
+
+            <div className='term col-9'>
+              to perform on {result.bookingDate}.
+            </div>
           </>
         )}
+
+        <div className='actions center'>
+          {(status === 'requested' && (
+            <>
+              <button className='nav-link primary' onClick={accept}>
+                Accept
+              </button>
+              <button className='nav-link danger' onClick={reject}>
+                Reject
+              </button>
+            </>
+          )) || (
+            <>
+              This request is <b>{status}</b>.
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
