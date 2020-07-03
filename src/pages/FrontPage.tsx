@@ -9,7 +9,7 @@ function FrontPage() {
     <div className='front-page'>
       <div className='row'>
         <div className='col-6'>
-          <h1>Lorem ipsum dolor sit</h1>
+          <h1>Book your next performance here</h1>
           <BasicSearch />
         </div>
         <div className='col-6 hidden-sm'>
